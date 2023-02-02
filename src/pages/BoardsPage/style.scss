@@ -1,0 +1,33 @@
+@import "../../styles/palette.scss";
+
+.boards {
+  flex: 1 0 auto;
+  padding: 20px;
+
+  &__title {
+    font-size: 23px;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+}
+
+.generate-btn {
+  background-color: $light-gray;
+  border: none;
+  border-radius: 10px;
+  height: 95px;
+  width: 285px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $hovered-gray;
+  }
+}
+
+.save-btn {
+  border: 1px solid $primary-blue;
+
+  &:hover {
+    background-color: $primary-blue;
+  }
+}
