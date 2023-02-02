@@ -6,7 +6,7 @@ export function ModalWindow({ show, handleModal }: IModal): JSX.Element {
   return (
     <Modal show={show}>
       <Modal.Header>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>Add Board</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
