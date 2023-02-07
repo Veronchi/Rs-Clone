@@ -1,0 +1,34 @@
+
+@import "../../styles/palette.scss";
+
+.header {
+  width: 100%;
+  background: $primary-blue;
+  display: flex;
+  align-items: center;
+  max-height: 54px;
+  min-height: 54px;
+  overflow: hidden;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  &__title {
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  &__nav {
+    display: flex;
+    width: 96%;
+    margin: 0 auto;
+  }
+
+  &__img {
+    width: 48px;
+    height: 48px;
+  }
+}
