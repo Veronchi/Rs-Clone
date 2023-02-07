@@ -1,23 +1,13 @@
-@import '../../styles/palette.scss';
+@import "../../styles/palette.scss";
 
-.form {
-  margin-left: auto;
-  align-self: center;
+.search-form {
   width: 300px;
-  display: flex;
-  outline-color: gold;
 
-  &-control {
-    text-align: center;
-    width: 100%;
-    margin: 0;
+  &__input {
     background-color: $light-blue;
-    height: 1.8rem;
 
     &:hover {
       background-color: $light-gray;
-      outline: auto;
-      outline-color: $primary-blue;
     }
   }
 }
