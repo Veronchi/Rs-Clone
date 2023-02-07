@@ -9,6 +9,43 @@
     margin: 0;
     margin-bottom: 20px;
   }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  &__item {
+    position: relative;
+    border-radius: 10px;
+    height: 95px;
+    width: 285px;
+    border: none;
+    transition: .5s;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(120%);
+
+      .boards__item-title {
+        left: 20px;
+      }
+  }
+}
+
+  &__item-title {
+    position: absolute;
+    max-width: 275px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: left;
+    left: 10px;
+    top: 10px;
+    color: $light-gray;
+    transition: .5s;
+  }
 }
 
 .generate-btn {
