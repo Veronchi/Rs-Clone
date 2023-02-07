@@ -1,4 +1,3 @@
-
 @import "../../styles/palette.scss";
 
 .header {
@@ -23,6 +22,8 @@
 
   &__nav {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 96%;
     margin: 0 auto;
   }

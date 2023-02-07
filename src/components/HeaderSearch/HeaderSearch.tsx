@@ -1,15 +1,13 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
 import './HeaderSearch.scss';
 
 function HeaderSearch(): JSX.Element {
   return (
-    <form className="form form-outline">
-      <input
-        className="form-control"
-        type="search"
-        placeholder="Search"
-      />
-    </form>
+    <Form className="search-form">
+      <Form.Control className="search-form__input" type="text" placeholder="Search" />
+    </Form>
+
   );
 }
 
