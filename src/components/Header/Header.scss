@@ -10,25 +10,25 @@
   min-height: 54px;
   overflow: hidden;
 
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  &__title {
+    font-size: 2rem;
+    margin: 0;
+  }
+
   &__nav {
     display: flex;
     width: 96%;
     margin: 0 auto;
+  }
 
-    &-logo {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-    }
-
-    &-img {
-      width: 48px;
-      height: 48px;
-    }
-
-    &-title {
-      font-size: 2rem;
-      margin: 0;
-    }
+  &__img {
+    width: 48px;
+    height: 48px;
   }
 }

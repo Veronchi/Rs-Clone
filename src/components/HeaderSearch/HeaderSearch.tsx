@@ -3,7 +3,7 @@ import './HeaderSearch.scss';
 
 function HeaderSearch(): JSX.Element {
   return (
-    <form className="form-outline">
+    <form className="form form-outline">
       <input
         className="form-control"
         type="search"

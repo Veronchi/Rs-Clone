@@ -1,14 +1,23 @@
-.form-outline {
+@import '../../styles/palette.scss';
+
+.form {
   margin-left: auto;
   align-self: center;
   width: 300px;
   display: flex;
+  outline-color: gold;
 
-  input {
+  &-control {
     text-align: center;
     width: 100%;
     margin: 0;
-    background-color: azure;
-    padding: 0;
+    background-color: $light-blue;
+    height: 1.8rem;
+
+    &:hover {
+      background-color: $light-gray;
+      outline: auto;
+      outline-color: $primary-blue;
+    }
   }
 }
