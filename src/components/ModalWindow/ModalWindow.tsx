@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { IModal } from '../../interfaces';
+import './style.scss';
 
 export function ModalWindow({ show, handleModal }: IModal): JSX.Element {
   return (
@@ -15,6 +16,15 @@ export function ModalWindow({ show, handleModal }: IModal): JSX.Element {
             <Form.Control
               type="text"
               placeholder="My board name"
+              autoFocus
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Label>board background</Form.Label>
+            <Form.Control
+              className="board-color"
+              value="#026aa7"
+              type="color"
               autoFocus
             />
           </Form.Group>
