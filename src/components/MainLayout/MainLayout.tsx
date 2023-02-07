@@ -4,15 +4,13 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import './style.scss';
 
-function MainLayout(): JSX.Element {
-  return (
-    <div className="content">
-      <Header />
-      <Outlet />
-      <Footer />
-    </div>
+const MainLayout = (): JSX.Element => (
+  <div className="content">
+    <Header />
+    <Outlet />
+    <Footer />
+  </div>
 
-  );
-}
+);
 
 export { MainLayout };

@@ -15,7 +15,7 @@ const boardArray = [
     color: '#998877',
   }];
 
-function BoardsPage(): JSX.Element | null {
+const BoardsPage = (): JSX.Element | null => {
   const [isModal, setIsModal] = useState<boolean>(false);
 
   const handleModalClose = (): void => setIsModal(false);
@@ -50,6 +50,6 @@ function BoardsPage(): JSX.Element | null {
     </section>
 
   );
-}
+};
 
 export { BoardsPage };
