@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
 import './style.scss';
 
-function BoardsPage(): JSX.Element | null {
+const BoardsPage = (): JSX.Element | null => {
   const [isModal, setIsModal] = useState<boolean>(false);
 
   const handleModalClose = (): void => setIsModal(false);
@@ -20,6 +20,6 @@ function BoardsPage(): JSX.Element | null {
     </section>
 
   );
-}
+};
 
 export { BoardsPage };
