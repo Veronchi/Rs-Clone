@@ -27,7 +27,7 @@ function BoardsPage(): JSX.Element | null {
       <h1 className="boards__title">Boards</h1>
       <div className="wrapper">
         <div className="boards__buttons">
-          <button className="generate-btn" type="button" onClick={(): void => setIsModal(true)}>create board</button>
+          <button className="generate-btn" type="button" onClick={(): void => setIsModal(true)}>Create board</button>
           {
             boardArray.map((element): JSX.Element => (
               <button
