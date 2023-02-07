@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { IModal } from '../../interfaces';
 import './style.scss';
 
-export function ModalWindow({ show, handleModal }: IModal): JSX.Element {
+export const ModalWindow = ({ show, handleModal }: IModal): JSX.Element => {
+  const [title, setTitle] = useState<string>('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    setTitle(value);
+  };
+
   return (
     <Modal show={show}>
       <Modal.Header>
@@ -17,13 +24,15 @@ export function ModalWindow({ show, handleModal }: IModal): JSX.Element {
               type="text"
               placeholder="My board name"
               autoFocus
+              onChange={handleChange}
+              value={title}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>board background</Form.Label>
             <Form.Control
               className="board-color"
-              value="#026aa7"
+              defaultValue="#026aa7"
               type="color"
               autoFocus
             />
@@ -40,4 +49,4 @@ export function ModalWindow({ show, handleModal }: IModal): JSX.Element {
       </Modal.Footer>
     </Modal>
   );
-}
+};
