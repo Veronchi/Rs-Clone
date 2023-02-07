@@ -8,27 +8,26 @@ export const deckArray: ICard[] = [
   {
     id: 1,
     title: 'To Do',
-    tasks: {
-      task: ['Razdvatri', '123456'],
-    },
+    tasks: ['Pokushat', 'Sleep'],
   },
   {
     id: 2,
     title: 'In Process',
-    tasks: {
-      task: ['Razdvatri', '123456', 'fgfgfg'],
-    },
+    tasks: ['Pokodit', 'Drink tea', 'Pokushat'],
   },
   {
     id: 3,
+    title: 'Review',
+    tasks: [''],
+  },
+  {
+    id: 4,
     title: 'Done',
-    tasks: {
-      task: ['Razdvatri', '123456', 'drink cofeek'],
-    },
+    tasks: ['Razdvatri', '123456'],
   },
 ];
 
-function BoardPage(): JSX.Element {
+const BoardPage = (): JSX.Element => {
   const [isModal, setIsModal] = useState<boolean>(false);
 
   const handleModalClose = (): void => setIsModal(false);
@@ -41,11 +40,11 @@ function BoardPage(): JSX.Element {
           <AddCard card={card} key={card.id} />
         ))}
         <button
-          className="btn btn-success"
+          className="board__btn"
           type="button"
           onClick={(): void => setIsModal(true)}
         >
-          Сreate Card
+          Add card
         </button>
       </div>
 
@@ -54,6 +53,6 @@ function BoardPage(): JSX.Element {
       ) : null}
     </section>
   );
-}
+};
 
 export default BoardPage;

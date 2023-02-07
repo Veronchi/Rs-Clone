@@ -2,20 +2,37 @@
 
 .board {
   flex: 1 0 auto;
-  padding: 20px;
+  padding: 5px;
 
   &__title {
-    font-size: 2.5rem;
-    margin: 5px auto;
+    font-size: 2.2rem;
+    margin: 3px auto;
     text-align: center;
   }
+
   .wrapper {
     display: flex;
+    align-items: start;
     padding: 2%;
-    border: 1px solid black;
     border-radius: 10px;
     background: $primary-blue;
-    gap: 10px;
+    overflow-x: auto;
+  }
+
+  &__btn {
+    flex: 0 0 16rem;
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 400;
+    background-color: $active-gray;
+    color: $light-gray;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    transition: background-color 150ms;
+    text-align: left;
+
+    &:hover {
+      background-color: $dark-blue;
+    }
   }
 }
-

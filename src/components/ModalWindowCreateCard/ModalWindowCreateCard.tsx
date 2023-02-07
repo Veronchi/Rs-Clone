@@ -6,7 +6,7 @@ import { IModal } from '../../interfaces';
 
 import './ModalWindowCreateCard.scss';
 
-function ModalWindowCreateCard({ show, handleModal }: IModal): JSX.Element {
+const ModalWindowCreateCard = ({ show, handleModal }: IModal): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [title, setTitle] = useState<string>('');
 
@@ -41,6 +41,6 @@ function ModalWindowCreateCard({ show, handleModal }: IModal): JSX.Element {
       </Modal.Footer>
     </Modal>
   );
-}
+};
 
 export default ModalWindowCreateCard;

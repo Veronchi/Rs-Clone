@@ -8,7 +8,8 @@ export interface IModal {
 export interface ICard {
   id: number;
   title: string;
-  tasks: {
-    task: string[];
-  }
+  tasks: string[];
+}
+export interface CardProps {
+  card: ICard;
 }

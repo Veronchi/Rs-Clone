@@ -6,18 +6,15 @@ import { RegistrationLayout } from './components/RegistrationLayout/Registration
 import BoardPage from './pages/BoardPage/BoardPage';
 import { BoardsPage } from './pages/BoardsPage/BoardsPage';
 
-function App(): JSX.Element {
-  return (
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route path="/boards" element={<BoardsPage />} />
-        <Route path="/" element={<Navigate to="/boards" replace />} />
-        <Route path="/board" element={<BoardPage />} />
-      </Route>
-      <Route path="/registration" element={<RegistrationLayout />} />
-    </Routes>
-
-  );
-}
+const App = (): JSX.Element => (
+  <Routes>
+    <Route path="/" element={<MainLayout />}>
+      <Route path="/boards" element={<BoardsPage />} />
+      <Route path="/" element={<Navigate to="/boards" replace />} />
+      <Route path="/board" element={<BoardPage />} />
+    </Route>
+    <Route path="/registration" element={<RegistrationLayout />} />
+  </Routes>
+);
 
 export default App;
