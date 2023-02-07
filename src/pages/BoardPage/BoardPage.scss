@@ -1,0 +1,68 @@
+@import '../../styles/palette.scss';
+$deck-bg: linear-gradient(115deg, #c5c9db, #98a8ee);
+
+.board {
+  flex: 1 0 auto;
+  padding: 20px;
+
+  &__title {
+    font-size: 2.5rem;
+    margin: 5px auto;
+    text-align: center;
+  }
+
+  .wrapper {
+    padding: 2%;
+    height: 90%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background: $deck-bg;
+    background-size: 400% 400%;
+    -webkit-animation: DeckAnimation 3s ease infinite;
+    -moz-animation: DeckAnimation 3s ease infinite;
+    animation: DeckAnimation 3s ease infinite;
+  }
+
+}
+
+.save-btn {
+  border: 1px solid $primary-blue;
+
+  &:hover {
+    background-color: $primary-blue;
+  }
+}
+
+@-webkit-keyframes DeckAnimation {
+  0% {
+    background-position: 88% 0%;
+  }
+  50% {
+    background-position: 13% 100%;
+  }
+  100% {
+    background-position: 88% 0%;
+  }
+}
+@-moz-keyframes DeckAnimation {
+  0% {
+    background-position: 88% 0%;
+  }
+  50% {
+    background-position: 13% 100%;
+  }
+  100% {
+    background-position: 88% 0%;
+  }
+}
+@keyframes DeckAnimation {
+  0% {
+    background-position: 88% 0%;
+  }
+  50% {
+    background-position: 13% 100%;
+  }
+  100% {
+    background-position: 88% 0%;
+  }
+}
