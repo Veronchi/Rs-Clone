@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
+import ModalWindowCreateCard from '../../components/ModalWindowCreateCard/ModalWindowCreateCard';
 import './BoardPage.scss';
 
 function BoardPage(): JSX.Element {
   const [isModal, setIsModal] = useState<boolean>(false);
-
-  const handleModalClose = (): void => setIsModal(false);
+  // const handleModalClose = (): void => setIsModal(false);
 
   return (
     <section className="board">
@@ -21,7 +20,7 @@ function BoardPage(): JSX.Element {
       </div>
 
       {isModal ? (
-        <ModalWindow show={isModal} handleModal={handleModalClose} />
+        <ModalWindowCreateCard />
       ) : null}
     </section>
   );
