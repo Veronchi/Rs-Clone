@@ -1,0 +1,13 @@
+@import "../../styles/palette.scss";
+
+.board-color {
+  width: 100px;
+}
+
+.save-btn {
+  border: 1px solid $primary-blue;
+
+  &:hover {
+    background-color: $primary-blue;
+  }
+}
