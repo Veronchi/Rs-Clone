@@ -7,12 +7,11 @@ import { IModal } from '../../interfaces';
 import './ModalWindowCreateCard.scss';
 
 const ModalWindowCreateCard = ({ show, handleModal }: IModal): JSX.Element => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [title, setTitle] = useState<string>('');
 
-  function getTitle(ev: React.ChangeEvent<HTMLInputElement>): void {
+  const handleTitle = (ev: React.ChangeEvent<HTMLInputElement>): void => {
     setTitle(ev.target.value);
-  }
+  };
 
   return (
     <Modal show={show}>
@@ -25,8 +24,8 @@ const ModalWindowCreateCard = ({ show, handleModal }: IModal): JSX.Element => {
               autoFocus
               type="text"
               placeholder="Add title"
-              // eslint-disable-next-line react/jsx-no-bind
-              onChange={getTitle}
+              value={title}
+              onChange={handleTitle}
             />
           </Form.Group>
         </Form>
