@@ -1,0 +1,32 @@
+@import "../../styles/palette.scss";
+
+.aside {
+  width: 15%;
+  padding: 10px;
+  background: $light-gray;
+  font-size: 1.5rem;
+  color: $gray-text;
+  float: right;
+  border-right: 1px solid $border-gray;
+
+  &__title {
+    color: inherit;
+  }
+
+  &__toggle {
+    color: inherit;
+    border: 1px solid red;
+  }
+
+  &__boards {
+    color: inherit;
+  }
+
+  &__users {
+    color: inherit;
+  }
+
+  &__settings > a {
+    color: inherit;
+  }
+}
