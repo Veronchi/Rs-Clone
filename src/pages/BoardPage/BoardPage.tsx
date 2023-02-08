@@ -1,42 +1,25 @@
-import React, { useState } from 'react';
-import AddCard from '../../components/AddCard/AddCard';
+import React, { useEffect, useState } from 'react';
+import AddCard from '../../components/Card/Card';
 import ModalWindowCreateCard from '../../components/ModalWindowCreateCard/ModalWindowCreateCard';
 import { ICard } from '../../interfaces';
 import './BoardPage.scss';
-
-export const deckArray: ICard[] = [
-  {
-    id: 1,
-    title: 'To Do',
-    tasks: ['Pokushat', 'Sleep'],
-  },
-  {
-    id: 2,
-    title: 'In Process',
-    tasks: ['Pokodit', 'Drink tea', 'Pokushat'],
-  },
-  {
-    id: 3,
-    title: 'Review',
-    tasks: [''],
-  },
-  {
-    id: 4,
-    title: 'Done',
-    tasks: ['Razdvatri', '123456'],
-  },
-];
+import cardArray from './fakeData';
 
 const BoardPage = (): JSX.Element => {
+  const [cards, setCards] = useState<ICard[]>([]);
   const [isModal, setIsModal] = useState<boolean>(false);
 
   const handleModalClose = (): void => setIsModal(false);
+
+  useEffect(() => {
+    setCards(cardArray);
+  }, []);
 
   return (
     <section className="board">
       <h1 className="board__title">Your Desk</h1>
       <div className="wrapper">
-        {deckArray.map((card) => (
+        {cards.map((card) => (
           <AddCard card={card} key={card.id} />
         ))}
         <button

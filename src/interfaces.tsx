@@ -5,11 +5,16 @@ export interface IModal {
   handleModal: (e: React.MouseEvent) => void;
 }
 
+export type Task = {
+  key: number,
+  name: string;
+};
 export interface ICard {
   id: number;
   title: string;
-  tasks: string[];
+  tasks: Task[]
 }
+
 export interface CardProps {
   card: ICard;
 }
