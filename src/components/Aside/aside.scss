@@ -1,21 +1,48 @@
 @import "../../styles/palette.scss";
 
 .aside {
-  width: 15%;
+  position: relative;
+  width: 250px;
   padding: 10px;
   background: $light-gray;
-  font-size: 1.5rem;
-  color: $gray-text;
-  float: right;
   border-right: 1px solid $border-gray;
+  overflow: hidden;
+  transition: 0.3s;
+
+  &__container {
+    position: absolute;
+    right: 0;
+    width: 230px;
+    font-size: 1.5rem;
+    color: $gray-text;
+  }
+
+  &__close {
+    background-image: url("../../assets/icons/arrow-left.svg");
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    background-size: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: 0.5;
+    z-index: 1;
+
+    &:hover {
+      filter: opacity(0.5);
+    }
+  }
 
   &__title {
+    width: 200px;
+    text-align: left;
     color: inherit;
   }
 
-  &__toggle {
-    color: inherit;
-    border: 1px solid red;
+  &__nav {
+    display: flex;
+    flex-direction: column;
   }
 
   &__boards {
@@ -29,4 +56,12 @@
   &__settings > a {
     color: inherit;
   }
+}
+
+.arrow-right {
+  background-image: url("../../assets/icons/arrow-right.svg");
+}
+
+.closed {
+  width: 35px;
 }

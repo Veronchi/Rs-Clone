@@ -22,7 +22,7 @@
     height: 95px;
     width: 285px;
     border: none;
-    transition: .5s;
+    transition: 0.5s;
     overflow: hidden;
     cursor: pointer;
 
@@ -32,8 +32,8 @@
       .boards__item-title {
         left: 20px;
       }
+    }
   }
-}
 
   &__item-title {
     position: absolute;
@@ -44,7 +44,7 @@
     left: 10px;
     top: 10px;
     color: $light-gray;
-    transition: .5s;
+    transition: 0.5s;
   }
 }
 
