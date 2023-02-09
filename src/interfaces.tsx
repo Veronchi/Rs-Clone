@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface IModal {
   show: boolean;
-  handleModal: (e: React.MouseEvent) => void;
+  handleModal: (e: React.MouseEvent | React.FormEvent) => void;
 }
 
 export type Task = {
@@ -17,4 +17,8 @@ export interface ICard {
 
 export interface CardProps {
   card: ICard;
+}
+
+export interface BoardPageModal extends IModal {
+  addCard: (card: ICard) => void;
 }
