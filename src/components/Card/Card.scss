@@ -42,7 +42,6 @@
     list-style: none;
 
     &-input {
-      display: none;
       position: absolute;
       left: 5px;
     }
@@ -52,10 +51,6 @@
 
       &:hover {
         background-color: $active-gray;
-
-        .list__item-btn {
-          display: none;
-        }
       }
     }
 
