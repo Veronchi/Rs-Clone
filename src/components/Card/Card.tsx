@@ -14,5 +14,4 @@ const Card = ({ card }: CardProps): JSX.Element => (
     </button>
   </div>
 );
-
 export default Card;
