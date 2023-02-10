@@ -18,3 +18,15 @@ export interface ICard {
 export interface CardProps {
   card: ICard;
 }
+
+export interface IUser {
+  login: string;
+  email?: string;
+  password: string;
+  isAuth: boolean;
+}
+
+export interface IBoard {
+  title: string;
+  background: string;
+}
