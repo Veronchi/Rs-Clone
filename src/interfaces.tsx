@@ -1,8 +1,8 @@
-import React from 'react';
+import { FormEvent, MouseEvent } from 'react';
 
 export interface IModal {
   show: boolean;
-  handleModal: (e: React.MouseEvent | React.FormEvent) => void;
+  handleModal: (e: MouseEvent | FormEvent) => void;
 }
 
 export type Task = {

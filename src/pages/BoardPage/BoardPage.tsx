@@ -12,7 +12,7 @@ const BoardPage = (): JSX.Element => {
   const handleModalClose = (): void => setIsModal(false);
 
   const addCard = (card: ICard): void => {
-    setCards((prev) => [...prev, card]);
+    setCards([...cards, card]);
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { IModal } from '../../interfaces';
 import { createBoard } from '../../http/boardAPI';
@@ -9,12 +9,12 @@ export const ModalWindow = ({ show, handleModal }: IModal): JSX.Element => {
   const [background, setBackground] = useState<string>('#026aa7');
   const [isSave, setIsSave] = useState<boolean>(false);
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     setTitle(value);
   };
 
-  const handleBackgroundChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleBackgroundChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     setBackground(value);
   };
