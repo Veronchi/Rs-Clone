@@ -1,6 +1,6 @@
 import { ICard } from '../../interfaces';
 
-const cardArray: ICard[] = [
+export const cardArray: ICard[] = [
   {
     id: 1,
     title: 'To Do',
@@ -33,4 +33,8 @@ const cardArray: ICard[] = [
   },
 ];
 
-export default cardArray;
+export const newCard = {
+  id: Math.ceil(Math.random() * 10000),
+  title: '',
+  tasks: [],
+};
