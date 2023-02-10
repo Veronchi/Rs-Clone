@@ -1,15 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { IModal } from '../../interfaces';
+import { createBoard } from '../../http/boardAPI';
 import './style.scss';
 
 export const ModalWindow = ({ show, handleModal }: IModal): JSX.Element => {
   const [title, setTitle] = useState<string>('');
+  const [background, setBackground] = useState<string>('#026aa7');
+  const [isSave, setIsSave] = useState<boolean>(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     setTitle(value);
   };
+
+  const handleBackgroundChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    setBackground(value);
+  };
+
+  const handleSave = async (): Promise<void> => {
+    try {
+      await createBoard(title, background);
+      setIsSave(false);
+    } catch (e) {
+      alert((e as Error).message);
+    }
+  };
+
+  useEffect(() => {
+    if (isSave) handleSave();
+  }, [isSave]);
 
   return (
     <Modal show={show}>
@@ -24,7 +45,7 @@ export const ModalWindow = ({ show, handleModal }: IModal): JSX.Element => {
               type="text"
               placeholder="My board name"
               autoFocus
-              onChange={handleChange}
+              onChange={handleTitleChange}
               value={title}
             />
           </Form.Group>
@@ -32,9 +53,10 @@ export const ModalWindow = ({ show, handleModal }: IModal): JSX.Element => {
             <Form.Label>board background</Form.Label>
             <Form.Control
               className="board-color"
-              defaultValue="#026aa7"
+              value={background}
               type="color"
               autoFocus
+              onChange={handleBackgroundChange}
             />
           </Form.Group>
         </Form>
@@ -43,7 +65,7 @@ export const ModalWindow = ({ show, handleModal }: IModal): JSX.Element => {
         <Button variant="outline-danger" onClick={handleModal}>
           Close
         </Button>
-        <Button className="save-btn" onClick={handleModal}>
+        <Button className="save-btn" onClick={():void => setIsSave(true)}>
           Save Board
         </Button>
       </Modal.Footer>

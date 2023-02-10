@@ -1,0 +1,46 @@
+@import "../../styles/palette.scss";
+
+.registration {
+  text-align: center;
+  padding-top: 50px;
+
+  &__title {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+
+  &__form {
+    max-width: 500px;
+    text-align: left;
+    border: 2px solid $light-blue;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  &__link {
+    text-decoration: none;
+  }
+
+  &__btn.btn {
+    color: $primary;
+    background-color: $primary-blue;
+    margin-bottom: 10px;
+
+    &:hover {
+      background-color: $light-blue;
+    }
+  }
+
+  &__option {
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid $primary-blue;
+    padding: 0;
+    margin-left: 5px;
+  }
+
+  &__input.form-control:focus {
+    border-color: $primary-blue;
+  }
+}

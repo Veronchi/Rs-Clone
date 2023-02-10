@@ -22,3 +22,15 @@ export interface CardProps {
 export interface BoardPageModal extends IModal {
   addCard: (card: ICard) => void;
 }
+
+export interface IUser {
+  login: string;
+  email?: string;
+  password: string;
+  isAuth: boolean;
+}
+
+export interface IBoard {
+  title: string;
+  background: string;
+}
