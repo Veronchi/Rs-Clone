@@ -1,4 +1,4 @@
-@import '../../styles/palette.scss';
+@import "../../styles/palette.scss";
 
 .list {
   flex: 0 0 18rem;
@@ -20,7 +20,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-content: start;
+    align-content: flex-start;
     padding: 0 0.6rem 0.5rem;
     overflow-y: auto;
   }
