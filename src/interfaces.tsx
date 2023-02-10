@@ -1,8 +1,8 @@
-import React from 'react';
+import { FormEvent, MouseEvent } from 'react';
 
 export interface IModal {
   show: boolean;
-  handleModal: (e: React.MouseEvent) => void;
+  handleModal: (e: MouseEvent | FormEvent) => void;
 }
 
 export type Task = {
@@ -17,4 +17,20 @@ export interface ICard {
 
 export interface CardProps {
   card: ICard;
+}
+
+export interface BoardPageModal extends IModal {
+  addCard: (card: ICard) => void;
+}
+
+export interface IUser {
+  login: string;
+  email?: string;
+  password: string;
+  isAuth: boolean;
+}
+
+export interface IBoard {
+  title: string;
+  background: string;
 }

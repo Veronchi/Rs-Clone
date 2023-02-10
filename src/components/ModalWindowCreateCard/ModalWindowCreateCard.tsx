@@ -1,22 +1,36 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { IModal } from '../../interfaces';
+import { BoardPageModal } from '../../interfaces';
+import { newCard } from '../../pages/BoardPage/fakeData';
 
 import './ModalWindowCreateCard.scss';
 
-const ModalWindowCreateCard = ({ show, handleModal }: IModal): JSX.Element => {
+const ModalWindowCreateCard = ({ show, handleModal, addCard }: BoardPageModal): JSX.Element => {
   const [title, setTitle] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
-  const handleTitle = (ev: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleTitle = (ev: ChangeEvent<HTMLInputElement>): void => {
     setTitle(ev.target.value);
+  };
+
+  const handleSubmit = (ev: FormEvent): void => {
+    ev.preventDefault();
+    if (title.trim().length === 0) {
+      setError('Please enter valid title.');
+      console.log(error);
+      return;
+    }
+    newCard.title = title;
+    addCard(newCard);
+    handleModal(ev);
   };
 
   return (
     <Modal show={show}>
       <Modal.Body>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Title</Form.Label>
             <Form.Control
@@ -34,7 +48,7 @@ const ModalWindowCreateCard = ({ show, handleModal }: IModal): JSX.Element => {
         <Button variant="secondary" onClick={handleModal}>
           Close
         </Button>
-        <Button variant="success" onClick={handleModal}>
+        <Button type="submit" variant="success" onClick={handleSubmit}>
           Save Changes
         </Button>
       </Modal.Footer>
