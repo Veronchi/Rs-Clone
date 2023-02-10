@@ -1,0 +1,20 @@
+.task-edit {
+  &__name {
+    font-size: 1.5rem;
+  }
+
+  &__mini-cards {
+    padding: 0 0;
+    margin: 0 12px;
+  }
+
+  &__buttons {
+    width: 150px;
+    margin: 5px 0;
+  }
+}
+
+.grid-vertical {
+  display: flex;
+  flex-direction: column;
+}

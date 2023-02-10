@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AddCard from '../../components/Card/Card';
-import ModalWindowCreateCard from '../../components/ModalWindowCreateCard/ModalWindowCreateCard';
+// import ModalWindowCreateCard from '../../components/ModalWindowCreateCard/ModalWindowCreateCard';
+import { CardTaskEdit } from '../../components/CardTaskEdit/CardTaskEdit';
 import { ICard } from '../../interfaces';
 import './BoardPage.scss';
 import cardArray from './fakeData';
@@ -32,7 +33,8 @@ const BoardPage = (): JSX.Element => {
       </div>
 
       {isModal ? (
-        <ModalWindowCreateCard show={isModal} handleModal={handleModalClose} />
+        // <ModalWindowCreateCard show={isModal} handleModal={handleModalClose} />
+        <CardTaskEdit show={isModal} handleModal={handleModalClose} />
       ) : null}
     </section>
   );
