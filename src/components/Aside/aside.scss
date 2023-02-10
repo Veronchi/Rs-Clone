@@ -1,0 +1,69 @@
+@import "../../styles/palette.scss";
+
+.aside {
+  flex: 0 0 auto;
+  position: relative;
+  width: 250px;
+  padding: 10px 0;
+  background: $light-gray;
+  border-right: 1px solid $border-gray;
+  overflow: hidden;
+  transition: 0.3s;
+
+  &__container {
+    position: absolute;
+    right: 0;
+    width: 250px;
+    font-size: 1.5rem;
+    color: $gray-text;
+  }
+
+  &__close {
+    background-image: url("../../assets/icons/arrow-left.svg");
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    background-size: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: 0.5;
+    z-index: 1;
+
+    &:hover {
+      filter: opacity(0.5);
+    }
+  }
+
+  &__title {
+    margin-left: 15px;
+    width: 200px;
+    text-align: left;
+    color: inherit;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__boards {
+    color: inherit;
+  }
+
+  &__users {
+    color: inherit;
+  }
+
+  &__settings > a {
+    color: inherit;
+  }
+}
+
+.arrow-right {
+  background-image: url("../../assets/icons/arrow-right.svg");
+}
+
+.closed {
+  width: 35px;
+}
