@@ -2,7 +2,6 @@ import React, { MouseEvent } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import CloseButton from 'react-bootstrap/CloseButton';
 import './aside.scss';
 
 const Aside = (): JSX.Element => {
@@ -25,9 +24,9 @@ const Aside = (): JSX.Element => {
 
   return (
     <aside className="aside">
-      <CloseButton className="aside__close" aria-label="Hide" onClick={handleAside} />
+      <button className="aside__close" aria-label="Hide" type="button" onClick={handleAside} />
       <div className="aside__container">
-        <Navbar.Brand href="/board" className="aside__title">Name Trello board</Navbar.Brand>
+        <Navbar.Brand href="/board" className="aside__title">Trello board</Navbar.Brand>
         <hr />
         <Nav className="me-auto aside__nav">
           <Nav.Link href="/boards" className="aside__boards">Boards</Nav.Link>

@@ -3,7 +3,7 @@
 .aside {
   flex: 0 0 auto;
   position: relative;
-  width: 250px;
+  width: 230px;
   padding: 10px 0;
   background: $light-gray;
   border-right: 1px solid $border-gray;
@@ -13,12 +13,14 @@
   &__container {
     position: absolute;
     right: 0;
-    width: 250px;
+    width: 230px;
     font-size: 1.5rem;
     color: $gray-text;
   }
 
   &__close {
+    background: transparent;
+    border: none;
     background-image: url("../../assets/icons/arrow-left.svg");
     padding: 0;
     width: 30px;
@@ -35,16 +37,26 @@
     }
   }
 
+  &__settings > a {
+    color: inherit;
+  }
+
+  &__nav > a {
+    color: inherit;
+  }
+
   &__title {
     margin-left: 15px;
-    width: 200px;
+    max-width: 180px;
     text-align: left;
     color: inherit;
+    word-wrap: normal;
   }
 
   &__nav {
     display: flex;
     flex-direction: column;
+    color: $gray-text;
   }
 
   &__boards {
@@ -52,10 +64,6 @@
   }
 
   &__users {
-    color: inherit;
-  }
-
-  &__settings > a {
     color: inherit;
   }
 }
