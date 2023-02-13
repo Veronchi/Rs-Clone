@@ -8,9 +8,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { IModal } from '../../interfaces';
-import './CardTaskEdit.scss';
+import './TaskEdit.scss';
 
-export const CardTaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
+export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
   const [title, setTitle] = useState<string>('To do chto-to');
   const [isNameBlock, setName] = useState<boolean>(true);
   const [cover, setCover] = useState<string>('');
@@ -32,10 +32,11 @@ export const CardTaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
         style={{ backgroundColor: cover }}
       >
         <OverlayTrigger
-          key="left"
+          defaultShow
+          key="bottom"
           placement="left"
           overlay={(
-            <Tooltip id="tooltip-left">
+            <Tooltip id="tooltip-bottom">
               Cover color
             </Tooltip>
           )}
@@ -113,7 +114,7 @@ export const CardTaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
         <Button variant="outline-danger" onClick={handleModal}>
           Close
         </Button>
-        <Button className="save-btn" onClick={handleModal}>
+        <Button className="save-btn" variant="outline-success" onClick={handleModal}>
           Save Task
         </Button>
       </Modal.Footer>

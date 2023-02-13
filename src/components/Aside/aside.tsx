@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CloseButton from 'react-bootstrap/CloseButton';
 import './aside.scss';
-import { CardTaskEdit } from '../CardTaskEdit/CardTaskEdit';
+import { TaskEdit } from '../TaskEdit/TaskEdit';
 
 const Aside = (): JSX.Element => {
   const [isModal, setIsModal] = useState<boolean>(false);
@@ -49,7 +49,7 @@ const Aside = (): JSX.Element => {
           Card
         </button>
       </div>
-      {isModal ? <CardTaskEdit show={isModal} handleModal={handleModalClose} /> : null}
+      {isModal ? <TaskEdit show={isModal} handleModal={handleModalClose} /> : null}
     </aside>
   );
 };
