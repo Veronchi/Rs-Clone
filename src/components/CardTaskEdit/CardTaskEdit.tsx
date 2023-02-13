@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import {
   Button, Form, Modal,
 } from 'react-bootstrap';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -11,18 +13,42 @@ import './CardTaskEdit.scss';
 export const CardTaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
   const [title, setTitle] = useState<string>('To do chto-to');
   const [isNameBlock, setName] = useState<boolean>(true);
-  const [isShowBlock, setShowBlock] = useState<boolean>(false);
+  const [cover, setCover] = useState<string>('');
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     setTitle(value);
   };
 
+  const handleCover = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    setCover(value);
+  };
+
   return (
     <Modal show={show} size="lg">
-      <Modal.Header>
-        <Modal.Title>Task Edit</Modal.Title>
-      </Modal.Header>
+      <div
+        className="task-edit__cover"
+        style={{ backgroundColor: cover }}
+      >
+        <OverlayTrigger
+          key="left"
+          placement="left"
+          overlay={(
+            <Tooltip id="tooltip-left">
+              Cover color
+            </Tooltip>
+          )}
+        >
+          <Form.Control
+            className="board-color"
+            value={cover}
+            type="color"
+            autoFocus
+            onChange={handleCover}
+          />
+        </OverlayTrigger>
+      </div>
       <Modal.Body>
         <Container>
           <Row>
@@ -38,13 +64,9 @@ export const CardTaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
                     value={title}
                     plaintext={isNameBlock}
                     readOnly={isNameBlock}
+                    style={{ fontSize: '1.5rem' }}
                   />
                 </Form.Group>
-                <Row className="task-edit__cards">
-                  <Col md="auto" className="mini-cards">Participants</Col>
-                  <Col md="auto" className="mini-cards">Marks</Col>
-                  <Col md="auto" className="mini-cards">Date</Col>
-                </Row>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                   <Form.Label>Description</Form.Label>
                   <Form.Control
@@ -53,81 +75,9 @@ export const CardTaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
                     placeholder="Add a more detailed description..."
                   />
                 </Form.Group>
-                {isShowBlock
-                  ? (
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
-                      <Form.Control
-                        className="task-edit__name"
-                        type="text"
-                        onChange={handleNameChange}
-                        onFocus={():void => setName(false)}
-                        onBlur={(): void => setName(true)}
-                        value="Checklist"
-                        plaintext={isNameBlock}
-                        readOnly={isNameBlock}
-                      />
-                      <input className="task-edit__percent" type="range" />
-                      <div className="mb-3">
-                        <Form.Check
-                          type="checkbox"
-                          id="default-checkbox1"
-                          label="chto-to vypolnit"
-                        />
-                        <Form.Check
-                          type="checkbox"
-                          id="default-checkbox2"
-                          label="default checkbox"
-                        />
-                      </div>
-                      <Button
-                        size="sm"
-                        variant="outline-secondary"
-                        onClick={handleModal}
-                        className="task-edit__buttons"
-                      >
-                        Add element
-                      </Button>
-                    </Form.Group>
-                  )
-                  : null}
               </Form>
             </Col>
             <Col md="auto">
-              <p>Add to card</p>
-              <div className="grid-vertical">
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  onClick={handleModal}
-                  className="task-edit__buttons"
-                >
-                  Participants
-                </Button>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  onClick={handleModal}
-                  className="task-edit__buttons"
-                >
-                  Marks
-                </Button>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  onClick={(): void => setShowBlock(!isShowBlock)}
-                  className="task-edit__buttons"
-                >
-                  Checklist
-                </Button>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  onClick={handleModal}
-                  className="task-edit__buttons"
-                >
-                  Dates
-                </Button>
-              </div>
               <p>Actions</p>
               <div className="grid-vertical">
                 <Button

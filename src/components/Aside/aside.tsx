@@ -1,11 +1,15 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CloseButton from 'react-bootstrap/CloseButton';
 import './aside.scss';
+import { CardTaskEdit } from '../CardTaskEdit/CardTaskEdit';
 
 const Aside = (): JSX.Element => {
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const handleModalClose = (): void => setIsModal(false);
+
   const handleAside = (e: MouseEvent<HTMLButtonElement>): void => {
     const container = document.querySelector('.aside__container') as HTMLElement;
     const aside = e.currentTarget.parentElement;
@@ -41,7 +45,11 @@ const Aside = (): JSX.Element => {
             <NavDropdown.Item href="#" className="aside__some">Something</NavDropdown.Item>
           </NavDropdown>
         </Nav>
+        <button type="button" onClick={():void => setIsModal(true)}>
+          Card
+        </button>
       </div>
+      {isModal ? <CardTaskEdit show={isModal} handleModal={handleModalClose} /> : null}
     </aside>
   );
 };
