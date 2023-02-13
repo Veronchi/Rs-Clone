@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react';
 import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom';
 import './aside.scss';
 
 const Aside = (): JSX.Element => {
@@ -26,11 +26,17 @@ const Aside = (): JSX.Element => {
     <aside className="aside">
       <button className="aside__close" aria-label="Hide" type="button" onClick={handleAside} />
       <div className="aside__container">
-        <Navbar.Brand href="/board" className="aside__title">Trello board</Navbar.Brand>
+        <div className="aside__title">
+          <p className="aside__avatar">U</p>
+          <div>
+            <p className="aside__name">User</p>
+            <p className="aside__email">sdg@fjk.com</p>
+          </div>
+        </div>
         <hr />
         <Nav className="me-auto aside__nav">
-          <Nav.Link href="/boards" className="aside__boards">Boards</Nav.Link>
-          <Nav.Link href="#" className="aside__users">Users</Nav.Link>
+          <Link to="/boards" className="aside__boards">Boards</Link>
+          <Link to="/auth" className="aside__users">Users</Link>
           <NavDropdown title="Settings" id="basic-nav-dropdown" className="aside__settings">
             <NavDropdown.Item href="#" className="aside__theme">Themes</NavDropdown.Item>
             <NavDropdown.Item href="#" className="aside__lang">
