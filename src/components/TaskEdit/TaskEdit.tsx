@@ -7,22 +7,48 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { ModalConfirm } from './ModalConfirm';
 import { IModal } from '../../interfaces';
 import './TaskEdit.scss';
 
 export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
   const [title, setTitle] = useState<string>('To do chto-to');
   const [isNameBlock, setName] = useState<boolean>(true);
-  const [cover, setCover] = useState<string>('');
+  const [cover, setCover] = useState<string>('white');
+  const [desc, setDesc] = useState<string>('Kkj ks dfjksjs kdfj');
+
+  const [isModal, setIsConfirmModal] = useState<boolean>(false);
+  const handleConfirmClose = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    console.log(e);
+    setIsConfirmModal(false);
+  };
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     setTitle(value);
   };
 
+  const handleDescChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    setDesc(value);
+  };
+
   const handleCover = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     setCover(value);
+  };
+
+  // const handleMove = (): void => {
+  // };
+
+  const handleCopy = (): void => {
+  };
+
+  const handleDelete = (): void => {
+    setIsConfirmModal(true);
+  };
+
+  const handleSubmit = (): void => {
   };
 
   return (
@@ -74,6 +100,8 @@ export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
                     as="textarea"
                     rows={3}
                     placeholder="Add a more detailed description..."
+                    value={desc}
+                    onChange={handleDescChange}
                   />
                 </Form.Group>
               </Form>
@@ -84,7 +112,7 @@ export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
                 <Button
                   size="sm"
                   variant="secondary"
-                  onClick={handleModal}
+                  onClick={handleConfirmClose}
                   className="task-edit__buttons"
                 >
                   Move
@@ -92,7 +120,7 @@ export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
                 <Button
                   size="sm"
                   variant="secondary"
-                  onClick={handleModal}
+                  onClick={handleCopy}
                   className="task-edit__buttons"
                 >
                   Copy
@@ -100,10 +128,10 @@ export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
                 <Button
                   size="sm"
                   variant="secondary"
-                  onClick={handleModal}
+                  onClick={handleDelete}
                   className="task-edit__buttons"
                 >
-                  Archive
+                  Delete
                 </Button>
               </div>
             </Col>
@@ -114,10 +142,11 @@ export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
         <Button variant="outline-danger" onClick={handleModal}>
           Close
         </Button>
-        <Button className="save-btn" variant="outline-success" onClick={handleModal}>
+        <Button className="save-btn" type="submit" variant="outline-success" onClick={handleSubmit}>
           Save Task
         </Button>
       </Modal.Footer>
+      {isModal ? <ModalConfirm show handleModal={handleModal} /> : null}
     </Modal>
   );
 };
