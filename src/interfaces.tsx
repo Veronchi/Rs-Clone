@@ -10,9 +10,10 @@ export type Task = {
   name: string;
 };
 export interface ICard {
-  id: number;
+  id: string;
   title: string;
-  tasks: Task[]
+  boardId: string;
+  // tasks: Task[]
 }
 
 export interface CardProps {
@@ -31,6 +32,28 @@ export interface IUser {
 }
 
 export interface IBoard {
+  id: string;
   title: string;
   background: string;
+}
+
+export interface ITask {
+  id: string;
+  text: string;
+  ColumnId: string;
+}
+
+export interface IState {
+  users: IUser;
+  boards: Array<IBoard>;
+  cards: Array<ICard>;
+  tasks: Array<ITask>;
+}
+
+export interface ICardProps {
+  card: ICard;
+}
+
+export interface ITaskProps {
+  task: ITask;
 }
