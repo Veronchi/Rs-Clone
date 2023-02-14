@@ -3,7 +3,7 @@
 .aside {
   flex: 0 0 auto;
   position: relative;
-  width: 250px;
+  width: 200px;
   padding: 10px 0;
   background: $light-gray;
   border-right: 1px solid $border-gray;
@@ -13,12 +13,14 @@
   &__container {
     position: absolute;
     right: 0;
-    width: 250px;
+    width: 200px;
     font-size: 1.5rem;
     color: $gray-text;
   }
 
   &__close {
+    background: transparent;
+    border: none;
     background-image: url("../../assets/icons/arrow-left.svg");
     padding: 0;
     width: 30px;
@@ -35,27 +37,64 @@
     }
   }
 
-  &__title {
-    margin-left: 15px;
-    width: 200px;
-    text-align: left;
+  &__settings > a {
     color: inherit;
+  }
+
+  &__nav {
+    color: inherit;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 15px;
+    max-width: 180px;
+    color: inherit;
+  }
+
+  &__name {
+    margin: 0 auto;
+    font-size: 1.1rem;
+    width: fit-content;
+  }
+
+  &__email {
+    margin: 0 auto;
+    font-size: 0.8rem;
+  }
+
+  &__avatar {
+    margin: auto 0;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: $primary-blue;
+    border-radius: 20px;
+    color: $primary;
   }
 
   &__nav {
     display: flex;
     flex-direction: column;
+    color: $gray-text;
   }
 
   &__boards {
+    margin: 10px 0;
+    padding: 0 15px;
+    text-decoration: none;
     color: inherit;
   }
 
   &__users {
-    color: inherit;
-  }
-
-  &__settings > a {
+    margin: 10px 0;
+    padding: 0 15px;
+    text-decoration: none;
     color: inherit;
   }
 }
