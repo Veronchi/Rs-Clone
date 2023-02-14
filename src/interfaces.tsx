@@ -3,6 +3,7 @@ import { FormEvent, MouseEvent } from 'react';
 export interface IModal {
   show: boolean;
   handleModal: (e: MouseEvent | FormEvent) => void;
+  boards: () => void
 }
 
 export type Task = {
@@ -13,14 +14,15 @@ export interface ICard {
   id: string;
   title: string;
   boardId: string;
-  // tasks: Task[]
 }
 
 export interface CardProps {
   card: ICard;
 }
 
-export interface BoardPageModal extends IModal {
+export interface BoardPageModal {
+  show: boolean;
+  handleModal: (e: MouseEvent | FormEvent) => void;
   addCard: (card: ICard) => void;
 }
 
