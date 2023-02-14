@@ -3,11 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { BoardPageModal } from '../../interfaces';
-import { newCard } from '../../pages/BoardPage/fakeData';
 
 import './ModalWindowCreateCard.scss';
 
-const ModalWindowCreateCard = ({ show, handleModal, addCard }: BoardPageModal): JSX.Element => {
+const ModalWindowCreateCard = ({ show, handleModal }: BoardPageModal): JSX.Element => {
   const [title, setTitle] = useState<string>('');
   const [error, setError] = useState<string>('');
 
@@ -22,8 +21,7 @@ const ModalWindowCreateCard = ({ show, handleModal, addCard }: BoardPageModal): 
       console.log(error);
       return;
     }
-    newCard.title = title;
-    addCard(newCard);
+
     handleModal(ev);
   };
 

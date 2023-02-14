@@ -1,52 +1,62 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
+import { getAllBoards } from '../../http/boardAPI';
+import { IState } from '../../interfaces';
+import { addBoards, clean } from '../../store/slices/boardsSlice';
 import './style.scss';
-
-const boardArray = [
-  {
-    id: 1,
-    name: 'Moya borda',
-    color: '#CC9966',
-  },
-  {
-    id: 2,
-    name: 'Our Trello',
-    color: '#998877',
-  }];
 
 const BoardsPage = (): JSX.Element | null => {
   const [isModal, setIsModal] = useState<boolean>(false);
+  const boards = useSelector((state: IState) => state.boards.flat());
+  const dispatch = useDispatch();
 
   const handleModalClose = (): void => setIsModal(false);
 
-  const navigate = useNavigate();
+  const getBoards = async (): Promise<void> => {
+    dispatch(clean());
+    await getAllBoards()
+      .then((data) => {
+        dispatch(addBoards([data]));
+      });
+  };
+
+  useEffect(() => {
+    getBoards();
+  }, []);
 
   return (
     <section className="boards">
       <h1 className="boards__title">Boards</h1>
       <div className="wrapper">
         <div className="boards__buttons">
-          <button className="generate-btn" type="button" onClick={(): void => setIsModal(true)}>Create board</button>
-          {
-            boardArray.map((element): JSX.Element => (
-              <button
-                type="button"
-                key={element.id}
-                className="boards__item"
-                style={{ backgroundColor: element.color }}
-                onClick={(): void => navigate('/board')}
-              >
-                <span className="boards__item-title">
-                  {element.name}
-                </span>
-              </button>
-            ))
-          }
+          <ul className="boards__list">
+            <button className="generate-btn" type="button" onClick={(): void => setIsModal(true)}>Create board</button>
+            {
+                boards.map(({ id, title, background }): JSX.Element => (
+                  <li key={id} className="boards__item" style={{ backgroundColor: background }}>
+                    <Link className="boards__link" to="/board" state={{ boardId: id, title, background }}>
+                      <span className="boards__item-title">
+                        {title}
+                      </span>
+                    </Link>
+                  </li>
+                ))
+              }
+
+          </ul>
+
         </div>
       </div>
 
-      {isModal ? <ModalWindow show={isModal} handleModal={handleModalClose} /> : null}
+      {isModal ? (
+        <ModalWindow
+          show={isModal}
+          handleModal={handleModalClose}
+          boards={getBoards}
+        />
+      ) : null}
     </section>
 
   );

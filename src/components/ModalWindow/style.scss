@@ -4,8 +4,9 @@
   width: 100px;
 }
 
-.save-btn {
+.save-btn.btn {
   border: 1px solid $primary-blue;
+  background-color: $light-gray;
 
   &:hover {
     background-color: $primary-blue;
