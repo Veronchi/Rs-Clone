@@ -2,8 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { BoardPageModal } from '../../interfaces';
-import { newCard } from '../../pages/BoardPage/fakeData';
+import { BoardPageModal, ICard } from '../../interfaces';
 
 import './ModalWindowCreateCard.scss';
 
@@ -22,7 +21,17 @@ const ModalWindowCreateCard = ({ show, handleModal, addCard }: BoardPageModal): 
       console.log(error);
       return;
     }
+
+    const newCard: ICard = {
+      id: 0,
+      title: '',
+      order: 0,
+      tasks: [],
+    };
+
     newCard.title = title;
+    newCard.id = Array.from(document.querySelectorAll('.list')).length + 1;
+    newCard.order = newCard.id;
     addCard(newCard);
     handleModal(ev);
   };

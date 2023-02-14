@@ -13,7 +13,8 @@ const boardArray = [
     id: 2,
     name: 'Our Trello',
     color: '#998877',
-  }];
+  },
+];
 
 const BoardsPage = (): JSX.Element | null => {
   const [isModal, setIsModal] = useState<boolean>(false);

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
-import { Task } from '../../interfaces';
+import { ITask } from '../../interfaces';
 
-const CardTask = ({ name }: Task): JSX.Element => {
+const CardTask = ({ name }: ITask): JSX.Element => {
   const [taskTitle, setTaskTitle] = useState<string>(name);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -18,7 +18,12 @@ const CardTask = ({ name }: Task): JSX.Element => {
   };
 
   return (
-    <li className="list__item" onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
+    <li
+      draggable
+      className="list__item"
+      onMouseEnter={mouseEnter}
+      onMouseLeave={mouseLeave}
+    >
       {taskTitle}
       {isHover
         ? (

@@ -24,7 +24,7 @@ const Aside = (): JSX.Element => {
   };
 
   return (
-    <aside className="aside">
+    <aside className="aside closed">
       <CloseButton className="aside__close" aria-label="Hide" onClick={handleAside} />
       <div className="aside__container">
         <Navbar.Brand href="/board" className="aside__title">Name Trello board</Navbar.Brand>

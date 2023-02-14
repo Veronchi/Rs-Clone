@@ -5,18 +5,25 @@ export interface IModal {
   handleModal: (e: MouseEvent | FormEvent) => void;
 }
 
-export type Task = {
+export interface ITask {
   key: number,
   name: string;
-};
+}
+
 export interface ICard {
   id: number;
   title: string;
-  tasks: Task[]
+  order: number;
+  tasks: ITask[];
 }
 
 export interface CardProps {
   card: ICard;
+  onDragStart: (ev: React.DragEvent<HTMLDivElement>, card: ICard) => void;
+  onDragLeave: (ev: React.DragEvent<HTMLDivElement>) => void;
+  onDragEnd: (ev: React.DragEvent<HTMLDivElement>) => void;
+  onDragOver: (ev: React.DragEvent<HTMLDivElement>) => void;
+  onDrop: (ev: React.DragEvent<HTMLDivElement>, card: ICard) => void;
 }
 
 export interface BoardPageModal extends IModal {
