@@ -24,6 +24,18 @@ const logIn = async (login: string, password: string):Promise<JwtPayload> => {
   return jwt_decode(data.token);
 };
 
+const update = async (login: string, password: string, email: string): Promise<void> => {
+  await $authHost.patch('user/', {
+    login,
+    password,
+    email,
+  });
+};
+
+const remove = async (): Promise<void> => {
+  await $authHost.delete('user/');
+};
+
 const check = async ():Promise<JwtPayload> => {
   const result = await $authHost.get('/user/auth');
 
@@ -32,4 +44,6 @@ const check = async ():Promise<JwtPayload> => {
   return jwt_decode(result.data.token);
 };
 
-export { registration, logIn, check };
+export {
+  registration, logIn, update, check, remove,
+};

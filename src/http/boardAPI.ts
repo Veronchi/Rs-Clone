@@ -16,4 +16,14 @@ const getAllBoards = async (): Promise<IBoard> => {
   return data;
 };
 
-export { createBoard, getAllBoards };
+const update = async (): Promise<void> => {
+  await $authHost.patch('/board/');
+};
+
+const remove = async (): Promise<void> => {
+  await $authHost.delete('/board/');
+};
+
+export {
+  createBoard, getAllBoards, update, remove,
+};
