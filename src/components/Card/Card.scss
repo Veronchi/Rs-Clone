@@ -1,73 +1,71 @@
 @import "../../styles/palette.scss";
 
-.list {
-  flex: 0 0 18rem;
+.title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  padding: 1rem;
+}
+
+.tasks {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: $light-gray;
-  max-height: calc(100vh - 11.8rem);
-  border-radius: 0.4rem;
-  margin-right: 1.5rem;
+  align-content: flex-start;
+  padding: 0 0.6rem 0.5rem;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+}
 
-  &__title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #333;
-    padding: 1rem;
+.task-item {
+  position: relative;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.3;
+  background-color: #fff;
+  padding: 0.7rem 0.6rem;
+  color: #4d4d4d;
+  border: 0.1rem solid #ccc;
+  border-bottom: 0.2rem solid #ccc;
+  border-radius: 0.3rem;
+  margin-bottom: 0.6rem;
+  word-wrap: break-word;
+  cursor: pointer;
+  list-style: none;
+
+  &__input {
+    position: absolute;
+    left: 5px;
   }
 
-  &__tasks {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-content: flex-start;
-    padding: 0 0.6rem 0.5rem;
-    overflow-y: auto;
-  }
-
-  &__item {
-    position: relative;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.3;
-    background-color: #fff;
-    padding: 0.7rem 0.6rem;
-    color: #4d4d4d;
-    border: 0.1rem solid #ccc;
-    border-bottom: 0.2rem solid #ccc;
-    border-radius: 0.3rem;
-    margin-bottom: 0.6rem;
-    word-wrap: break-word;
-    cursor: pointer;
-    list-style: none;
-
-    &-input {
-      position: absolute;
-      left: 5px;
-    }
-
-    &-btn {
-      float: right;
-
-      &:hover {
-        background-color: $active-gray;
-      }
-    }
-
-    &:last-of-type {
-      margin-bottom: 0;
-    }
+  &__btn {
+    float: right;
 
     &:hover {
-      background-color: $hovered-gray;
-    }
-
-    &:active {
       background-color: $active-gray;
     }
   }
 
-  .list__btn {
-    border-radius: 0;
+  // &:last-of-type {
+  //   margin-bottom: 0;
+  // }
+
+  &:hover {
+    background-color: $hovered-gray;
   }
+
+  &:active {
+    background-color: $active-gray;
+  }
+}
+
+.input-wrapper {
+  padding: 0 5px;
+  margin-bottom: 10px;
+}
+
+.board__item .list__btn {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 }
