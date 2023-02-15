@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Card from '../../components/Card/Card';
-import ModalWindowCreateCard from '../../components/ModalWindowCreateCard/ModalWindowCreateCard';
+import ModalWindowCreateCard from '../../components/CreateCardModal/CreateCardModal';
 import { getAllCards } from '../../http/cardAPI';
 import { IState } from '../../interfaces';
 import { clean, setAllCards } from '../../store/slices/cardsSlice';

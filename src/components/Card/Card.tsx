@@ -7,7 +7,7 @@ import { createRow, getAllRows } from '../../http/rowAPI';
 import { CardProps, IState } from '../../interfaces';
 import { setAllTasks } from '../../store/slices/tasksSlice';
 import CardTask from '../CardTask/CardTask';
-import './Card.scss';
+import './style.scss';
 
 const Card: FC<CardProps> = ({ card }): JSX.Element => {
   const dispatch = useDispatch();

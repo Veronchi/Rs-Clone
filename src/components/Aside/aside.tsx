@@ -4,7 +4,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { IState } from '../../interfaces';
-import './aside.scss';
+import './style.scss';
 
 const Aside = (): JSX.Element => {
   const user = useSelector((state: IState) => state.user);

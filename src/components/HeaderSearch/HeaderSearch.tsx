@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
-import './HeaderSearch.scss';
+import './style.scss';
 
 const HeaderSearch = (): JSX.Element => (
   <Form className="search-form">

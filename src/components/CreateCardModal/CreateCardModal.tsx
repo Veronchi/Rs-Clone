@@ -5,9 +5,9 @@ import Modal from 'react-bootstrap/Modal';
 import { createCard } from '../../http/cardAPI';
 import { BoardPageModal } from '../../interfaces';
 
-import './ModalWindowCreateCard.scss';
+import './style.scss';
 
-const ModalWindowCreateCard = ({
+const CreateCardModal = ({
   show, handleModal, BoardId, setCards,
 }: BoardPageModal): JSX.Element => {
   const [title, setTitle] = useState<string>('');
@@ -81,4 +81,4 @@ const ModalWindowCreateCard = ({
   );
 };
 
-export default ModalWindowCreateCard;
+export default CreateCardModal;
