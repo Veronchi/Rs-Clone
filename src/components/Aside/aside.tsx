@@ -31,7 +31,7 @@ const Aside = (): JSX.Element => {
               <hr />
               <Nav className="me-auto aside__nav">
                 <Link to="/boards" className="aside__boards">Boards</Link>
-                <Link to="/auth" className="aside__users">Users</Link>
+                <Link to="/auth" className="aside__users" onClick={(): void => localStorage.removeItem('token')}>Users</Link>
                 <NavDropdown title="Settings" id="basic-nav-dropdown" className="aside__settings">
                   <NavDropdown.Item href="#" className="aside__theme">Themes</NavDropdown.Item>
                   <NavDropdown.Item href="#" className="aside__lang">

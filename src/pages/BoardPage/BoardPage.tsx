@@ -6,7 +6,7 @@ import ModalWindowCreateCard from '../../components/CreateCardModal/CreateCardMo
 import { getAllCards } from '../../http/cardAPI';
 import { IState } from '../../interfaces';
 import { clean, setAllCards } from '../../store/slices/cardsSlice';
-import './BoardPage.scss';
+import './style.scss';
 
 const BoardPage = (): JSX.Element => {
   const [isModal, setIsModal] = useState<boolean>(false);
