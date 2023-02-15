@@ -10,8 +10,13 @@ const cardsSlice = createSlice({
     setAllCards: (state, action: PayloadAction<ICard[]>): void => {
       state.push(...action.payload);
     },
+    clean: (state): Array<ICard> => {
+      let res = state;
+      res = initialState;
+      return res;
+    },
   },
 });
 
-export const { setAllCards } = cardsSlice.actions;
+export const { setAllCards, clean } = cardsSlice.actions;
 export default cardsSlice.reducer;
