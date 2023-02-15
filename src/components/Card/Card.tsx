@@ -59,12 +59,12 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
       <h3 className="title">{card.title}</h3>
       <ul className="tasks">
         {
-        currTasks.map((task) => (
-          <li className="tasks__item" key={task.id}>
-            <CardTask task={task} />
-          </li>
-        ))
-}
+          currTasks.map((task) => (
+            <li className="tasks__item" key={task.id}>
+              <CardTask task={task} />
+            </li>
+          ))
+        }
       </ul>
       {isNewTask
         ? (
