@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Card from '../../components/Card/Card';
 import ModalWindowCreateCard from '../../components/ModalWindowCreateCard/ModalWindowCreateCard';
-import { createCard, getAllCards } from '../../http/cardAPI';
-import { ICard, IState } from '../../interfaces';
-import { setAllCards } from '../../store/slices/cardsSlice';
+import { getAllCards } from '../../http/cardAPI';
+import { IState } from '../../interfaces';
+import { clean, setAllCards } from '../../store/slices/cardsSlice';
 import './BoardPage.scss';
 
 const BoardPage = (): JSX.Element => {
@@ -16,18 +16,9 @@ const BoardPage = (): JSX.Element => {
   const dispatch = useDispatch();
   const cards = useSelector((state: IState) => state.cards.flat());
 
-  const handleModalClose = (): void => setIsModal(false);
-
-  const addCard = async ({ title, boardId }: ICard): Promise<void> => {
-    try {
-      await createCard(title, boardId);
-    } catch (e) {
-      console.log((e as Error).message);
-    }
-  };
-
   const setCards = async (): Promise<void> => {
     setIsLoading(true);
+    dispatch(clean());
     try {
       await getAllCards(boards.state.boardId)
         .then((data) => dispatch(setAllCards([data])))
@@ -35,6 +26,10 @@ const BoardPage = (): JSX.Element => {
     } catch (e) {
       console.log((e as Error).message);
     }
+  };
+
+  const handleModalClose = (): void => {
+    setIsModal(false);
   };
 
   useEffect(() => {
@@ -69,7 +64,12 @@ const BoardPage = (): JSX.Element => {
       </div>
 
       {isModal ? (
-        <ModalWindowCreateCard addCard={addCard} show={isModal} handleModal={handleModalClose} />
+        <ModalWindowCreateCard
+          show={isModal}
+          handleModal={handleModalClose}
+          BoardId={boards.state.boardId}
+          setCards={setCards}
+        />
       ) : null}
     </section>
   );

@@ -2,27 +2,41 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { createCard } from '../../http/cardAPI';
 import { BoardPageModal } from '../../interfaces';
 
 import './ModalWindowCreateCard.scss';
 
-const ModalWindowCreateCard = ({ show, handleModal }: BoardPageModal): JSX.Element => {
+const ModalWindowCreateCard = ({
+  show, handleModal, BoardId, setCards,
+}: BoardPageModal): JSX.Element => {
   const [title, setTitle] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [isValid, setIsValid] = useState<boolean>(true);
 
-  const handleTitle = (ev: ChangeEvent<HTMLInputElement>): void => {
-    setTitle(ev.target.value);
+  const addCard = async (): Promise<void> => {
+    try {
+      await createCard(title, BoardId);
+    } catch (e) {
+      console.log((e as Error).message);
+    }
   };
 
   const handleSubmit = (ev: FormEvent): void => {
     ev.preventDefault();
     if (title.trim().length === 0) {
+      setIsValid(false);
       setError('Please enter valid title.');
-      console.log(error);
-      return;
+    } else {
+      addCard()
+        .then(() => setCards())
+        .then(() => handleModal(ev));
     }
+  };
 
-    handleModal(ev);
+  const handleTitle = (ev: ChangeEvent<HTMLInputElement>): void => {
+    setIsValid(true);
+    setTitle(ev.target.value);
   };
 
   return (
@@ -31,14 +45,27 @@ const ModalWindowCreateCard = ({ show, handleModal }: BoardPageModal): JSX.Eleme
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Title</Form.Label>
-            <Form.Control
-              className="addTitle"
-              autoFocus
-              type="text"
-              placeholder="Add title"
-              value={title}
-              onChange={handleTitle}
-            />
+            {isValid
+              ? (
+                <Form.Control
+                  className="valid-title"
+                  autoFocus
+                  type="text"
+                  placeholder="Add title"
+                  value={title}
+                  onChange={handleTitle}
+                />
+              )
+              : (
+                <Form.Control
+                  className="invalid-title"
+                  autoFocus
+                  type="text"
+                  placeholder={error}
+                  value={title}
+                  onChange={handleTitle}
+                />
+              )}
           </Form.Group>
         </Form>
       </Modal.Body>

@@ -1,10 +1,10 @@
 import { ICard } from '../interfaces';
 import { $authHost } from './index';
 
-const createCard = async (title: string, boardId: string): Promise<ICard> => {
+const createCard = async (title: string, BoardId: string): Promise<ICard> => {
   const { data } = await $authHost.post('/column/createColumn', {
     title,
-    boardId,
+    BoardId,
   });
 
   return data;
