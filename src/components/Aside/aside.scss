@@ -1,7 +1,11 @@
 @import "../../styles/palette.scss";
 
-.aside {
+.aside-container {
   flex: 0 0 auto;
+}
+
+.aside {
+  height: 100%;
   position: relative;
   width: 200px;
   padding: 10px 0;
