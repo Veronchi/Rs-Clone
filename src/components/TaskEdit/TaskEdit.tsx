@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ModalConfirm } from './ModalConfirm';
-import { IModal } from '../../interfaces';
+import { IModalTemp } from '../../interfaces';
 import './TaskEdit.scss';
 
 export interface IRow {
@@ -33,7 +33,7 @@ const task: IRow = {
   ColumnId: '100',
 };
 
-export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
+export const TaskEdit = ({ show, handleModal }: IModalTemp): JSX.Element => {
   const [title, setTitle] = useState<string>(task.text);
   const [isNameBlock, setName] = useState<boolean>(true);
   const [cover, setCover] = useState<string>(task.cover);
@@ -139,7 +139,6 @@ export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
                         onFocus={():void => setName(false)}
                         onBlur={(): void => setName(true)}
                         value={title}
-                        plaintext={isNameBlock}
                         placeholder={error}
                         readOnly={isNameBlock}
                         style={{ fontSize: '1.5rem' }}

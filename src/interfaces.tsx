@@ -61,3 +61,8 @@ export interface IParentModal {
   handleModal: (e: MouseEvent | FormEvent) => void;
   handleParentModal: (e: MouseEvent | FormEvent) => void;
 }
+
+export interface IModalTemp {
+  show: boolean;
+  handleModal: (e: MouseEvent | FormEvent) => void;
+}
