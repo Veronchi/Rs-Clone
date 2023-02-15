@@ -14,11 +14,11 @@ export const ModalConfirm = (
   return (
     <Modal show={show} animation={false} centered>
       <Alert variant="danger" style={{ margin: '0' }}>
-        <Modal.Header>
+        <Modal.Header style={{ borderBottomColor: '#842029' }}>
           <Modal.Title>Delete task</Modal.Title>
         </Modal.Header>
         <Modal.Body>The task will be deleted. Are you sure?</Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer style={{ borderTopColor: '#842029' }}>
           <Button variant="outline-success" onClick={handleModal}>
             No
           </Button>
