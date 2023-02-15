@@ -1,15 +1,11 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logIn, registration } from '../../http/userAPI';
-import { IUser } from '../../interfaces';
-import { addUser } from '../../store/slices/userSlice';
 import './style.scss';
 
 const RegistrationPage = (): JSX.Element => {
-  const dispatch = useDispatch();
   const [isSignUp, setIsSignUp] = useState<boolean>(false);
   const [inputLogin, setInputLogin] = useState<string>('');
   const [inputPassword, setInputPassword] = useState<string>('');
@@ -20,14 +16,12 @@ const RegistrationPage = (): JSX.Element => {
 
   const hanleSubmit = async (): Promise<void> => {
     try {
-      let data;
       if (isSignUp) {
-        data = await registration(inputLogin, inputEmail, inputPassword) as IUser;
+        await registration(inputLogin, inputEmail, inputPassword);
       } else {
-        data = await logIn(inputLogin, inputPassword) as IUser;
+        await logIn(inputLogin, inputPassword);
       }
 
-      dispatch(addUser(data));
       setIsSubmit(false);
       navigate('/', { replace: true });
     } catch (e) {
