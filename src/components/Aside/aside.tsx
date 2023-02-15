@@ -12,20 +12,6 @@ const Aside = (): JSX.Element => {
 
   const handleAside = (): void => {
     setIsShow(!isShow);
-    // const container = document.querySelector('.aside__container') as HTMLElement;
-    // const aside = e.currentTarget.parentElement;
-    // const button = e.currentTarget;
-    // if (aside) {
-    //   if (aside.classList.contains('closed')) {
-    //     container.style.display = 'block';
-    //     aside.classList.remove('closed');
-    //     button.classList.remove('arrow-right');
-    //   } else {
-    //     aside.classList.add('closed');
-    //     container.style.display = 'none';
-    //     button.classList.add('arrow-right');
-    //   }
-    // }
   };
 
   return (
