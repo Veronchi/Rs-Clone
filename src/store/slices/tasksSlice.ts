@@ -10,8 +10,13 @@ const tasksSlice = createSlice({
     setAllTasks: (state, action: PayloadAction<ITask[]>): void => {
       state.push(...action.payload);
     },
+    clean: (state): Array<ITask> => {
+      let res = state;
+      res = initialState;
+      return res;
+    },
   },
 });
 
-export const { setAllTasks } = tasksSlice.actions;
+export const { setAllTasks, clean } = tasksSlice.actions;
 export default tasksSlice.reducer;

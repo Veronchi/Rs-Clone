@@ -5,7 +5,7 @@ import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { createRow, getAllRows } from '../../http/rowAPI';
 import { CardProps, IState } from '../../interfaces';
-import { setAllTasks } from '../../store/slices/tasksSlice';
+import { clean, setAllTasks } from '../../store/slices/tasksSlice';
 import CardTask from '../CardTask/CardTask';
 import './style.scss';
 
@@ -15,8 +15,10 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
   const [isNewTask, setIsNewTask] = useState<boolean>(false);
   const [isSentTask, setIsSentTask] = useState<boolean>(false);
   const [newTask, setNewTask] = useState<string>('');
+  const [isValid, setIsValid] = useState<boolean>(true);
 
   const setTask = (e: ChangeEvent<HTMLInputElement>): void => {
+    setIsValid(true);
     setNewTask(e.target.value);
   };
 
@@ -29,6 +31,7 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
   };
 
   const setTasks = async (): Promise<void> => {
+    dispatch(clean());
     try {
       await getAllRows(card.id)
         .then((data) => {
@@ -43,10 +46,13 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
 
   useEffect(() => {
     if (isSentTask) {
-      addTask(newTask, card.id);
-      setIsNewTask(false);
-      setIsSentTask(false);
-      setTasks();
+      if (newTask.length === 0) {
+        setIsValid(false);
+      } else {
+        addTask(newTask, card.id);
+        setIsNewTask(false);
+        setTasks();
+      }
     }
   }, [isSentTask]);
 
@@ -69,7 +75,13 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
       {isNewTask
         ? (
           <div className="input-wrapper">
-            <Form.Control className="task-input" type="text" placeholder="Enter new task" value={newTask} onChange={setTask} />
+            {isValid
+              ? <Form.Control className="task-input valid" type="text" placeholder="Enter new task" value={newTask} onChange={setTask} />
+              : <Form.Control className="task-input invalid" type="text" placeholder="Enter new task" value={newTask} onChange={setTask} />}
+
+            <button type="button" className="input-close" onClick={():void => setIsNewTask(false)}>
+              x
+            </button>
           </div>
         )
         : null}

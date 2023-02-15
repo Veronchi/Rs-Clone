@@ -37,6 +37,7 @@
   &__input {
     position: absolute;
     left: 5px;
+    margin-right: 5px;
   }
 
   &__btn {
@@ -47,10 +48,6 @@
     }
   }
 
-  // &:last-of-type {
-  //   margin-bottom: 0;
-  // }
-
   &:hover {
     background-color: $hovered-gray;
   }
@@ -60,7 +57,30 @@
   }
 }
 
+.task-input {
+  margin-right: 5px;
+
+  &.valid {
+    border: 1px solid green;
+  }
+
+  &.invalid {
+    border: 1px solid red;
+  }
+}
+
+.input-close {
+  border: 1px solid $active-gray;
+  border-radius: 5px;
+  background-color: transparent;
+  line-height: 30px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
 .input-wrapper {
+  display: flex;
+  justify-content: space-between;
   padding: 0 5px;
   margin-bottom: 10px;
 }
