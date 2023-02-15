@@ -1,4 +1,5 @@
 import jwt_decode, { JwtPayload } from 'jwt-decode';
+import { IUser } from '../interfaces';
 import { $host, $authHost } from './index';
 
 const registration = async (login: string, email: string, password: string):Promise<JwtPayload> => {
@@ -24,6 +25,12 @@ const logIn = async (login: string, password: string):Promise<JwtPayload> => {
   return jwt_decode(data.token);
 };
 
+const getUser = async (): Promise<IUser> => {
+  const { data } = await $authHost.get('/user');
+
+  return data;
+};
+
 const update = async (login: string, password: string, email: string): Promise<void> => {
   await $authHost.patch('user/', {
     login,
@@ -45,5 +52,5 @@ const check = async ():Promise<JwtPayload> => {
 };
 
 export {
-  registration, logIn, update, check, remove,
+  registration, logIn, getUser, update, check, remove,
 };

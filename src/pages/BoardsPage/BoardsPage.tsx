@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
 import { getAllBoards } from '../../http/boardAPI';
+import { getUser } from '../../http/userAPI';
 import { IState } from '../../interfaces';
 import { addBoards, clean } from '../../store/slices/boardsSlice';
+import { addUser } from '../../store/slices/userSlice';
 import './style.scss';
 
 const BoardsPage = (): JSX.Element | null => {
@@ -22,8 +24,16 @@ const BoardsPage = (): JSX.Element | null => {
       });
   };
 
+  const getCurrUser = async (): Promise<void> => {
+    await getUser()
+      .then((data) => {
+        dispatch(addUser(data));
+      });
+  };
+
   useEffect(() => {
     getBoards();
+    getCurrUser();
   }, []);
 
   return (
