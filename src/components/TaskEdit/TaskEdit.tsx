@@ -1,4 +1,6 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, {
+  ChangeEvent, FormEvent, useState,
+} from 'react';
 import {
   Button, Form, Modal,
 } from 'react-bootstrap';
@@ -11,17 +13,34 @@ import { ModalConfirm } from './ModalConfirm';
 import { IModal } from '../../interfaces';
 import './TaskEdit.scss';
 
-export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
-  const [title, setTitle] = useState<string>('To do chto-to');
-  const [isNameBlock, setName] = useState<boolean>(true);
-  const [cover, setCover] = useState<string>('white');
-  const [desc, setDesc] = useState<string>('Kkj ks dfjksjs kdfj');
+export interface IRow {
+  id: number;
+  text: string;
+  cover: string;
+  description: string;
+  ColumnId: string;
+}
 
-  const [isModal, setIsConfirmModal] = useState<boolean>(false);
-  const handleConfirmClose = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    console.log(e);
-    setIsConfirmModal(false);
-  };
+export interface IColumnId {
+  columnID: string
+}
+
+const task: IRow = {
+  id: 100,
+  text: 'Sdelat chto to horoshee',
+  cover: '#ff0000',
+  description: 'Vypolnit mnogo chego',
+  ColumnId: '100',
+};
+
+export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
+  const [title, setTitle] = useState<string>(task.text);
+  const [isNameBlock, setName] = useState<boolean>(true);
+  const [cover, setCover] = useState<string>(task.cover);
+  const [desc, setDesc] = useState<string>(task.description);
+
+  const [isConfirmModal, setIsConfirmModal] = useState<boolean>(false);
+  const handleConfirmClose = (): void => { setIsConfirmModal(false); };
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
@@ -48,7 +67,11 @@ export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
     setIsConfirmModal(true);
   };
 
-  const handleSubmit = (): void => {
+  const handleSubmit = (ev: FormEvent): void => {
+    task.cover = cover;
+    task.description = desc;
+    task.text = title;
+    handleModal(ev);
   };
 
   return (
@@ -146,7 +169,13 @@ export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
           Save Task
         </Button>
       </Modal.Footer>
-      {isModal ? <ModalConfirm show handleModal={handleModal} /> : null}
+      {isConfirmModal ? (
+        <ModalConfirm
+          show={isConfirmModal}
+          handleModal={handleConfirmClose}
+          handleParentModal={handleModal}
+        />
+      ) : null}
     </Modal>
   );
 };

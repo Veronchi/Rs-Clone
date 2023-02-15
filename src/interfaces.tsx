@@ -5,6 +5,12 @@ export interface IModal {
   handleModal: (e: MouseEvent | FormEvent) => void;
 }
 
+export interface IParentModal {
+  show: boolean;
+  handleModal: (e: MouseEvent | FormEvent) => void;
+  handleParentModal: (e: MouseEvent | FormEvent) => void;
+}
+
 export type Task = {
   key: number,
   name: string;
