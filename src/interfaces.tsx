@@ -55,3 +55,9 @@ export interface ICardProps {
 export interface ITaskProps {
   task: ITask;
 }
+
+export interface IParentModal {
+  show: boolean;
+  handleModal: (e: MouseEvent | FormEvent) => void;
+  handleParentModal: (e: MouseEvent | FormEvent) => void;
+}

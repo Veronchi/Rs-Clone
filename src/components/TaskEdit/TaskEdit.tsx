@@ -38,6 +38,8 @@ export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
   const [isNameBlock, setName] = useState<boolean>(true);
   const [cover, setCover] = useState<string>(task.cover);
   const [desc, setDesc] = useState<string>(task.description);
+  const [error, setError] = useState<string>('');
+  const [isValid, setIsValid] = useState<boolean>(true);
 
   const [isConfirmModal, setIsConfirmModal] = useState<boolean>(false);
   const handleConfirmClose = (): void => { setIsConfirmModal(false); };
@@ -45,6 +47,7 @@ export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     setTitle(value);
+    setIsValid(true);
   };
 
   const handleDescChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -68,10 +71,19 @@ export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
   };
 
   const handleSubmit = (ev: FormEvent): void => {
-    task.cover = cover;
-    task.description = desc;
-    task.text = title;
-    handleModal(ev);
+    ev.preventDefault();
+    if (title.trim().length === 0) {
+      setIsValid(false);
+      setError('Please enter valid task.');
+    } else {
+      // addCard()
+      //   .then(() => setCards())
+      //   .then(() => handleModal(ev));
+      task.cover = cover;
+      task.description = desc;
+      task.text = title;
+      handleModal(ev);
+    }
   };
 
   return (
@@ -105,17 +117,34 @@ export const TaskEdit = ({ show, handleModal }: IModal): JSX.Element => {
             <Col>
               <Form className="task-edit">
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                  <Form.Control
-                    className="task-edit__name"
-                    type="text"
-                    onChange={handleNameChange}
-                    onFocus={():void => setName(false)}
-                    onBlur={(): void => setName(true)}
-                    value={title}
-                    plaintext={isNameBlock}
-                    readOnly={isNameBlock}
-                    style={{ fontSize: '1.5rem' }}
-                  />
+                  {isValid
+                    ? (
+                      <Form.Control
+                        className="task-edit__name"
+                        type="text"
+                        onChange={handleNameChange}
+                        onFocus={():void => setName(false)}
+                        onBlur={(): void => setName(true)}
+                        value={title}
+                        plaintext={isNameBlock}
+                        readOnly={isNameBlock}
+                        style={{ fontSize: '1.5rem' }}
+                      />
+                    )
+                    : (
+                      <Form.Control
+                        className="task-edit__name invalid-title"
+                        type="text"
+                        onChange={handleNameChange}
+                        onFocus={():void => setName(false)}
+                        onBlur={(): void => setName(true)}
+                        value={title}
+                        plaintext={isNameBlock}
+                        placeholder={error}
+                        readOnly={isNameBlock}
+                        style={{ fontSize: '1.5rem' }}
+                      />
+                    )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                   <Form.Label>Description</Form.Label>

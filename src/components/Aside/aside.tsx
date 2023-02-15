@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { IState } from '../../interfaces';
 import './aside.scss';
-import { TaskEdit } from '../TaskEdit/TaskEdit';
 
 const Aside = (): JSX.Element => {
   const user = useSelector((state: IState) => state.user);
