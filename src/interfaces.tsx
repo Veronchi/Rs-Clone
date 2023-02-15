@@ -6,10 +6,6 @@ export interface IModal {
   boards: () => void
 }
 
-export type Task = {
-  key: number,
-  name: string;
-};
 export interface ICard {
   id: string;
   title: string;
@@ -23,14 +19,13 @@ export interface CardProps {
 export interface BoardPageModal {
   show: boolean;
   handleModal: (e: MouseEvent | FormEvent) => void;
-  addCard: (card: ICard) => void;
+  BoardId: string;
+  setCards: () => void;
 }
 
 export interface IUser {
   login: string;
   email?: string;
-  password: string;
-  isAuth: boolean;
 }
 
 export interface IBoard {
@@ -42,11 +37,12 @@ export interface IBoard {
 export interface ITask {
   id: string;
   text: string;
+  cover?: string;
   ColumnId: string;
 }
 
 export interface IState {
-  users: IUser;
+  user: IUser;
   boards: Array<IBoard>;
   cards: Array<ICard>;
   tasks: Array<ITask>;
