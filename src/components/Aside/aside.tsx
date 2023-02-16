@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { createBoard, getAllBoards } from '../../http/boardAPI';
 import { createCard } from '../../http/cardAPI';
 import { IBoard, IState } from '../../interfaces';
+import { addBoards, clean } from '../../store/slices/boardsSlice';
 import './style.scss';
 
 type NameTempl = 'minimal' | 'medium' | 'large';
@@ -30,12 +31,19 @@ const template = {
 
 const Aside = (): JSX.Element => {
   const user = useSelector((state: IState) => state.user);
-  const boards = useSelector((state: IState) => state.boards);
-  const [isShow, setIsShow] = useState<boolean>(true);
   const dispatch = useDispatch();
+  const [isShow, setIsShow] = useState<boolean>(true);
 
   const handleAside = (): void => {
     setIsShow(!isShow);
+  };
+
+  const getBoards = async (): Promise<void> => {
+    dispatch(clean());
+    await getAllBoards()
+      .then((data) => {
+        dispatch(addBoards([data]));
+      });
   };
 
   const handleTemplates = (templateName: NameTempl): void => {
@@ -45,13 +53,8 @@ const Aside = (): JSX.Element => {
         tempBoard.cards.forEach(async (element):Promise<void> => {
           await createCard(element, result.id);
         });
-      });
-    // .then(
-    //   dispatch(clean());
-    //   await getAllBoards()
-    //   .then((data) => {
-    //     dispatch(addBoards([data]));
-    //   }));
+      })
+      .then(getBoards);
   };
 
   return (
