@@ -40,6 +40,14 @@ const BoardsPage = (): JSX.Element | null => {
     getCurrUser();
   }, []);
 
+  const editBoard = (id: string): void => {
+    console.log(`Изменяем доску с id - ${id}`);
+  };
+
+  const deleteBoard = (id: string): void => {
+    console.log(`Удаляем доску с id - ${id}`);
+  };
+
   return (
     <section className="boards">
       <h1 className="boards__title">Boards</h1>
@@ -59,6 +67,14 @@ const BoardsPage = (): JSX.Element | null => {
                         {title}
                       </span>
                     </Link>
+                    <div className="boards__icons">
+                      <button className="boards__button" type="button" onClick={(): void => editBoard(id)}>
+                        <i className="bx bx-edit-alt bx-sm icon" />
+                      </button>
+                      <button className="boards__button" type="button" onClick={(): void => deleteBoard(id)}>
+                        <i className="bx bx-trash bx-sm icon" />
+                      </button>
+                    </div>
                   </li>
                 ))
               }

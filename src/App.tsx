@@ -5,6 +5,7 @@ import { MainLayout } from './components/MainLayout/MainLayout';
 import BoardPage from './pages/BoardPage/BoardPage';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 import { BoardsPage } from './pages/BoardsPage/BoardsPage';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 const App = (): JSX.Element => (
   <Routes>
@@ -14,6 +15,7 @@ const App = (): JSX.Element => (
       <Route path="board" element={<BoardPage />} />
     </Route>
     <Route path="/auth" element={<RegistrationPage />} />
+    <Route path="*" element={<ErrorPage />} />
   </Routes>
 );
 
