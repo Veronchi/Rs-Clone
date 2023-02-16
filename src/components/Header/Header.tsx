@@ -1,5 +1,6 @@
 import React from 'react';
-import './Header.scss';
+import './style.scss';
+
 import HeaderSearch from '../HeaderSearch/HeaderSearch';
 
 const Header = (): JSX.Element => (
