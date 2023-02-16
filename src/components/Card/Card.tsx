@@ -5,9 +5,9 @@ import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { createRow, getAllRows } from '../../http/rowAPI';
 import { CardProps, IState } from '../../interfaces';
-import { setAllTasks } from '../../store/slices/tasksSlice';
+import { clean, setAllTasks } from '../../store/slices/tasksSlice';
 import CardTask from '../CardTask/CardTask';
-import './Card.scss';
+import './style.scss';
 
 const Card: FC<CardProps> = ({ card }): JSX.Element => {
   const dispatch = useDispatch();
@@ -15,8 +15,11 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
   const [isNewTask, setIsNewTask] = useState<boolean>(false);
   const [isSentTask, setIsSentTask] = useState<boolean>(false);
   const [newTask, setNewTask] = useState<string>('');
+  const [isValid, setIsValid] = useState<boolean>(true);
+  const [isHover, setIsHover] = useState<boolean>(false);
 
   const setTask = (e: ChangeEvent<HTMLInputElement>): void => {
+    setIsValid(true);
     setNewTask(e.target.value);
   };
 
@@ -29,6 +32,7 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
   };
 
   const setTasks = async (): Promise<void> => {
+    dispatch(clean());
     try {
       await getAllRows(card.id)
         .then((data) => {
@@ -41,12 +45,26 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
 
   const currTasks = tasks.filter((item) => item.ColumnId === card.id);
 
+  const mouseEnter = ():void => setIsHover(true);
+  const mouseLeave = ():void => setIsHover(false);
+
+  const deleteCard = (id: string): void => {
+    console.log(`Удаляем карточку с id - ${id}`);
+  };
+
+  const editCard = (id: string): void => {
+    console.log(`Редактируем карточку с id - ${id}`);
+  };
+
   useEffect(() => {
     if (isSentTask) {
-      addTask(newTask, card.id);
-      setIsNewTask(false);
-      setIsSentTask(false);
-      setTasks();
+      if (newTask.length === 0) {
+        setIsValid(false);
+      } else {
+        addTask(newTask, card.id);
+        setIsNewTask(false);
+        setTasks();
+      }
     }
   }, [isSentTask]);
 
@@ -55,8 +73,19 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
   }, []);
 
   return (
-    <>
+    <li className="board__item" onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
       <h3 className="title">{card.title}</h3>
+      { isHover
+        ? (
+          <span className="icons">
+            <button className="icons__btn" type="button" onClick={(): void => editCard(card.id)}>
+              <i className="bx bx-pencil bx-sm icon" />
+            </button>
+            <button className="icons__btn" type="button" onClick={(): void => deleteCard(card.id)}>
+              <i className="bx bx-trash bx-sm icon" />
+            </button>
+          </span>
+        ) : null }
       <ul className="tasks">
         {
           currTasks.map((task) => (
@@ -69,7 +98,13 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
       {isNewTask
         ? (
           <div className="input-wrapper">
-            <Form.Control className="task-input" type="text" placeholder="Enter new task" value={newTask} onChange={setTask} />
+            {isValid
+              ? <Form.Control className="task-input valid" type="text" placeholder="Enter new task" value={newTask} onChange={setTask} />
+              : <Form.Control className="task-input invalid" type="text" placeholder="Enter new task" value={newTask} onChange={setTask} />}
+
+            <button type="button" className="input-close" onClick={():void => setIsNewTask(false)}>
+              x
+            </button>
           </div>
         )
         : null}
@@ -84,7 +119,7 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
             Add task
           </button>
         )}
-    </>
+    </li>
   );
 };
 

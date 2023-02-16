@@ -2,16 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Card from '../../components/Card/Card';
-import ModalWindowCreateCard from '../../components/ModalWindowCreateCard/ModalWindowCreateCard';
+import ModalWindowCreateCard from '../../components/CreateCardModal/CreateCardModal';
 import { getAllCards } from '../../http/cardAPI';
 import { IState } from '../../interfaces';
 import { clean, setAllCards } from '../../store/slices/cardsSlice';
-import './BoardPage.scss';
+import './style.scss';
 
 const BoardPage = (): JSX.Element => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const boards = useLocation();
   const dispatch = useDispatch();
   const cards = useSelector((state: IState) => state.cards.flat());
@@ -45,9 +44,7 @@ const BoardPage = (): JSX.Element => {
             <>
               <ul className="board__list">
                 {cards.map((card) => (
-                  <li className="board__item" key={card.id}>
-                    <Card card={card} />
-                  </li>
+                  <Card card={card} key={card.id} />
                 ))}
 
               </ul>

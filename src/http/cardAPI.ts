@@ -11,8 +11,8 @@ const createCard = async (title: string, BoardId: string): Promise<ICard> => {
 };
 
 const getAllCards = async (id: string): Promise<ICard> => {
-  const { data } = await $authHost.post('/column/columns', {
-    data: {
+  const { data } = await $authHost.get('/column/columns', {
+    params: {
       boardID: id,
     },
   });
@@ -20,12 +20,19 @@ const getAllCards = async (id: string): Promise<ICard> => {
   return data;
 };
 
-const update = async (): Promise<void> => {
-  await $authHost.patch('/column/');
+const update = async (id: string, title: string): Promise<void> => {
+  await $authHost.patch('/column', {
+    id,
+    title,
+  });
 };
 
-const remove = async (): Promise<void> => {
-  await $authHost.delete('/column/');
+const remove = async (id: string): Promise<void> => {
+  await $authHost.delete('/column', {
+    params: {
+      id,
+    },
+  });
 };
 
 export {

@@ -1,4 +1,4 @@
-@import "../../styles/palette.scss";
+@import '../../styles/palette.scss';
 
 .title {
   font-size: 1.4rem;
@@ -37,6 +37,7 @@
   &__input {
     position: absolute;
     left: 5px;
+    margin-right: 5px;
   }
 
   &__btn {
@@ -47,10 +48,6 @@
     }
   }
 
-  // &:last-of-type {
-  //   margin-bottom: 0;
-  // }
-
   &:hover {
     background-color: $hovered-gray;
   }
@@ -60,7 +57,30 @@
   }
 }
 
+.task-input.form-control {
+  margin-right: 5px;
+
+  &.valid {
+    border: 1px solid green;
+  }
+
+  &.invalid {
+    border: 1px solid red;
+  }
+}
+
+.input-close {
+  border: 1px solid $active-gray;
+  border-radius: 5px;
+  background-color: transparent;
+  line-height: 30px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
 .input-wrapper {
+  display: flex;
+  justify-content: space-between;
   padding: 0 5px;
   margin-bottom: 10px;
 }
@@ -68,4 +88,29 @@
 .board__item .list__btn {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
+}
+
+.icons {
+  display: flex;
+  right: 0.5%;
+  top: 5%;
+  color: black;
+  position: absolute;
+
+  &__btn {
+    border: 0;
+    background-color: inherit;
+    padding-left: 2%;
+
+    .icon {
+      color: dark;
+      transition: color 0.15s ease-in-out;
+      &:hover {
+        color: $dark-blue;
+      }
+      &:active {
+        color: rgba($dark-blue, 0.5);
+      }
+    }
+  }
 }
