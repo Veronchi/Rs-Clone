@@ -11,8 +11,8 @@ const createRow = async (text: string, ColumnId: string): Promise<ITask> => {
 };
 
 const getAllRows = async (id: string): Promise<ITask> => {
-  const { data } = await $authHost.post('/row/rows', {
-    data: {
+  const { data } = await $authHost.get('/row/rows', {
+    params: {
       columnID: id,
     },
   });
@@ -20,12 +20,19 @@ const getAllRows = async (id: string): Promise<ITask> => {
   return data;
 };
 
-const update = async (): Promise<void> => {
-  await $authHost.patch('/row/');
+const update = async (id: string, title: string): Promise<void> => {
+  await $authHost.patch('/row', {
+    id,
+    title,
+  });
 };
 
-const remove = async (): Promise<void> => {
-  await $authHost.delete('/row/');
+const remove = async (id: string): Promise<void> => {
+  await $authHost.delete('/row', {
+    params: {
+      id,
+    },
+  });
 };
 
 export {
