@@ -11,7 +11,6 @@ import './style.scss';
 const BoardPage = (): JSX.Element => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const boards = useLocation();
   const dispatch = useDispatch();
   const cards = useSelector((state: IState) => state.cards.flat());
@@ -45,9 +44,7 @@ const BoardPage = (): JSX.Element => {
             <>
               <ul className="board__list">
                 {cards.map((card) => (
-                  <li className="board__item" key={card.id}>
-                    <Card card={card} />
-                  </li>
+                  <Card card={card} key={card.id} />
                 ))}
 
               </ul>

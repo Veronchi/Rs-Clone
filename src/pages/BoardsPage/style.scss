@@ -59,6 +59,31 @@
       transition: 0.5s;
     }
   }
+
+  &__icons {
+    position: absolute;
+    display: flex;
+    right: 0.5%;
+    top: 5%;
+    color: black;
+  }
+
+  &__button {
+    border: 0;
+    background-color: inherit;
+    padding-left: 2%;
+
+    .icon {
+      color: $light-blue;
+      transition: color 0.2s ease-in-out;
+      &:hover {
+        color: $dark-blue;
+      }
+      &:active {
+        color: rgba($dark-blue, 0.4);
+      }
+    }
+  }
 }
 
 .generate-btn {
