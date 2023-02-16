@@ -1,4 +1,4 @@
-@import "../../styles/palette.scss";
+@import '../../styles/palette.scss';
 
 .title {
   font-size: 1.4rem;
@@ -57,7 +57,7 @@
   }
 }
 
-.task-input {
+.task-input.form-control {
   margin-right: 5px;
 
   &.valid {
@@ -88,4 +88,29 @@
 .board__item .list__btn {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
+}
+
+.icons {
+  display: flex;
+  right: 0.5%;
+  top: 5%;
+  color: black;
+  position: absolute;
+
+  &__btn {
+    border: 0;
+    background-color: inherit;
+    padding-left: 2%;
+
+    .icon {
+      color: dark;
+      transition: color 0.15s ease-in-out;
+      &:hover {
+        color: $dark-blue;
+      }
+      &:active {
+        color: rgba($dark-blue, 0.5);
+      }
+    }
+  }
 }
