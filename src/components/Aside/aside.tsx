@@ -5,29 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createBoard, getAllBoards } from '../../http/boardAPI';
 import { createCard } from '../../http/cardAPI';
-import { IBoard, IState } from '../../interfaces';
+import {
+  IBoard, IState, TemplateSize, templates,
+} from '../../interfaces';
 import { addBoards, clean } from '../../store/slices/boardsSlice';
 import './style.scss';
-
-type NameTempl = 'minimal' | 'medium' | 'large';
-
-const template = {
-  minimal: {
-    title: 'Minimal board',
-    background: '#009900',
-    cards: ['To do', 'Done'],
-  },
-  medium: {
-    title: 'Medium board',
-    background: '#000099',
-    cards: ['To do', 'Doing', 'Done'],
-  },
-  large: {
-    title: 'Large board',
-    background: '#990000',
-    cards: ['Backlog', 'To do', 'Doing', 'Done'],
-  },
-};
 
 const Aside = (): JSX.Element => {
   const user = useSelector((state: IState) => state.user);
@@ -38,6 +20,13 @@ const Aside = (): JSX.Element => {
     setIsShow(!isShow);
   };
 
+  const getRandomColor = (): string => {
+    const red: string = Math.floor(Math.random() * (255 - 20 + 1) + 20).toString(16).padStart(2, '0');
+    const green: string = Math.floor(Math.random() * (255 - 20 + 1) + 20).toString(16).padStart(2, '0');
+    const blue: string = Math.floor(Math.random() * (255 - 20 + 1) + 20).toString(16).padStart(2, '0');
+    return `#${red}${green}${blue}`;
+  };
+
   const getBoards = async (): Promise<void> => {
     dispatch(clean());
     await getAllBoards()
@@ -46,9 +35,9 @@ const Aside = (): JSX.Element => {
       });
   };
 
-  const handleTemplates = (templateName: NameTempl): void => {
-    const tempBoard = template[templateName];
-    createBoard(tempBoard.title, tempBoard.background)
+  const handleTemplates = (templateName: TemplateSize): void => {
+    const tempBoard = templates[templateName];
+    createBoard(tempBoard.title, getRandomColor())
       .then((result: IBoard) => {
         tempBoard.cards.forEach(async (element):Promise<void> => {
           await createCard(element, result.id);
@@ -76,9 +65,9 @@ const Aside = (): JSX.Element => {
                 <Link to="/boards" className="aside__boards">Boards</Link>
                 <Link to="/auth" className="aside__users" onClick={(): void => localStorage.removeItem('token')}>Users</Link>
                 <NavDropdown title="Templates" id="basic-nav-dropdown" className="aside__settings">
-                  <NavDropdown.Item onClick={(): void => handleTemplates('minimal')} className="aside__theme">Minimal (with 2 cards)</NavDropdown.Item>
-                  <NavDropdown.Item onClick={(): void => handleTemplates('medium')} className="aside__theme">Medium (with 3 cards)</NavDropdown.Item>
-                  <NavDropdown.Item onClick={(): void => handleTemplates('large')} className="aside__lang">Large (with 4 cards)</NavDropdown.Item>
+                  <NavDropdown.Item onClick={(): void => handleTemplates('small')} className="aside__theme">Small board (2 cards)</NavDropdown.Item>
+                  <NavDropdown.Item onClick={(): void => handleTemplates('medium')} className="aside__theme">Medium board (3 cards)</NavDropdown.Item>
+                  <NavDropdown.Item onClick={(): void => handleTemplates('big')} className="aside__lang">Big board (4 cards)</NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Settings" id="basic-nav-dropdown" className="aside__settings">
                   <NavDropdown.Item href="#" className="aside__theme">Themes</NavDropdown.Item>
