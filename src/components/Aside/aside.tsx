@@ -14,6 +14,10 @@ const Aside = (): JSX.Element => {
     setIsShow(!isShow);
   };
 
+  const handleTemplates = (): void => {
+    setIsShow(!isShow);
+  };
+
   return (
     <div className="aside-container">
       {isShow
@@ -22,7 +26,7 @@ const Aside = (): JSX.Element => {
             <button className="aside__close" aria-label="Hide" type="button" onClick={handleAside} />
             <div className="aside__container">
               <div className="aside__title">
-                <p className="aside__avatar">U</p>
+                <p className="aside__avatar">{String(user.login[0]).toUpperCase()}</p>
                 <div>
                   <p className="aside__name">{user.login}</p>
                   <p className="aside__email">{user.email}</p>
@@ -32,6 +36,11 @@ const Aside = (): JSX.Element => {
               <Nav className="me-auto aside__nav">
                 <Link to="/boards" className="aside__boards">Boards</Link>
                 <Link to="/auth" className="aside__users" onClick={(): void => localStorage.removeItem('token')}>Users</Link>
+                <NavDropdown title="Templates" id="basic-nav-dropdown" className="aside__settings">
+                  <NavDropdown.Item onClick={handleTemplates} className="aside__theme">Minimal (with 2 cards)</NavDropdown.Item>
+                  <NavDropdown.Item onClick={handleTemplates} className="aside__theme">Medium (with 3 cards)</NavDropdown.Item>
+                  <NavDropdown.Item onClick={handleTemplates} className="aside__lang">Large (with 4 cards)</NavDropdown.Item>
+                </NavDropdown>
                 <NavDropdown title="Settings" id="basic-nav-dropdown" className="aside__settings">
                   <NavDropdown.Item href="#" className="aside__theme">Themes</NavDropdown.Item>
                   <NavDropdown.Item href="#" className="aside__lang">
