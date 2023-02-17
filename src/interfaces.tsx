@@ -55,3 +55,23 @@ export interface ICardProps {
 export interface ITaskProps {
   task: ITask;
 }
+
+export type TemplateSize = 'small' | 'medium' | 'big';
+
+export const templates = {
+  small: {
+    title: 'Small board',
+    background: '#009900',
+    cards: ['To do', 'Done'],
+  },
+  medium: {
+    title: 'Medium board',
+    background: '#000099',
+    cards: ['To do', 'In process', 'Done'],
+  },
+  big: {
+    title: 'Big board',
+    background: '#990000',
+    cards: ['To do', 'In process', 'Review', 'Done'],
+  },
+};
