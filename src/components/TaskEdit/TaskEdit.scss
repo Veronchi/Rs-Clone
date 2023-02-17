@@ -1,0 +1,34 @@
+@import "../../styles/palette.scss";
+
+.task-edit {
+  &__cover {
+    padding: 0 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 70px;
+    background-color: $light-gray;
+  }
+
+  &__btn-cover {
+    display: block;
+  }
+
+  &__name {
+    font-size: 1.5rem;
+  }
+
+  &__buttons {
+    width: 150px;
+    margin: 5px 0;
+  }
+}
+
+.grid-vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.invalid-title {
+  background-color: red;
+}

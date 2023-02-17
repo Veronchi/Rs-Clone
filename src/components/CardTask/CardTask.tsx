@@ -3,18 +3,22 @@ import React, {
 } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { ITaskProps } from '../../interfaces';
+import { TaskEdit } from '../TaskEdit/TaskEdit';
 import './style.scss';
 
 const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
   const [taskTitle, setTaskTitle] = useState<string>(task.text);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [isModalEdit, setIsModalEdit] = useState<boolean>(false);
+  const handleModalEditClose = (): void => setIsModalEdit(false);
 
   const mouseEnter = ():void => setIsHover(true);
   const mouseLeave = ():void => setIsHover(false);
 
   const handleClick = (): void => {
     setIsActive(!isActive);
+    setIsModalEdit(true);
   };
 
   const handleKeyDown = (ev: KeyboardEvent<HTMLInputElement>): void => {
@@ -50,7 +54,8 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
       {isActive
         ? <input onChange={handleTitle} onKeyDown={handleKeyDown} placeholder={taskTitle} className="task-item__input" type="text" />
         : null }
-
+      {isModalEdit
+        ? <TaskEdit show={isModalEdit} handleModal={handleModalEditClose} task={task} /> : null}
     </div>
   );
 };
