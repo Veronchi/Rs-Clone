@@ -10,7 +10,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ModalConfirm } from './ModalConfirm';
-import { IModalTemp } from '../../interfaces';
+import { IModalEdit } from '../../interfaces';
+import { update } from '../../http/rowAPI';
 import './TaskEdit.scss';
 
 export interface IRow {
@@ -25,19 +26,18 @@ export interface IColumnId {
   columnID: string
 }
 
-const task: IRow = {
-  id: 100,
-  text: 'Sdelat chto to horoshee',
-  cover: '#ff0000',
-  description: 'Vypolnit mnogo chego',
-  ColumnId: '100',
-};
+// const task: IRow = {
+//   id: 100,
+//   text: 'Sdelat chto to horoshee',
+//   cover: '#ff0000',
+//   description: 'Vypolnit mnogo chego',
+//   ColumnId: '100',
+// };
 
-export const TaskEdit = ({ show, handleModal }: IModalTemp): JSX.Element => {
+export const TaskEdit = ({ show, handleModal, task }: IModalEdit): JSX.Element => {
   const [title, setTitle] = useState<string>(task.text);
   const [isNameBlock, setName] = useState<boolean>(true);
-  const [cover, setCover] = useState<string>(task.cover);
-  const [desc, setDesc] = useState<string>(task.description);
+  const [cover, setCover] = useState<string | undefined>(task.cover ? task.cover : '#ffffff');
   const [error, setError] = useState<string>('');
   const [isValid, setIsValid] = useState<boolean>(true);
 
@@ -48,11 +48,6 @@ export const TaskEdit = ({ show, handleModal }: IModalTemp): JSX.Element => {
     const { value } = e.target;
     setTitle(value);
     setIsValid(true);
-  };
-
-  const handleDescChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    const { value } = e.target;
-    setDesc(value);
   };
 
   const handleCover = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -76,13 +71,9 @@ export const TaskEdit = ({ show, handleModal }: IModalTemp): JSX.Element => {
       setIsValid(false);
       setError('Please enter valid task.');
     } else {
-      // addCard()
-      //   .then(() => setCards())
-      //   .then(() => handleModal(ev));
-      task.cover = cover;
-      task.description = desc;
-      task.text = title;
-      handleModal(ev);
+      console.log(task.id, title);
+      update(task.id, title)
+        .then(() => handleModal(ev));
     }
   };
 
@@ -145,16 +136,6 @@ export const TaskEdit = ({ show, handleModal }: IModalTemp): JSX.Element => {
                       />
                     )}
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Add a more detailed description..."
-                    value={desc}
-                    onChange={handleDescChange}
-                  />
-                </Form.Group>
               </Form>
             </Col>
             <Col md="auto">
@@ -202,6 +183,7 @@ export const TaskEdit = ({ show, handleModal }: IModalTemp): JSX.Element => {
           show={isConfirmModal}
           handleModal={handleConfirmClose}
           handleParentModal={handleModal}
+          task={task}
         />
       ) : null}
     </Modal>

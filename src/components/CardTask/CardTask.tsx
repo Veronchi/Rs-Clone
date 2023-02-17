@@ -30,7 +30,6 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
       {isActive
         ? <input onChange={handleTitle} placeholder={taskTitle} className="task-item__input" type="text" />
         : null}
-
     </div>
   );
 };

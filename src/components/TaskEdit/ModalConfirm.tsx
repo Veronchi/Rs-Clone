@@ -3,12 +3,16 @@ import { Alert } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { IParentModal } from '../../interfaces';
+import { remove } from '../../http/rowAPI';
 
 export const ModalConfirm = (
-  { show, handleModal, handleParentModal }: IParentModal,
+  {
+    show, handleModal, handleParentModal, task,
+  }: IParentModal,
 ): JSX.Element => {
   const deleteTask = (ev: FormEvent): void => {
-    handleParentModal(ev);
+    remove(task.id)
+      .then(() => handleParentModal(ev));
   };
 
   return (

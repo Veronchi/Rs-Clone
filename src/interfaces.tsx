@@ -60,9 +60,11 @@ export interface IParentModal {
   show: boolean;
   handleModal: (e: MouseEvent | FormEvent) => void;
   handleParentModal: (e: MouseEvent | FormEvent) => void;
+  task: ITask;
 }
 
-export interface IModalTemp {
+export interface IModalEdit {
   show: boolean;
   handleModal: (e: MouseEvent | FormEvent) => void;
+  task: ITask;
 }

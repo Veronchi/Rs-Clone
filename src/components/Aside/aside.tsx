@@ -4,15 +4,11 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { IState } from '../../interfaces';
-import { TaskEdit } from '../TaskEdit/TaskEdit';
 import './style.scss';
 
 const Aside = (): JSX.Element => {
   const user = useSelector((state: IState) => state.user);
   const [isShow, setIsShow] = useState<boolean>(true);
-
-  const [isModal, setIsModal] = useState<boolean>(false);
-  const handleModalClose = (): void => setIsModal(false);
 
   const handleAside = (): void => {
     setIsShow(!isShow);
@@ -45,14 +41,9 @@ const Aside = (): JSX.Element => {
                   <NavDropdown.Item href="#" className="aside__some">Something</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
-              <button type="button" onClick={():void => setIsModal(true)}>
-                Card
-              </button>
-              {isModal ? <TaskEdit show={isModal} handleModal={handleModalClose} /> : null}
             </div>
           </aside>
         )
-
         : (
           <aside className="aside closed">
             <button className="aside__close arrow-right" aria-label="Hide" type="button" onClick={handleAside} />
