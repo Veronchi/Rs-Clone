@@ -22,7 +22,7 @@ const Aside = (): JSX.Element => {
             <button className="aside__close" aria-label="Hide" type="button" onClick={handleAside} />
             <div className="aside__container">
               <div className="aside__title">
-                <p className="aside__avatar">U</p>
+                <p className="aside__avatar">{user.login ? user.login[0].toUpperCase() : 'U'}</p>
                 <div>
                   <p className="aside__name">{user.login}</p>
                   <p className="aside__email">{user.email}</p>

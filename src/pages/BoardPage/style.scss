@@ -50,9 +50,10 @@
     flex-direction: column;
     width: 300px;
     background-color: $light-gray;
-    // max-height: calc(100vh - 11.8rem);
+    height: 100%;
     border-radius: 0.4rem;
     margin-right: 1.5rem;
     position: relative;
+    opacity: 1;
   }
 }

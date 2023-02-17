@@ -1,5 +1,9 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, {
+  ChangeEvent, FC, KeyboardEvent, useState,
+} from 'react';
+import { Dropdown } from 'react-bootstrap';
 import { ITaskProps } from '../../interfaces';
+import './style.scss';
 
 const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
   const [taskTitle, setTaskTitle] = useState<string>(task.text);
@@ -13,8 +17,18 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
     setIsActive(!isActive);
   };
 
+  const handleKeyDown = (ev: KeyboardEvent<HTMLInputElement>): void => {
+    if (ev.key === 'Enter') {
+      setIsActive(!isActive);
+    }
+  };
+
   const handleTitle = (ev: ChangeEvent<HTMLInputElement>): void => {
     setTaskTitle(ev.target.value);
+  };
+
+  const deleteTask = (id: string): void => {
+    console.log(`Удаляем таск с id - ${id}`);
   };
 
   return (
@@ -22,14 +36,21 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
       {taskTitle}
       {isHover
         ? (
-          <button onClick={handleClick} type="button" className="task-item__btn">
-            ...
-          </button>
+          <Dropdown>
+            <Dropdown.Toggle className="task-item__btn">
+              <i className="bx bx-dots-horizontal-rounded bx-xs" />
+            </Dropdown.Toggle>
+            <Dropdown.Menu className="task-item__menu">
+              <Dropdown.Item onClick={handleClick}>Edit task</Dropdown.Item>
+              <Dropdown.Item onClick={(): void => deleteTask(task.id)}> Delete task</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         )
         : null}
       {isActive
-        ? <input onChange={handleTitle} placeholder={taskTitle} className="task-item__input" type="text" />
-        : null}
+        ? <input onChange={handleTitle} onKeyDown={handleKeyDown} placeholder={taskTitle} className="task-item__input" type="text" />
+        : null }
+
     </div>
   );
 };
