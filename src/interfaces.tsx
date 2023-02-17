@@ -67,11 +67,11 @@ export const templates = {
   medium: {
     title: 'Medium board',
     background: '#000099',
-    cards: ['To do', 'Doing', 'Done'],
+    cards: ['To do', 'In process', 'Done'],
   },
   big: {
     title: 'Big board',
     background: '#990000',
-    cards: ['Backlog', 'To do', 'Doing', 'Done'],
+    cards: ['To do', 'In process', 'Review', 'Done'],
   },
 };
