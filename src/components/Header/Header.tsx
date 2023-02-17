@@ -1,7 +1,7 @@
 import React from 'react';
-import './style.scss';
-
 import HeaderSearch from '../HeaderSearch/HeaderSearch';
+import { HeaderMenu } from '../HeaderMenu/HeaderMenu';
+import './style.scss';
 
 const Header = (): JSX.Element => (
   <header className="header">
@@ -14,6 +14,7 @@ const Header = (): JSX.Element => (
         />
         <h1 className="header__title">Trello Clone</h1>
       </div>
+      <HeaderMenu />
       <HeaderSearch />
     </nav>
   </header>
