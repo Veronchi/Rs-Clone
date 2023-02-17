@@ -1,7 +1,9 @@
 @import "../../styles/palette.scss";
 
 .search-form {
-  width: 300px;
+  @media screen and (min-width: 600px) {
+    width: 300px;
+  }
 
   &__input {
     background-color: $light-blue;

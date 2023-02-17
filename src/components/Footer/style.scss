@@ -19,8 +19,17 @@
   &__left-img {
     width: 50px;
     transition: 0.4s;
+    @media screen and (max-width: 600px) {
+      width: 40px;
+    }
     &:hover {
       transform: translateY(-10px);
+    }
+  }
+
+  &__central-container {
+    @media screen and (max-width: 600px) {
+      font-size: 1rem;
     }
   }
 
@@ -31,5 +40,8 @@
 
   &__right-img {
     width: 140px;
+    @media screen and (max-width: 600px) {
+      width: 70px;
+    }
   }
 }

@@ -1,0 +1,83 @@
+@import '../../styles/palette.scss';
+
+.task-item {
+  position: relative;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.3;
+  background-color: #fff;
+  padding: 0.7rem 0.6rem;
+  color: #4d4d4d;
+  border: 0.1rem solid #ccc;
+  border-bottom: 0.2rem solid #ccc;
+  border-radius: 0.3rem;
+  margin-bottom: 0.6rem;
+  word-wrap: break-word;
+  cursor: pointer;
+  list-style: none;
+
+  &__input {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    margin-right: 5px;
+    z-index: 50;
+  }
+
+  .dropdown-toggle {
+    padding: 0%;
+    margin: 0%;
+    border: 0;
+    height: 14px;
+    right: -7px;
+    background: $light-gray;
+
+    &:hover {
+      background: $hovered-gray;
+    }
+
+  }
+
+  .dropdown-toggle::after,
+  .dropdown-toggle::before {
+    display: none !important; 
+  }
+
+  .dropdown-item {
+    display: inline;
+    margin: 7px;
+    padding: 0%;
+    z-index: 5000;
+  }
+  
+  &__btn {
+    position:absolute;
+    right: 1px;
+    bottom: -5px;
+    border: 1px solid black;
+    background-color: $hovered-gray;
+    margin: 0;
+    padding: 0;
+    border-radius: 20px;
+  }
+
+  &:hover {
+    background-color: $hovered-gray;
+  }
+
+  &:active {
+    background-color: $active-gray;
+  }
+}
+
+.task-input.form-control {
+  margin-right: 5px;
+
+  &.valid {
+    border: 1px solid green;
+  }
+
+  &.invalid {
+    border: 1px solid red;
+  }
+}
