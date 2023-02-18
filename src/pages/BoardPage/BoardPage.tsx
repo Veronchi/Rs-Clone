@@ -18,13 +18,11 @@ const BoardPage = (): JSX.Element => {
   const setCards = async (): Promise<void> => {
     setIsLoading(true);
     dispatch(clean());
-    try {
-      await getAllCards(boards.state.boardId)
-        .then((data) => dispatch(setAllCards([data])))
-        .then(() => setIsLoading(false));
-    } catch (e) {
-      console.log((e as Error).message);
-    }
+
+    await getAllCards(boards.state.boardId)
+      .then((data) => dispatch(setAllCards([data])))
+      .then(() => setIsLoading(false))
+      .catch((e) => console.log((e as Error).message));
   };
 
   const handleModalClose = (): void => {
@@ -59,7 +57,6 @@ const BoardPage = (): JSX.Element => {
           )}
 
       </div>
-
       {isModal ? (
         <ModalWindowCreateCard
           show={isModal}

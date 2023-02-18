@@ -24,23 +24,17 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
   };
 
   const addTask = async (text: string, ColumnId: string): Promise<void> => {
-    try {
-      await createRow(text, ColumnId);
-    } catch (e) {
-      console.log((e as Error).message);
-    }
+    await createRow(text, ColumnId)
+      .catch((e) => console.log((e as Error).message));
   };
 
   const setTasks = async (): Promise<void> => {
     dispatch(clean());
-    try {
-      await getAllRows(card.id)
-        .then((data) => {
-          dispatch(setAllTasks([data]));
-        });
-    } catch (e) {
-      console.log((e as Error).message);
-    }
+    await getAllRows(card.id)
+      .then((data) => {
+        dispatch(setAllTasks([data]));
+      })
+      .catch((e) => console.log((e as Error).message));
   };
 
   const currTasks = tasks.filter((item) => item.ColumnId === card.id);

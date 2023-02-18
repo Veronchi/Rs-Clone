@@ -14,25 +14,17 @@ import { IModalEdit } from '../../interfaces';
 import { update } from '../../http/rowAPI';
 import './TaskEdit.scss';
 
-export interface IRow {
-  id: number;
-  text: string;
-  cover: string;
-  description: string;
-  ColumnId: string;
-}
+// export interface IRow {
+//   id: number;
+//   text: string;
+//   cover: string;
+//   description: string;
+//   ColumnId: string;
+// }
 
-export interface IColumnId {
-  columnID: string
-}
-
-// const task: IRow = {
-//   id: 100,
-//   text: 'Sdelat chto to horoshee',
-//   cover: '#ff0000',
-//   description: 'Vypolnit mnogo chego',
-//   ColumnId: '100',
-// };
+// export interface IColumnId {
+//   columnID: string
+// }
 
 export const TaskEdit = ({ show, handleModal, task }: IModalEdit): JSX.Element => {
   const [title, setTitle] = useState<string>(task.text);
