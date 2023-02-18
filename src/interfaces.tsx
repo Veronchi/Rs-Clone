@@ -1,9 +1,15 @@
 import { FormEvent, MouseEvent } from 'react';
 
+export interface IUpdateState {
+  isUpdate: boolean,
+  boardId: string,
+  boardTitle: string,
+}
+
 export interface IModal {
-  show: boolean;
   handleModal: (e: MouseEvent | FormEvent) => void;
-  boards: () => void
+  boards: () => void;
+  updateState: IUpdateState;
 }
 
 export interface ICard {

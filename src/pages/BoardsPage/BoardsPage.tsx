@@ -1,22 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useEffect, useState, MouseEvent,
+} from 'react';
+import tinycolor from 'tinycolor2';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
 import { getAllBoards } from '../../http/boardAPI';
 import { getUser } from '../../http/userAPI';
-import { IState } from '../../interfaces';
+import { IBoard, IState, IUpdateState } from '../../interfaces';
 import { addBoards, clean } from '../../store/slices/boardsSlice';
 import { addUser } from '../../store/slices/userSlice';
 import './style.scss';
 
 const BoardsPage = (): JSX.Element | null => {
+  const initUpdState = {
+    isUpdate: false,
+    boardId: '',
+    boardTitle: '',
+  };
+
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [updateState, setUpdateState] = useState<IUpdateState>(initUpdState);
 
   const boards = useSelector((state: IState) => state.boards.flat());
   const dispatch = useDispatch();
 
-  const handleModalClose = (): void => setIsModal(false);
+  const handleModalClose = (): void => {
+    setUpdateState(initUpdState);
+    setIsModal(false);
+  };
 
   const getBoards = async (): Promise<void> => {
     setIsLoading(true);
@@ -25,14 +39,16 @@ const BoardsPage = (): JSX.Element | null => {
       .then((data) => {
         dispatch(addBoards([data]));
       })
-      .then(() => setIsLoading(false));
+      .then(() => setIsLoading(false))
+      .catch((e) => console.log((e as Error).message));
   };
 
   const getCurrUser = async (): Promise<void> => {
     await getUser()
       .then((data) => {
         dispatch(addUser(data));
-      });
+      })
+      .catch((e) => console.log((e as Error).message));
   };
 
   useEffect(() => {
@@ -40,8 +56,24 @@ const BoardsPage = (): JSX.Element | null => {
     getCurrUser();
   }, []);
 
-  const editBoard = (id: string): void => {
-    console.log(`Изменяем доску с id - ${id}`);
+  const getColor = (id: string): string => {
+    const currBoard = boards.find((i) => i.id === id) as IBoard;
+    if (tinycolor(currBoard.background).isLight()) {
+      return '#000';
+    }
+    return '#fff';
+  };
+
+  const handleUpdate = (e: MouseEvent<HTMLButtonElement>): void => {
+    const board = (e.target as HTMLButtonElement).offsetParent as HTMLDivElement;
+    const text = board.offsetParent?.textContent as string;
+
+    setUpdateState({
+      isUpdate: true,
+      boardId: board.id,
+      boardTitle: text,
+    });
+    setIsModal(true);
   };
 
   const deleteBoard = (id: string): void => {
@@ -63,16 +95,16 @@ const BoardsPage = (): JSX.Element | null => {
                 boards.map(({ id, title, background }): JSX.Element => (
                   <li key={id} className="boards__item" style={{ backgroundColor: background }}>
                     <Link className="boards__link" to="/board" state={{ boardId: id, title, background }}>
-                      <span className="boards__item-title">
+                      <span className="boards__item-title" style={{ color: getColor(id) }}>
                         {title}
                       </span>
                     </Link>
-                    <div className="boards__icons">
-                      <button className="boards__button" type="button" onClick={(): void => editBoard(id)}>
-                        <i className="bx bx-edit-alt bx-sm icon" />
+                    <div className="boards__icons" id={id}>
+                      <button className="boards__button" type="button" onClick={(e): void => handleUpdate(e)}>
+                        <i className="bx bx-edit-alt bx-sm icon" style={{ color: getColor(id) }} />
                       </button>
                       <button className="boards__button" type="button" onClick={(): void => deleteBoard(id)}>
-                        <i className="bx bx-trash bx-sm icon" />
+                        <i className="bx bx-trash bx-sm icon" style={{ color: getColor(id) }} />
                       </button>
                     </div>
                   </li>
@@ -82,13 +114,14 @@ const BoardsPage = (): JSX.Element | null => {
             )}
         </div>
       </div>
-
       {isModal ? (
-        <ModalWindow
-          show={isModal}
-          handleModal={handleModalClose}
-          boards={getBoards}
-        />
+        <Modal show={isModal}>
+          <ModalWindow
+            handleModal={handleModalClose}
+            boards={getBoards}
+            updateState={updateState}
+          />
+        </Modal>
       ) : null}
     </section>
 
