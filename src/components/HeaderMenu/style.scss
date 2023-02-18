@@ -1,72 +1,23 @@
 @import "../../styles/palette.scss";
 
-.aside {
+.menu {
   display: flex;
   flex-direction: row;
-  padding: 10px 0;
-  transition: 0.3s;
+  gap: 10px;
   font-size: 1.5rem;
-  border: 1px solid red;
   color: $primary;
 
-  &__settings > a {
-    color: inherit;
-  }
-
-  &__nav {
-    color: inherit;
-  }
-
-  &__title {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-left: 15px;
-    max-width: 180px;
-    color: inherit;
-  }
-
-  &__name {
-    margin: 0 auto;
-    font-size: 1.1rem;
-    width: fit-content;
-  }
-
-  &__email {
-    margin: 0 auto;
-    font-size: 0.8rem;
-  }
-
-  &__avatar {
-    margin: auto 0;
-    margin-right: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    background-color: $primary-blue;
-    border-radius: 20px;
-    color: $primary;
-    overflow: hidden;
-  }
-
-  &__nav {
-    display: flex;
-    color: $gray-text;
-  }
-
-  &__boards {
-    margin: 10px 0;
-    padding: 0 15px;
+  &__boards,
+  &__templates {
+    display: block;
+    padding: 0 10px;
     text-decoration: none;
-    color: inherit;
-  }
+    border-radius: 5px;
+    background-color: $blue;
+    transition: 0.5s;
 
-  &__users {
-    margin: 10px 0;
-    padding: 0 15px;
-    text-decoration: none;
-    color: inherit;
+    &:hover {
+      background-color: $dark-text;
+    }
   }
 }

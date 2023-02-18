@@ -32,7 +32,9 @@
     padding: 0 10px;
     color: $primary;
     font-size: 1.2rem;
+    border-radius: 5px;
     text-decoration: none;
+    background-color: $blue;
     transition: 0.5s;
 
     &:hover {

@@ -41,19 +41,13 @@ const HeaderMenu = (): JSX.Element => {
   };
 
   return (
-    <div className="aside">
-      <nav className="aside__nav">
-        <ul>
-          <li><a href="/boards">Boards</a></li>
-          <li>Templates</li>
-        </ul>
-        <Link to="/auth" className="aside__users" onClick={(): void => localStorage.removeItem('token')}>Users</Link>
-        <NavDropdown title="Templates" id="basic-nav-dropdown" className="aside__settings">
-          <NavDropdown.Item onClick={(): void => handleTemplates('small')} className="aside__theme">Small board (2 cards)</NavDropdown.Item>
-          <NavDropdown.Item onClick={(): void => handleTemplates('medium')} className="aside__theme">Medium board (3 cards)</NavDropdown.Item>
-          <NavDropdown.Item onClick={(): void => handleTemplates('big')} className="aside__lang">Big board (4 cards)</NavDropdown.Item>
-        </NavDropdown>
-      </nav>
+    <div className="menu">
+      <Link to="/boards" className="menu__boards">Boards</Link>
+      <NavDropdown title="Templates" id="basic-nav-dropdown" className="menu__templates">
+        <NavDropdown.Item onClick={(): void => handleTemplates('small')} className="aside__theme">Small board (2 cards)</NavDropdown.Item>
+        <NavDropdown.Item onClick={(): void => handleTemplates('medium')} className="aside__theme">Medium board (3 cards)</NavDropdown.Item>
+        <NavDropdown.Item onClick={(): void => handleTemplates('big')} className="aside__lang">Big board (4 cards)</NavDropdown.Item>
+      </NavDropdown>
     </div>
   );
 };
