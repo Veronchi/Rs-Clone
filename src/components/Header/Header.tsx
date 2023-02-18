@@ -2,6 +2,7 @@ import React from 'react';
 import HeaderSearch from '../HeaderSearch/HeaderSearch';
 import { HeaderMenu } from '../HeaderMenu/HeaderMenu';
 import './style.scss';
+import User from '../User/User';
 
 const Header = (): JSX.Element => (
   <header className="header">
@@ -16,6 +17,7 @@ const Header = (): JSX.Element => (
       </div>
       <HeaderMenu />
       <HeaderSearch />
+      <User />
     </nav>
   </header>
 );

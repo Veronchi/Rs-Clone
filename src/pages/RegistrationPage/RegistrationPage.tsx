@@ -71,7 +71,7 @@ const RegistrationPage = (): JSX.Element => {
           <Form.Control className="registration__input" type="password" placeholder="Password" value={inputPassword} onChange={handlePasswordChange} />
         </Form.Group>
         <Button className="registration__btn" type="button" onClick={():void => setIsSubmit(true)}>
-          {!isSignUp ? 'Sig in' : 'Sign up'}
+          {!isSignUp ? 'Sign in' : 'Sign up'}
         </Button>
         <div>
           {!isSignUp

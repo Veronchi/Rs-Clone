@@ -1,0 +1,109 @@
+@import "../../styles/palette.scss";
+
+.user {
+  &__avatar {
+    margin: auto 0;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: $dark-blue;
+    border-radius: 20px;
+    border: none;
+    color: $primary;
+    overflow: hidden;
+    transition: 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 0 10px $primary;
+    }
+  }
+
+  &__entry {
+    position: relative;
+    color: inherit;
+  }
+
+  &__login {
+    display: block;
+    padding: 0 10px;
+    color: $primary;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: $dark-text;
+    }
+  }
+
+  &__info {
+    background-color: $light-gray;
+  }
+
+  &__data {
+    padding: 20px;
+    color: $dark-text;
+  }
+
+  &__label {
+    margin: 0;
+    margin-top: 10px;
+    color: inherit;
+    font-size: 0.8rem;
+  }
+
+  &__name,
+  &__email {
+    padding-left: 10px;
+    margin: 0;
+  }
+
+  &__links {
+    border-top: 1px solid $border-gray;
+  }
+
+  &__link {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      color: inherit;
+      background-color: $light-blue;
+    }
+  }
+
+  &__exit {
+    border-top: 1px solid $border-gray;
+  }
+
+  &__logout {
+    margin: 10px 0;
+    padding: 10px 0;
+    border: none;
+    color: inherit;
+    width: 100%;
+    font-weight: 600;
+    background-color: transparent;
+
+    &:hover {
+      background-color: $light-blue;
+    }
+  }
+}
+
+.user-modal.modal-backdrop.show {
+  opacity: 0;
+}
+
+.user__block > .modal-dialog {
+  width: 200px;
+  top: 25px;
+  margin-right: 0;
+}

@@ -1,17 +1,17 @@
 import React from 'react';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createBoard, getAllBoards } from '../../http/boardAPI';
 import { createCard } from '../../http/cardAPI';
 import {
-  IBoard, IState, TemplateSize, templates,
+  IBoard, TemplateSize, templates,
 } from '../../interfaces';
 import { addBoards, clean } from '../../store/slices/boardsSlice';
 import './style.scss';
 
 const HeaderMenu = (): JSX.Element => {
-  const user = useSelector((state: IState) => state.user);
+  // const user = useSelector((state: IState) => state.user);
   const dispatch = useDispatch();
 
   const getRandomColor = (): string => {
@@ -42,13 +42,6 @@ const HeaderMenu = (): JSX.Element => {
 
   return (
     <div className="aside">
-      <div className="aside__title">
-        <p className="aside__avatar">{user.login ? user.login[0].toUpperCase() : 'U'}</p>
-        <div>
-          <p className="aside__name">{user.login}</p>
-          <p className="aside__email">{user.email}</p>
-        </div>
-      </div>
       <nav className="aside__nav">
         <ul>
           <li><a href="/boards">Boards</a></li>
