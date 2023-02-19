@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
-import { getAllBoards } from '../../http/boardAPI';
+import { getAllBoards, remove } from '../../http/boardAPI';
 import { getUser } from '../../http/userAPI';
-import { IBoard, IState, IUpdateState } from '../../interfaces';
+import {
+  IBoard, IState, IUpdateState,
+} from '../../interfaces';
 import { addBoards, clean } from '../../store/slices/boardsSlice';
 import { addUser } from '../../store/slices/userSlice';
 import './style.scss';
@@ -76,8 +78,9 @@ const BoardsPage = (): JSX.Element | null => {
     setIsModal(true);
   };
 
-  const deleteBoard = (id: string): void => {
-    console.log(`Удаляем доску с id - ${id}`);
+  const deleteBoard = async (id: string): Promise<void> => {
+    await remove(id);
+    getBoards();
   };
 
   return (
@@ -103,7 +106,7 @@ const BoardsPage = (): JSX.Element | null => {
                       <button className="boards__button" type="button" onClick={(e): void => handleUpdate(e)}>
                         <i className="bx bx-edit-alt bx-sm icon" style={{ color: getColor(id) }} />
                       </button>
-                      <button className="boards__button" type="button" onClick={(): void => deleteBoard(id)}>
+                      <button className="boards__button" type="button" onClick={(): Promise<void> => deleteBoard(id)}>
                         <i className="bx bx-trash bx-sm icon" style={{ color: getColor(id) }} />
                       </button>
                     </div>

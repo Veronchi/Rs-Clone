@@ -15,7 +15,7 @@ export interface IModal {
 export interface ICard {
   id: string;
   title: string;
-  boardId: string;
+  BoardId: string;
 }
 
 export interface CardProps {

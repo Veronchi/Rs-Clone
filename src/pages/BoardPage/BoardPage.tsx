@@ -20,7 +20,7 @@ const BoardPage = (): JSX.Element => {
     dispatch(clean());
 
     await getAllCards(boards.state.boardId)
-      .then((data) => dispatch(setAllCards([data])))
+      .then((data) => dispatch(setAllCards(data)))
       .then(() => setIsLoading(false))
       .catch((e) => console.log((e as Error).message));
   };
