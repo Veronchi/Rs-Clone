@@ -42,7 +42,7 @@ const BoardPage = (): JSX.Element => {
             <>
               <ul className="board__list">
                 {cards.map((card) => (
-                  <Card card={card} key={card.id} />
+                  <Card card={card} key={card.id} setCards={setCards} />
                 ))}
 
               </ul>

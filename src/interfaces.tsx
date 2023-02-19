@@ -18,10 +18,6 @@ export interface ICard {
   BoardId: string;
 }
 
-export interface CardProps {
-  card: ICard;
-}
-
 export interface BoardPageModal {
   show: boolean;
   handleModal: (e: MouseEvent | FormEvent) => void;
@@ -56,6 +52,7 @@ export interface IState {
 
 export interface ICardProps {
   card: ICard;
+  setCards: () => Promise<void>;
 }
 
 export interface ITaskProps {

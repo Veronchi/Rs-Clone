@@ -3,13 +3,14 @@ import React, {
 } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { remove } from '../../http/cardAPI';
 import { createRow, getAllRows } from '../../http/rowAPI';
-import { CardProps, IState } from '../../interfaces';
+import { ICardProps, IState } from '../../interfaces';
 import { clean, setAllTasks } from '../../store/slices/tasksSlice';
 import CardTask from '../CardTask/CardTask';
 import './style.scss';
 
-const Card: FC<CardProps> = ({ card }): JSX.Element => {
+const Card: FC<ICardProps> = ({ card, setCards }): JSX.Element => {
   const dispatch = useDispatch();
   const tasks = useSelector((state: IState) => state.tasks.flat());
   const [isNewTask, setIsNewTask] = useState<boolean>(false);
@@ -43,8 +44,11 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
   const mouseEnter = ():void => setIsHover(true);
   const mouseLeave = ():void => setIsHover(false);
 
-  const deleteCard = (id: string): void => {
-    console.log(`Удаляем карточку с id - ${id}`);
+  const deleteCard = async (id: string): Promise<void> => {
+    await remove(id)
+      .then(() => setCards());
+
+    // console.log(`Удаляем карточку с id - ${id}`);
   };
 
   const editCard = (id: string): void => {
@@ -76,7 +80,7 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
             <button className="icons__btn" type="button" onClick={(): void => editCard(card.id)}>
               <i className="bx bx-pencil bx-sm icon" />
             </button>
-            <button className="icons__btn" type="button" onClick={(): void => deleteCard(card.id)}>
+            <button className="icons__btn" type="button" onClick={(): Promise<void> => deleteCard(card.id)}>
               <i className="bx bx-trash bx-sm icon" />
             </button>
           </span>

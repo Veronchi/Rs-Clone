@@ -26,7 +26,7 @@ const CreateCardModal = ({
     ev.preventDefault();
     if (title.trim().length === 0) {
       setIsValid(false);
-      setError('Please enter valid title.');
+      setError('Please enter valid title');
     } else {
       addCard()
         .then(() => setCards())
