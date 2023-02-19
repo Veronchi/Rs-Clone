@@ -9,17 +9,19 @@ import './style.scss';
 export const ModalWindow: FC<IModal> = ({
   handleModal, boards, updateState,
 }): JSX.Element => {
-  const { isUpdate, boardId, boardTitle } = updateState;
-  const [title, setTitle] = useState<string>('' || boardTitle as string);
-  const [background, setBackground] = useState<string>('#026aa7');
+  const {
+    isUpdate, id, title, background,
+  } = updateState;
+  const [boardTitle, setBoardTitle] = useState<string>('' || title as string);
+  const [boardBackground, setBackground] = useState<string>(background || '#F5E1C8');
   const [isValid, setIsValid] = useState<boolean>(true);
 
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     if (/^\s+$/.test(value)) {
-      setIsValid(true);
+      setIsValid(false);
     } else {
-      setTitle(value);
+      setBoardTitle(value);
       setIsValid(true);
     }
   };
@@ -30,15 +32,15 @@ export const ModalWindow: FC<IModal> = ({
   };
 
   const handleClick = async (event: MouseEvent<HTMLButtonElement>): Promise<void> => {
-    if (!title) {
+    if (!boardTitle) {
       setIsValid(false);
-    } else if (isUpdate && boardId) {
-      update(boardId, title, background)
+    } else if (isUpdate) {
+      await update(id, boardTitle, boardBackground)
         .then(boards)
         .then(() => handleModal(event))
         .catch((e) => alert((e as Error).message));
     } else {
-      await createBoard(title, background)
+      await createBoard(boardTitle, boardBackground)
         .then(boards)
         .then(() => handleModal(event))
         .catch((e) => alert((e as Error).message));
@@ -60,10 +62,10 @@ export const ModalWindow: FC<IModal> = ({
             <Form.Label>board title</Form.Label>
             <Form.Control
               type="text"
-              placeholder={isValid ? 'My board title' : 'Enter your title'}
+              placeholder={isValid ? 'My board name' : 'Enter your name'}
               autoFocus
               onChange={handleTitleChange}
-              value={title}
+              value={boardTitle}
               style={{ borderColor: color }}
             />
             {!isValid ? <span className="validation-text">Enter some text</span> : null}
@@ -72,7 +74,7 @@ export const ModalWindow: FC<IModal> = ({
             <Form.Label>board background</Form.Label>
             <Form.Control
               className="board-color"
-              value={background}
+              value={boardBackground}
               type="color"
               autoFocus
               onChange={handleBackgroundChange}

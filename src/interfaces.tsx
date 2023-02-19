@@ -2,8 +2,9 @@ import { FormEvent, MouseEvent } from 'react';
 
 export interface IUpdateState {
   isUpdate: boolean,
-  boardId: string,
-  boardTitle: string,
+  id: string,
+  title: string,
+  background?: string,
 }
 
 export interface IModal {
@@ -19,10 +20,10 @@ export interface ICard {
 }
 
 export interface BoardPageModal {
-  show: boolean;
   handleModal: (e: MouseEvent | FormEvent) => void;
   BoardId: string;
   setCards: () => void;
+  updateState: IUpdateState
 }
 
 export interface IUser {
@@ -53,6 +54,7 @@ export interface IState {
 export interface ICardProps {
   card: ICard;
   setCards: () => Promise<void>;
+  editCard: (id: string) => void;
 }
 
 export interface ITaskProps {

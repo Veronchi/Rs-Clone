@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useState, MouseEvent,
+  useEffect, useState,
 } from 'react';
 import tinycolor from 'tinycolor2';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,8 +18,9 @@ import './style.scss';
 const BoardsPage = (): JSX.Element | null => {
   const initUpdState = {
     isUpdate: false,
-    boardId: '',
-    boardTitle: '',
+    id: '',
+    title: '',
+    background: '',
   };
 
   const [isModal, setIsModal] = useState<boolean>(false);
@@ -66,14 +67,12 @@ const BoardsPage = (): JSX.Element | null => {
     return '#fff';
   };
 
-  const handleUpdate = (e: MouseEvent<HTMLButtonElement>): void => {
-    const board = (e.target as HTMLButtonElement).offsetParent as HTMLDivElement;
-    const text = board.offsetParent?.textContent as string;
-
+  const handleUpdate = (id: string, title: string, background: string): void => {
     setUpdateState({
       isUpdate: true,
-      boardId: board.id,
-      boardTitle: text,
+      id,
+      title,
+      background,
     });
     setIsModal(true);
   };
@@ -103,7 +102,7 @@ const BoardsPage = (): JSX.Element | null => {
                       </span>
                     </Link>
                     <div className="boards__icons" id={id}>
-                      <button className="boards__button" type="button" onClick={(e): void => handleUpdate(e)}>
+                      <button className="boards__button" type="button" onClick={(): void => handleUpdate(id, title, background)}>
                         <i className="bx bx-edit-alt bx-sm icon" style={{ color: getColor(id) }} />
                       </button>
                       <button className="boards__button" type="button" onClick={(): Promise<void> => deleteBoard(id)}>
@@ -117,15 +116,13 @@ const BoardsPage = (): JSX.Element | null => {
             )}
         </div>
       </div>
-      {isModal ? (
-        <Modal show={isModal}>
-          <ModalWindow
-            handleModal={handleModalClose}
-            boards={getBoards}
-            updateState={updateState}
-          />
-        </Modal>
-      ) : null}
+      <Modal show={isModal}>
+        <ModalWindow
+          handleModal={handleModalClose}
+          boards={getBoards}
+          updateState={updateState}
+        />
+      </Modal>
     </section>
 
   );
