@@ -12,7 +12,7 @@ const Header = (): JSX.Element => (
           src="https://img.icons8.com/clouds/256/trello.png"
           alt="trello_logo"
         />
-        <h1 className="header__title">Trello Clone</h1>
+        <h2 className="header__title">Trello Clone</h2>
       </div>
       <HeaderSearch />
     </nav>

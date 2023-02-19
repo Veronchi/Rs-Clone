@@ -6,9 +6,11 @@ import BoardPage from './pages/BoardPage/BoardPage';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 import { BoardsPage } from './pages/BoardsPage/BoardsPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
+import WelcomePage from './pages/WelcomePage/WelcomePage';
 
 const App = (): JSX.Element => (
   <Routes>
+    <Route path="/welcome" element={<WelcomePage />} />
     <Route path="/" element={<MainLayout />}>
       <Route path="boards" element={<BoardsPage />} />
       <Route path="/" element={<Navigate to="boards" replace />} />

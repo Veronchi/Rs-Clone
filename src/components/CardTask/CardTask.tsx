@@ -41,8 +41,8 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
               <i className="bx bx-dots-horizontal-rounded bx-xs" />
             </Dropdown.Toggle>
             <Dropdown.Menu className="task-item__menu">
-              <Dropdown.Item onClick={handleClick}>Edit task</Dropdown.Item>
-              <Dropdown.Item onClick={(): void => deleteTask(task.id)}> Delete task</Dropdown.Item>
+              <Dropdown.Item className="task-item__link" onClick={handleClick}>Edit task</Dropdown.Item>
+              <Dropdown.Item className="task-item__link" onClick={(): void => deleteTask(task.id)}> Delete task</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         )
