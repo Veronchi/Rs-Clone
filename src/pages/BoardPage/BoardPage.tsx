@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Card from '../../components/Card/Card';
-import ModalWindowCreateCard from '../../components/CreateCardModal/CreateCardModal';
+import CreateCardModal from '../../components/CreateCardModal/CreateCardModal';
 import { getAllCards } from '../../http/cardAPI';
-import { IState } from '../../interfaces';
+import { IState, IUpdateState } from '../../interfaces';
 import { clean, setAllCards } from '../../store/slices/cardsSlice';
 import './style.scss';
 
 const BoardPage = (): JSX.Element => {
+  const initUpdState = {
+    isUpdate: false,
+    id: '',
+    title: '',
+  };
+
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [updateState, setUpdateState] = useState<IUpdateState>(initUpdState);
   const boards = useLocation();
   const dispatch = useDispatch();
   const cards = useSelector((state: IState) => state.cards.flat());
@@ -33,6 +41,19 @@ const BoardPage = (): JSX.Element => {
     setCards();
   }, []);
 
+  const editCard = (id: string): void => {
+    setIsModal(true);
+
+    const currCard = cards.find((i) => i.id === id);
+    if (currCard) {
+      setUpdateState({
+        isUpdate: true,
+        id,
+        title: currCard.title,
+      });
+    }
+  };
+
   return (
     <section className="board">
       <h1 className="board__title">{boards.state.title}</h1>
@@ -42,7 +63,7 @@ const BoardPage = (): JSX.Element => {
             <>
               <ul className="board__list">
                 {cards.map((card) => (
-                  <Card card={card} key={card.id} setCards={setCards} />
+                  <Card card={card} key={card.id} setCards={setCards} editCard={editCard} />
                 ))}
 
               </ul>
@@ -57,14 +78,14 @@ const BoardPage = (): JSX.Element => {
           )}
 
       </div>
-      {isModal ? (
-        <ModalWindowCreateCard
-          show={isModal}
+      <Modal show={isModal}>
+        <CreateCardModal
           handleModal={handleModalClose}
           BoardId={boards.state.boardId}
           setCards={setCards}
+          updateState={updateState}
         />
-      ) : null}
+      </Modal>
     </section>
   );
 };

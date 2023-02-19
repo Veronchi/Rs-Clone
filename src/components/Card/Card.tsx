@@ -10,7 +10,7 @@ import { clean, setAllTasks } from '../../store/slices/tasksSlice';
 import CardTask from '../CardTask/CardTask';
 import './style.scss';
 
-const Card: FC<ICardProps> = ({ card, setCards }): JSX.Element => {
+const Card: FC<ICardProps> = ({ card, setCards, editCard }): JSX.Element => {
   const dispatch = useDispatch();
   const tasks = useSelector((state: IState) => state.tasks.flat());
   const [isNewTask, setIsNewTask] = useState<boolean>(false);
@@ -47,12 +47,6 @@ const Card: FC<ICardProps> = ({ card, setCards }): JSX.Element => {
   const deleteCard = async (id: string): Promise<void> => {
     await remove(id)
       .then(() => setCards());
-
-    // console.log(`Удаляем карточку с id - ${id}`);
-  };
-
-  const editCard = (id: string): void => {
-    console.log(`Редактируем карточку с id - ${id}`);
   };
 
   useEffect(() => {
