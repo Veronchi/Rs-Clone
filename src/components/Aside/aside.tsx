@@ -44,14 +44,12 @@ const Aside = (): JSX.Element => {
             </div>
           </aside>
         )
-
         : (
           <aside className="aside closed">
             <button className="aside__close arrow-right" aria-label="Hide" type="button" onClick={handleAside} />
           </aside>
         )}
     </div>
-
   );
 };
 export { Aside };
