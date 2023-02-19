@@ -23,24 +23,19 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
     setNewTask(e.target.value);
   };
 
-  const addTask = async (text: string, ColumnId: string): Promise<void> => {
-    try {
-      await createRow(text, ColumnId);
-    } catch (e) {
-      console.log((e as Error).message);
-    }
-  };
-
   const setTasks = async (): Promise<void> => {
     dispatch(clean());
-    try {
-      await getAllRows(card.id)
-        .then((data) => {
-          dispatch(setAllTasks([data]));
-        });
-    } catch (e) {
-      console.log((e as Error).message);
-    }
+    await getAllRows(card.id)
+      .then((data) => {
+        dispatch(setAllTasks(data));
+      })
+      .catch((e) => console.log((e as Error).message));
+  };
+
+  const addTask = async (text: string, ColumnId: string, BoardId: string): Promise<void> => {
+    await createRow(text, ColumnId, BoardId)
+      .then(() => setTasks())
+      .catch((e) => console.log((e as Error).message));
   };
 
   const currTasks = tasks.filter((item) => item.ColumnId === card.id);
@@ -61,9 +56,9 @@ const Card: FC<CardProps> = ({ card }): JSX.Element => {
       if (newTask.length === 0) {
         setIsValid(false);
       } else {
-        addTask(newTask, card.id);
         setIsNewTask(false);
-        setTasks();
+        setIsNewTask(false);
+        addTask(newTask, card.id, card.BoardId);
       }
     }
   }, [isSentTask]);
