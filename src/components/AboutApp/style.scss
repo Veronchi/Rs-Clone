@@ -1,0 +1,68 @@
+.welcome {
+  &__app {
+    max-width: 98%;
+    width: 100%;
+    margin: 2% auto;
+    box-shadow: 0px 0px 8px 1px black;
+    background: #fafbfc;
+    border-radius: 10px;
+
+    &-title {
+      font-size: 3.3rem;
+      margin: 40px 90px;
+    }
+
+    &-feature {
+      display: flex;
+      justify-content: space-between;
+      margin: 80px 40px;
+    }
+
+    &-second-title {
+      color: cornflowerblue;
+      margin: 0 auto;
+      font-size: 2.2rem;
+      text-shadow: 1px 1px 1px black;
+    }
+
+    &-info {
+      width: 600px;
+      align-self: center;
+
+      .feature-title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 3%;
+        color: cadetblue;
+        text-shadow: 1px 1px 1px black;
+      }
+
+      .feature-description {
+        font-size: 1.2rem;
+        text-align: center;
+        text-shadow: 1px 1px 1px black;
+      }
+    }
+    &-image {
+      display: block;
+      width: 700px;
+      height: 350px;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      box-shadow: 1px 1px 8px 2px black;
+      border-radius: 10px;
+    }
+  }
+}
+
+.feature-1 {
+  background-image: url('../../assets/icons/screen1.png');
+}
+
+.feature-2 {
+  background-image: url('../../assets/icons/screen2.png');
+}
+
+.feature-3 {
+  background-image: url('../../assets/icons/screen3.png');
+}

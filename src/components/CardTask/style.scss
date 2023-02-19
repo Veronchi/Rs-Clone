@@ -24,16 +24,23 @@
     z-index: 50;
   }
 
-  .dropdown-toggle {
+  .task-item__btn.dropdown-toggle {
     padding: 0%;
     margin: 0%;
     border: 0;
     height: 14px;
     right: -7px;
-    background: $light-gray;
+    width: 25px;
+    height: 20px;
+    background: $hovered-gray;
+    transition: background 0.15s ease-in-out;
 
     &:hover {
-      background: $hovered-gray;
+      border: 0.5px solid grey;
+    }
+
+    &:active {
+      background: $active-gray;
     }
 
   }
@@ -43,11 +50,10 @@
     display: none !important; 
   }
 
-  .dropdown-item {
+  &__link.dropdown-item {
     display: inline;
     margin: 7px;
     padding: 0%;
-    z-index: 5000;
   }
   
   &__btn {
