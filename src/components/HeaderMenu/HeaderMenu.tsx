@@ -7,7 +7,7 @@ import { createCard } from '../../http/cardAPI';
 import {
   IBoard, TemplateSize, templates,
 } from '../../interfaces';
-import { addBoards, clean } from '../../store/slices/boardsSlice';
+import { updateBoards } from '../../store/slices/boardsSlice';
 import './style.scss';
 
 const HeaderMenu = (): JSX.Element => {
@@ -26,11 +26,8 @@ const HeaderMenu = (): JSX.Element => {
   };
 
   const getBoards = async (): Promise<void> => {
-    dispatch(clean());
-    await getAllBoards()
-      .then((data) => {
-        dispatch(addBoards([data]));
-      });
+    const data = await getAllBoards();
+    dispatch(updateBoards([data]));
   };
 
   const handleBoards = (): void => {
