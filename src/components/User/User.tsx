@@ -11,7 +11,6 @@ const User = (): JSX.Element => {
   const user = useSelector((state: IState) => state.user);
   const [isUserClick, setIsUserClick] = useState<boolean>(false);
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
 
   const handleUser = (): void => {
     setIsUserClick(true);
@@ -24,7 +23,7 @@ const User = (): JSX.Element => {
   const handleLogOut = (): void => {
     setIsUserClick(false);
     localStorage.removeItem('token');
-    navigate('/', { replace: true });
+    navigate('/welcome', { replace: true });
   };
 
   return (

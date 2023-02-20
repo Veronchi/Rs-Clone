@@ -11,7 +11,6 @@ import { addBoards, clean } from '../../store/slices/boardsSlice';
 import './style.scss';
 
 const HeaderMenu = (): JSX.Element => {
-  // const user = useSelector((state: IState) => state.user);
   const [templateSize, setTemplateSize] = useState<TemplateSize>('small');
   const [isOpenTemplates, setIsOpenTemplates] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('Small board');
@@ -35,7 +34,7 @@ const HeaderMenu = (): JSX.Element => {
   };
 
   const handleBoards = (): void => {
-    navigate('/', { replace: true });
+    navigate('/boards', { replace: true });
   };
 
   const handleSize = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -127,7 +126,6 @@ const HeaderMenu = (): JSX.Element => {
                       <Form.Control
                         type="text"
                         placeholder="My board name"
-                        autoFocus
                         onChange={handleTitleChange}
                         value={title}
                       />
