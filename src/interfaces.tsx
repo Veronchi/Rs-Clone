@@ -1,15 +1,21 @@
 import { FormEvent, MouseEvent } from 'react';
 
+export interface IUpdateState {
+  isUpdate: boolean,
+  boardId: string,
+  boardTitle: string,
+}
+
 export interface IModal {
-  show: boolean;
   handleModal: (e: MouseEvent | FormEvent) => void;
-  boards: () => void
+  boards: () => void;
+  updateState: IUpdateState;
 }
 
 export interface ICard {
   id: string;
   title: string;
-  boardId: string;
+  BoardId: string;
 }
 
 export interface CardProps {
@@ -75,3 +81,16 @@ export const templates = {
     cards: ['To do', 'In process', 'Review', 'Done'],
   },
 };
+
+export interface IParentModal {
+  show: boolean;
+  handleModal: (e: MouseEvent | FormEvent) => void;
+  handleParentModal: (e: MouseEvent | FormEvent) => void;
+  task: ITask;
+}
+
+export interface IModalEdit {
+  show: boolean;
+  handleModal: (e: MouseEvent | FormEvent) => void;
+  task: ITask;
+}

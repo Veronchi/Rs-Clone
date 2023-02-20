@@ -10,7 +10,7 @@ const createCard = async (title: string, BoardId: string): Promise<ICard> => {
   return data;
 };
 
-const getAllCards = async (id: string): Promise<ICard> => {
+const getAllCards = async (id: string): Promise<Array<ICard>> => {
   const { data } = await $authHost.get('/column/columns', {
     params: {
       boardID: id,

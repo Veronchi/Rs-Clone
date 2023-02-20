@@ -1,16 +1,27 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, {
+  ChangeEvent, FC, MouseEvent, useState,
+} from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { IModal } from '../../interfaces';
-import { createBoard } from '../../http/boardAPI';
+import { createBoard, update } from '../../http/boardAPI';
 import './style.scss';
 
-export const ModalWindow = ({ show, handleModal, boards }: IModal): JSX.Element => {
-  const [title, setTitle] = useState<string>('');
+export const ModalWindow: FC<IModal> = ({
+  handleModal, boards, updateState,
+}): JSX.Element => {
+  const { isUpdate, boardId, boardTitle } = updateState;
+  const [title, setTitle] = useState<string>('' || boardTitle as string);
   const [background, setBackground] = useState<string>('#026aa7');
+  const [isValid, setIsValid] = useState<boolean>(true);
 
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
-    setTitle(value);
+    if (/^\s+$/.test(value)) {
+      setIsValid(true);
+    } else {
+      setTitle(value);
+      setIsValid(true);
+    }
   };
 
   const handleBackgroundChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -18,18 +29,30 @@ export const ModalWindow = ({ show, handleModal, boards }: IModal): JSX.Element 
     setBackground(value);
   };
 
-  const handleSave = async (): Promise<void> => {
-    try {
-      await createBoard(title, background);
-    } catch (e) {
-      alert((e as Error).message);
+  const handleClick = async (event: MouseEvent<HTMLButtonElement>): Promise<void> => {
+    if (!title) {
+      setIsValid(false);
+    } else if (isUpdate && boardId) {
+      update(boardId, title, background)
+        .then(boards)
+        .then(() => handleModal(event))
+        .catch((e) => alert((e as Error).message));
+    } else {
+      await createBoard(title, background)
+        .then(boards)
+        .then(() => handleModal(event))
+        .catch((e) => alert((e as Error).message));
     }
   };
 
+  const color = isValid ? 'green' : 'red';
+
   return (
-    <Modal show={show}>
+    <>
       <Modal.Header>
-        <Modal.Title>Add Board</Modal.Title>
+        {isUpdate
+          ? <Modal.Title>Update Board</Modal.Title>
+          : <Modal.Title>Add Board</Modal.Title>}
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -37,11 +60,13 @@ export const ModalWindow = ({ show, handleModal, boards }: IModal): JSX.Element 
             <Form.Label>board title</Form.Label>
             <Form.Control
               type="text"
-              placeholder="My board name"
+              placeholder={isValid ? 'My board title' : 'Enter your title'}
               autoFocus
               onChange={handleTitleChange}
               value={title}
+              style={{ borderColor: color }}
             />
+            {!isValid ? <span className="validation-text">Enter some text</span> : null}
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>board background</Form.Label>
@@ -61,15 +86,12 @@ export const ModalWindow = ({ show, handleModal, boards }: IModal): JSX.Element 
         </Button>
         <Button
           className="save-btn"
-          onClick={(e):void => {
-            handleSave()
-              .then(boards)
-              .then(() => handleModal(e));
-          }}
+          onClick={(e): Promise<void> => handleClick(e)}
         >
-          Save Board
+          Save
         </Button>
       </Modal.Footer>
-    </Modal>
+    </>
+
   );
 };

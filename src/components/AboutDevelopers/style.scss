@@ -1,0 +1,73 @@
+.welcome {
+  &__developers {
+    width: 1400px;
+    max-width: 98%;
+    margin: 2% auto;
+    box-shadow: 0px 0px 8px 1px black;
+    background: #fafbfc;
+    border-radius: 10px;
+
+    &-title {
+      font-size: 3.3rem;
+      margin: 40px 90px;
+    }
+  }
+
+  &__cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 5%;
+
+    &-info {
+      width: 320px;
+      height: 350px;
+      padding: 10px;
+      gap: 35px;
+      background-color: #fafbfc;
+      box-shadow: 0px 0px 8px 1px black;
+      background: #fafbfc;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 5%;
+    }
+
+    &-name {
+      font-size: 2rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 5%;
+    }
+
+    &-photo {
+      display: block;
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 220px;
+      height: 220px;
+    }
+
+    &-job {
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-align: center;
+      margin: 0;
+    }
+  }
+}
+
+.vika-photo {
+  background-image: url('../../assets/icons/veronika.jpg');
+}
+
+.vladimir-photo {
+  background-image: url('../../assets/icons/vladimir.jpg');
+}
+
+.sasha-photo {
+  background-image: url('../../assets/icons/alexandr.jpg');
+}
