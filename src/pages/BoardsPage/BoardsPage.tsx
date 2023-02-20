@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useState, MouseEvent,
+  useEffect, useState,
 } from 'react';
 import tinycolor from 'tinycolor2';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,15 +11,16 @@ import { getUser } from '../../http/userAPI';
 import {
   IBoard, IState, IUpdateState,
 } from '../../interfaces';
-import { addBoards, clean } from '../../store/slices/boardsSlice';
+import { updateBoards } from '../../store/slices/boardsSlice';
 import { addUser } from '../../store/slices/userSlice';
 import './style.scss';
 
 const BoardsPage = (): JSX.Element | null => {
   const initUpdState = {
     isUpdate: false,
-    boardId: '',
-    boardTitle: '',
+    id: '',
+    title: '',
+    background: '',
   };
 
   const [isModal, setIsModal] = useState<boolean>(false);
@@ -36,21 +37,14 @@ const BoardsPage = (): JSX.Element | null => {
 
   const getBoards = async (): Promise<void> => {
     setIsLoading(true);
-    dispatch(clean());
-    await getAllBoards()
-      .then((data) => {
-        dispatch(addBoards([data]));
-      })
-      .then(() => setIsLoading(false))
-      .catch((e) => console.log((e as Error).message));
+    const data = await getAllBoards();
+    dispatch(updateBoards([data]));
+    setIsLoading(false);
   };
 
   const getCurrUser = async (): Promise<void> => {
-    await getUser()
-      .then((data) => {
-        dispatch(addUser(data));
-      })
-      .catch((e) => console.log((e as Error).message));
+    const data = await getUser();
+    dispatch(addUser(data));
   };
 
   useEffect(() => {
@@ -66,21 +60,20 @@ const BoardsPage = (): JSX.Element | null => {
     return '#fff';
   };
 
-  const handleUpdate = (e: MouseEvent<HTMLButtonElement>): void => {
-    const board = (e.target as HTMLButtonElement).offsetParent as HTMLDivElement;
-    const text = board.offsetParent?.textContent as string;
-
+  const handleUpdate = (id: string, title: string, background: string): void => {
     setUpdateState({
       isUpdate: true,
-      boardId: board.id,
-      boardTitle: text,
+      id,
+      title,
+      background,
     });
     setIsModal(true);
   };
 
   const deleteBoard = async (id: string): Promise<void> => {
     await remove(id);
-    getBoards();
+    const data = await getAllBoards();
+    dispatch(updateBoards([data]));
   };
 
   return (
@@ -103,7 +96,7 @@ const BoardsPage = (): JSX.Element | null => {
                       </span>
                     </Link>
                     <div className="boards__icons" id={id}>
-                      <button className="boards__button" type="button" onClick={(e): void => handleUpdate(e)}>
+                      <button className="boards__button" type="button" onClick={(): void => handleUpdate(id, title, background)}>
                         <i className="bx bx-edit-alt bx-sm icon" style={{ color: getColor(id) }} />
                       </button>
                       <button className="boards__button" type="button" onClick={(): Promise<void> => deleteBoard(id)}>
@@ -117,15 +110,12 @@ const BoardsPage = (): JSX.Element | null => {
             )}
         </div>
       </div>
-      {isModal ? (
-        <Modal show={isModal}>
-          <ModalWindow
-            handleModal={handleModalClose}
-            boards={getBoards}
-            updateState={updateState}
-          />
-        </Modal>
-      ) : null}
+      <Modal show={isModal}>
+        <ModalWindow
+          handleModal={handleModalClose}
+          updateState={updateState}
+        />
+      </Modal>
     </section>
 
   );
