@@ -4,34 +4,42 @@ import React, {
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { createCard, update } from '../../http/cardAPI';
+import { useDispatch } from 'react-redux';
+import { createCard, getAllCards, update } from '../../http/cardAPI';
+import { getAllRows } from '../../http/rowAPI';
 import { BoardPageModal } from '../../interfaces';
+import { setAllCards, updateCards } from '../../store/slices/cardsSlice';
+import { setAllTasks } from '../../store/slices/tasksSlice';
 
 import './style.scss';
 
 const CreateCardModal: FC<BoardPageModal> = ({
-  handleModal, BoardId, setCards, updateState,
+  handleModal, BoardId, updateState,
 }): JSX.Element => {
   const { isUpdate, id, title } = updateState;
   const [cardTitle, setCardTitle] = useState<string>('' || title as string);
   const [isValid, setIsValid] = useState<boolean>(true);
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     if (cardTitle.trim().length === 0) {
       setIsValid(false);
     } else if (isUpdate) {
-      await update(id, cardTitle)
-        .then(setCards)
-        .then(() => setCardTitle(''))
-        .then(() => handleModal(e))
-        .catch((err) => console.log((err as Error).message));
+      await update(id, cardTitle);
+      const data = await getAllCards(BoardId);
+      dispatch(updateCards(data));
+
+      const taska = await getAllRows(id);
+      dispatch(setAllTasks(taska));
     } else {
-      await createCard(cardTitle, BoardId)
-        .then(() => setCards())
-        .then(() => handleModal(e))
-        .catch((err) => console.log((err as Error).message));
+      const data = await createCard(cardTitle, BoardId);
+      dispatch(setAllCards([data]));
     }
+
+    setCardTitle('');
+    handleModal(e);
   };
 
   const handleTitle = (e: ChangeEvent<HTMLInputElement>): void => {

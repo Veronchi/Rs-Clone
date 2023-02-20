@@ -3,50 +3,44 @@ import React, {
 } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { remove } from '../../http/cardAPI';
+import { getAllCards, remove } from '../../http/cardAPI';
 import { createRow, getAllRows } from '../../http/rowAPI';
-import { ICardProps, IState } from '../../interfaces';
-import { clean, setAllTasks } from '../../store/slices/tasksSlice';
+import {
+  ICardProps, IState, ITaskMap,
+} from '../../interfaces';
+import { updateCards } from '../../store/slices/cardsSlice';
+import { setAllTasks } from '../../store/slices/tasksSlice';
 import CardTask from '../CardTask/CardTask';
 import './style.scss';
 
-const Card: FC<ICardProps> = ({ card, setCards, editCard }): JSX.Element => {
+const Card: FC<ICardProps> = ({ card, editCard }): JSX.Element => {
   const dispatch = useDispatch();
-  const tasks = useSelector((state: IState) => state.tasks.flat());
+  const tasks = useSelector((state: IState): ITaskMap => state.tasks);
+
   const [isNewTask, setIsNewTask] = useState<boolean>(false);
   const [isSentTask, setIsSentTask] = useState<boolean>(false);
   const [newTask, setNewTask] = useState<string>('');
   const [isValid, setIsValid] = useState<boolean>(true);
   const [isHover, setIsHover] = useState<boolean>(false);
 
-  const setTask = (e: ChangeEvent<HTMLInputElement>): void => {
+  const onTaskChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setIsValid(true);
     setNewTask(e.target.value);
   };
 
-  const setTasks = async (): Promise<void> => {
-    dispatch(clean());
-    await getAllRows(card.id)
-      .then((data) => {
-        dispatch(setAllTasks(data));
-      })
-      .catch((e) => console.log((e as Error).message));
-  };
-
   const addTask = async (text: string, ColumnId: string, BoardId: string): Promise<void> => {
-    await createRow(text, ColumnId, BoardId)
-      .then(() => setTasks())
-      .catch((e) => console.log((e as Error).message));
+    await createRow(text, ColumnId, BoardId);
+    const data = await getAllRows(card.id);
+    dispatch(setAllTasks(data));
   };
-
-  const currTasks = tasks.filter((item) => item.ColumnId === card.id);
 
   const mouseEnter = ():void => setIsHover(true);
   const mouseLeave = ():void => setIsHover(false);
 
   const deleteCard = async (id: string): Promise<void> => {
-    await remove(id)
-      .then(() => setCards());
+    await remove(id);
+    const data = await getAllCards(card.BoardId);
+    dispatch(updateCards(data));
   };
 
   useEffect(() => {
@@ -55,14 +49,17 @@ const Card: FC<ICardProps> = ({ card, setCards, editCard }): JSX.Element => {
         setIsValid(false);
       } else {
         setIsNewTask(false);
-        setIsNewTask(false);
+        setIsSentTask(false);
         addTask(newTask, card.id, card.BoardId);
       }
     }
   }, [isSentTask]);
 
   useEffect(() => {
-    setTasks();
+    (async (): Promise<void> => {
+      const data = await getAllRows(card.id);
+      dispatch(setAllTasks(data));
+    })();
   }, []);
 
   return (
@@ -81,7 +78,7 @@ const Card: FC<ICardProps> = ({ card, setCards, editCard }): JSX.Element => {
         ) : null }
       <ul className="tasks">
         {
-          currTasks.map((task) => (
+          tasks[card.id]?.map((task) => (
             <li className="tasks__item" key={task.id}>
               <CardTask task={task} />
             </li>
@@ -92,10 +89,17 @@ const Card: FC<ICardProps> = ({ card, setCards, editCard }): JSX.Element => {
         ? (
           <div className="input-wrapper">
             {isValid
-              ? <Form.Control className="task-input valid" type="text" placeholder="Enter new task" value={newTask} onChange={setTask} />
-              : <Form.Control className="task-input invalid" type="text" placeholder="Enter new task" value={newTask} onChange={setTask} />}
+              ? <Form.Control className="task-input valid" type="text" placeholder="Enter new task" value={newTask} onChange={onTaskChange} />
+              : <Form.Control className="task-input invalid" type="text" placeholder="Enter new task" value={newTask} onChange={onTaskChange} />}
 
-            <button type="button" className="input-close" onClick={():void => setIsNewTask(false)}>
+            <button
+              type="button"
+              className="input-close"
+              onClick={():void => {
+                setNewTask('');
+                setIsNewTask(false);
+              }}
+            >
               x
             </button>
           </div>
