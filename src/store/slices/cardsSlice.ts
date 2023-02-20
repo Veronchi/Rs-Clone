@@ -7,16 +7,11 @@ const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    setAllCards: (state, action: PayloadAction<ICard[]>): void => {
-      state.push(...action.payload);
-    },
-    clean: (state): Array<ICard> => {
-      let res = state;
-      res = initialState;
-      return res;
-    },
+    setAllCards:
+      (state, action: PayloadAction<ICard[]>): Array<ICard> => [...state, ...action.payload],
+    updateCards: (state, action: PayloadAction<ICard[]>): Array<ICard> => [...action.payload],
   },
 });
 
-export const { setAllCards, clean } = cardsSlice.actions;
+export const { setAllCards, updateCards } = cardsSlice.actions;
 export default cardsSlice.reducer;
