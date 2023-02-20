@@ -9,7 +9,6 @@ export interface IUpdateState {
 
 export interface IModal {
   handleModal: (e: MouseEvent | FormEvent) => void;
-  boards: () => void;
   updateState: IUpdateState;
 }
 
@@ -22,7 +21,6 @@ export interface ICard {
 export interface BoardPageModal {
   handleModal: (e: MouseEvent | FormEvent) => void;
   BoardId: string;
-  setCards: () => void;
   updateState: IUpdateState
 }
 
@@ -44,16 +42,16 @@ export interface ITask {
   ColumnId: string;
 }
 
+export type ITaskMap = { [n: string]: Array<ITask> };
 export interface IState {
   user: IUser;
   boards: Array<IBoard>;
   cards: Array<ICard>;
-  tasks: Array<ITask>;
+  tasks: ITaskMap;
 }
 
 export interface ICardProps {
   card: ICard;
-  setCards: () => Promise<void>;
   editCard: (id: string) => void;
 }
 

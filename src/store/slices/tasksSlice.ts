@@ -1,22 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ITask } from '../../interfaces';
+import { ITask, ITaskMap } from '../../interfaces';
 
-const initialState: Array<ITask> = [];
+const initialState: ITaskMap = {};
 
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    setAllTasks: (state, action: PayloadAction<ITask[]>): void => {
-      state.push(...action.payload);
-    },
-    clean: (state): Array<ITask> => {
-      let res = state;
-      res = initialState;
-      return res;
+    setAllTasks: (state, action: PayloadAction<Array<ITask>>): ITaskMap => {
+      const obj:ITaskMap = {};
+      action.payload.forEach((item: ITask) => {
+        if (!obj[item.ColumnId]) obj[item.ColumnId] = [item];
+        else obj[item.ColumnId].push(item);
+      });
+      return { ...state, ...obj };
     },
   },
 });
 
-export const { setAllTasks, clean } = tasksSlice.actions;
+export const { setAllTasks } = tasksSlice.actions;
 export default tasksSlice.reducer;
