@@ -2,13 +2,16 @@ import React, {
   ChangeEvent, FC, MouseEvent, useState,
 } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { IModal } from '../../interfaces';
-import { createBoard, update } from '../../http/boardAPI';
+import { createBoard, getAllBoards, update } from '../../http/boardAPI';
+import { addBoards, updateBoards } from '../../store/slices/boardsSlice';
 import './style.scss';
 
 export const ModalWindow: FC<IModal> = ({
-  handleModal, boards, updateState,
+  handleModal, updateState,
 }): JSX.Element => {
+  const dispatch = useDispatch();
   const {
     isUpdate, id, title, background,
   } = updateState;
@@ -35,15 +38,14 @@ export const ModalWindow: FC<IModal> = ({
     if (!boardTitle) {
       setIsValid(false);
     } else if (isUpdate) {
-      await update(id, boardTitle, boardBackground)
-        .then(boards)
-        .then(() => handleModal(event))
-        .catch((e) => alert((e as Error).message));
+      await update(id, boardTitle, boardBackground);
+      const updBoards = await getAllBoards();
+      dispatch(updateBoards([updBoards]));
+      handleModal(event);
     } else {
-      await createBoard(boardTitle, boardBackground)
-        .then(boards)
-        .then(() => handleModal(event))
-        .catch((e) => alert((e as Error).message));
+      const board = await createBoard(boardTitle, boardBackground);
+      dispatch(addBoards([board]));
+      handleModal(event);
     }
   };
 

@@ -7,18 +7,11 @@ const boardsSlice = createSlice({
   name: 'boards',
   initialState,
   reducers: {
-    addBoards: (state, action: PayloadAction<IBoard[]>): Array<IBoard> => {
-      let res = state;
-      res = action.payload;
-      return res;
-    },
-    clean: (state): Array<IBoard> => {
-      let res = state;
-      res = initialState;
-      return res;
-    },
+    addBoards:
+      (state, action: PayloadAction<IBoard[]>): Array<IBoard> => [...state, ...action.payload],
+    updateBoards: (state, action: PayloadAction<IBoard[]>): Array<IBoard> => [...action.payload],
   },
 });
 
-export const { addBoards, clean } = boardsSlice.actions;
+export const { addBoards, updateBoards } = boardsSlice.actions;
 export default boardsSlice.reducer;

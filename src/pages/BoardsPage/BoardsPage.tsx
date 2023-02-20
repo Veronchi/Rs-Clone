@@ -11,7 +11,7 @@ import { getUser } from '../../http/userAPI';
 import {
   IBoard, IState, IUpdateState,
 } from '../../interfaces';
-import { addBoards, clean } from '../../store/slices/boardsSlice';
+import { updateBoards } from '../../store/slices/boardsSlice';
 import { addUser } from '../../store/slices/userSlice';
 import './style.scss';
 
@@ -37,21 +37,14 @@ const BoardsPage = (): JSX.Element | null => {
 
   const getBoards = async (): Promise<void> => {
     setIsLoading(true);
-    dispatch(clean());
-    await getAllBoards()
-      .then((data) => {
-        dispatch(addBoards([data]));
-      })
-      .then(() => setIsLoading(false))
-      .catch((e) => console.log((e as Error).message));
+    const data = await getAllBoards();
+    dispatch(updateBoards([data]));
+    setIsLoading(false);
   };
 
   const getCurrUser = async (): Promise<void> => {
-    await getUser()
-      .then((data) => {
-        dispatch(addUser(data));
-      })
-      .catch((e) => console.log((e as Error).message));
+    const data = await getUser();
+    dispatch(addUser(data));
   };
 
   useEffect(() => {
@@ -79,7 +72,8 @@ const BoardsPage = (): JSX.Element | null => {
 
   const deleteBoard = async (id: string): Promise<void> => {
     await remove(id);
-    getBoards();
+    const data = await getAllBoards();
+    dispatch(updateBoards([data]));
   };
 
   return (
@@ -119,7 +113,6 @@ const BoardsPage = (): JSX.Element | null => {
       <Modal show={isModal}>
         <ModalWindow
           handleModal={handleModalClose}
-          boards={getBoards}
           updateState={updateState}
         />
       </Modal>
