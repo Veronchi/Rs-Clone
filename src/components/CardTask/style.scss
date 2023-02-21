@@ -21,57 +21,6 @@
     margin-right: 5px;
     z-index: 50;
   }
-
-  .task-item__btn.dropdown-toggle {
-    padding: 0%;
-    margin: 0%;
-    border: 0;
-    height: 14px;
-    right: -7px;
-    width: 25px;
-    height: 20px;
-    background: $hovered-gray;
-    transition: background 0.15s ease-in-out;
-
-    &:hover {
-      border: 0.5px solid grey;
-    }
-
-    &:active {
-      background: $active-gray;
-    }
-
-  }
-
-  .dropdown-toggle::after,
-  .dropdown-toggle::before {
-    display: none !important; 
-  }
-
-  &__link.dropdown-item {
-    display: inline;
-    margin: 7px;
-    padding: 0%;
-  }
-  
-  &__btn {
-    position:absolute;
-    right: 1px;
-    bottom: -5px;
-    border: 1px solid black;
-    background-color: $hovered-gray;
-    margin: 0;
-    padding: 0;
-    border-radius: 20px;
-  }
-
-  &:hover {
-    background-color: $hovered-gray;
-  }
-
-  &:active {
-    background-color: $active-gray;
-  }
 }
 
 .task-input.form-control {
@@ -93,4 +42,54 @@
 .task-header {
   height: 26px;
   background-size: contain;
+  position: relative;
+
+  &__btn.btn {
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+
+    &:hover {
+      background-color: transparent !important;
+    }
+    &:active {
+      background-color: transparent !important;
+    }
+  }
+
+  &__btn.dropdown-toggle {
+    padding: 0%;
+    margin: 0%;
+    border: 0;
+    height: 14px;
+    width: 25px;
+    height: 20px;
+    background-color: transparent;
+
+    &:hover {
+      border: 0.5px solid grey !important;
+    }
+
+    &:active {
+      background-color: transparent !important;
+    }
+
+    &:focus {
+      background-color: transparent !important;
+    }
+  }
+
+  .dropdown-toggle::after,
+  .dropdown-toggle::before {
+    display: none !important;
+  }
+
+  &__link.dropdown-item {
+    display: inline;
+    margin: 7px;
+    padding: 0%;
+  }
 }
