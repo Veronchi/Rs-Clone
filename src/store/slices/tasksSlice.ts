@@ -16,13 +16,10 @@ const tasksSlice = createSlice({
       return { ...state, ...obj };
     },
     updateTask: (state, action: PayloadAction<{ task: ITask, columnId: string }>) => {
-      // console.log(current(state));
-      // console.log(action.payload);
       const curState = current(state);
       const { columnId, task } = action.payload;
       const res = curState[columnId].map((item) => {
         if (item.id === task.id) {
-          console.log(task);
           return task;
         }
         return item;
