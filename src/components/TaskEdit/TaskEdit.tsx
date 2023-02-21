@@ -9,32 +9,19 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { ModalConfirm } from './ModalConfirm';
+import { useDispatch } from 'react-redux';
 import { IModalEdit } from '../../interfaces';
 import { update } from '../../http/rowAPI';
-import './TaskEdit.scss';
+import { updateTask } from '../../store/slices/tasksSlice';
+import './style.scss';
 
-// export interface IRow {
-//   id: number;
-//   text: string;
-//   cover: string;
-//   description: string;
-//   ColumnId: string;
-// }
-
-// export interface IColumnId {
-//   columnID: string
-// }
-
-export const TaskEdit = ({ show, handleModal, task }: IModalEdit): JSX.Element => {
+export const TaskEdit = ({ handleModal, task }: IModalEdit): JSX.Element => {
   const [title, setTitle] = useState<string>(task.text);
   const [isNameBlock, setName] = useState<boolean>(true);
-  const [cover, setCover] = useState<string | undefined>(task.cover ? task.cover : '#ffffff');
-  const [error, setError] = useState<string>('');
+  const [cover, setCover] = useState<string | undefined>(task.cover || '#ffffff');
   const [isValid, setIsValid] = useState<boolean>(true);
 
-  const [isConfirmModal, setIsConfirmModal] = useState<boolean>(false);
-  const handleConfirmClose = (): void => { setIsConfirmModal(false); };
+  const dispatch = useDispatch();
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
@@ -53,24 +40,24 @@ export const TaskEdit = ({ show, handleModal, task }: IModalEdit): JSX.Element =
   const handleCopy = (): void => {
   };
 
-  const handleDelete = (): void => {
-    setIsConfirmModal(true);
-  };
-
-  const handleSubmit = (ev: FormEvent): void => {
-    ev.preventDefault();
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
+    e.preventDefault();
     if (title.trim().length === 0) {
       setIsValid(false);
-      setError('Please enter valid task.');
     } else {
-      console.log(task.id, title);
-      update(task.id, title)
-        .then(() => handleModal(ev));
+      const isUpdate = await update(task.id, title, cover as string);
+      if (isUpdate) {
+        dispatch(updateTask({
+          task: { ...task, text: title, cover },
+          columnId: task.ColumnId,
+        }));
+      }
+      handleModal(e);
     }
   };
 
   return (
-    <Modal show={show} size="lg">
+    <>
       <div
         className="task-edit__cover"
         style={{ backgroundColor: cover }}
@@ -122,11 +109,12 @@ export const TaskEdit = ({ show, handleModal, task }: IModalEdit): JSX.Element =
                         onFocus={():void => setName(false)}
                         onBlur={(): void => setName(true)}
                         value={title}
-                        placeholder={error}
+                        placeholder="Please enter valid task тфьу"
                         readOnly={isNameBlock}
                         style={{ fontSize: '1.5rem' }}
                       />
                     )}
+                  {!isValid ? <span className="validation-text">Enter task name</span> : null}
                 </Form.Group>
               </Form>
             </Col>
@@ -136,7 +124,7 @@ export const TaskEdit = ({ show, handleModal, task }: IModalEdit): JSX.Element =
                 <Button
                   size="sm"
                   variant="secondary"
-                  onClick={handleConfirmClose}
+                  // onClick={handleConfirmClose}
                   className="task-edit__buttons"
                 >
                   Move
@@ -152,7 +140,7 @@ export const TaskEdit = ({ show, handleModal, task }: IModalEdit): JSX.Element =
                 <Button
                   size="sm"
                   variant="secondary"
-                  onClick={handleDelete}
+                  // onClick={handleDelete}
                   className="task-edit__buttons"
                 >
                   Delete
@@ -170,14 +158,8 @@ export const TaskEdit = ({ show, handleModal, task }: IModalEdit): JSX.Element =
           Save Task
         </Button>
       </Modal.Footer>
-      {isConfirmModal ? (
-        <ModalConfirm
-          show={isConfirmModal}
-          handleModal={handleConfirmClose}
-          handleParentModal={handleModal}
-          task={task}
-        />
-      ) : null}
-    </Modal>
+
+    </>
+
   );
 };

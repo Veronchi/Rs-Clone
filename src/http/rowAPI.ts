@@ -31,11 +31,13 @@ const getTasksByBoardId = async (id: string): Promise<Array<ITask>> => {
   return data;
 };
 
-const update = async (id: string, title: string): Promise<void> => {
-  await $authHost.patch('/row', {
+const update = async (id: string, text: string, cover: string): Promise<boolean> => {
+  const { data } = await $authHost.patch('/row', {
     id,
-    title,
+    text,
+    cover,
   });
+  return !!data;
 };
 
 const remove = async (id: string): Promise<boolean> => {
