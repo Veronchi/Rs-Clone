@@ -38,12 +38,13 @@ const update = async (id: string, title: string): Promise<void> => {
   });
 };
 
-const remove = async (id: string): Promise<void> => {
-  await $authHost.delete('/row', {
+const remove = async (id: string): Promise<boolean> => {
+  const { data } = await $authHost.delete('/row', {
     params: {
       id,
     },
   });
+  return !!data;
 };
 
 export {

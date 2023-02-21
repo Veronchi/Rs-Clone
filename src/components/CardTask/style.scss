@@ -1,4 +1,4 @@
-@import '../../styles/palette.scss';
+@import "../../styles/palette.scss";
 
 .task-item {
   position: relative;
@@ -35,29 +35,29 @@
     background: $hovered-gray;
     transition: background 0.15s ease-in-out;
 
-    &:hover {
-      border: 0.5px solid grey;
-    }
-
     &:active {
       background: $active-gray;
     }
-
   }
 
   .dropdown-toggle::after,
   .dropdown-toggle::before {
-    display: none !important; 
+    display: none !important;
   }
 
   &__link.dropdown-item {
     display: inline;
     margin: 7px;
     padding: 0%;
+
+    &:hover {
+      background-color: transparent;
+      text-shadow: 0px 1px 2px #ccc;
+    }
   }
-  
+
   &__btn {
-    position:absolute;
+    position: absolute;
     right: 1px;
     bottom: -5px;
     border: 1px solid black;
@@ -65,10 +65,6 @@
     margin: 0;
     padding: 0;
     border-radius: 20px;
-  }
-
-  &:hover {
-    background-color: $hovered-gray;
   }
 
   &:active {
