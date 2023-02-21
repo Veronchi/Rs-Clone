@@ -40,6 +40,7 @@ export interface ITask {
   text: string;
   cover?: string;
   ColumnId: string;
+  BoardId: string;
 }
 
 export type ITaskMap = { [n: string]: Array<ITask> };
@@ -59,15 +60,32 @@ export interface ITaskProps {
   task: ITask;
 }
 
+export type TemplateSize = 'small' | 'medium' | 'big';
+
+export const templates = {
+  small: {
+    title: 'Small board',
+    background: '#009900',
+    cards: ['To do', 'Done'],
+  },
+  medium: {
+    title: 'Medium board',
+    background: '#000099',
+    cards: ['To do', 'In process', 'Done'],
+  },
+  big: {
+    title: 'Big board',
+    background: '#990000',
+    cards: ['To do', 'In process', 'Review', 'Done'],
+  },
+};
+
 export interface IParentModal {
-  show: boolean;
+  deleteTask?: () => Promise<void>;
   handleModal: (e: MouseEvent | FormEvent) => void;
-  handleParentModal: (e: MouseEvent | FormEvent) => void;
-  task: ITask;
 }
 
 export interface IModalEdit {
-  show: boolean;
   handleModal: (e: MouseEvent | FormEvent) => void;
   task: ITask;
 }
