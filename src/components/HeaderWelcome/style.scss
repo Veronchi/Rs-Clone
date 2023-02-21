@@ -1,0 +1,9 @@
+@import '../../styles/palette.scss';
+.header__welcome {
+  width: 100%;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(0deg, #e2efff, #fcfdff 0%);
+}

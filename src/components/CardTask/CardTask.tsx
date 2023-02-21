@@ -36,27 +36,30 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
   };
 
   return (
-    <div className="task-item" onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
-      {taskTitle}
-      {isHover
-        ? (
-          <Dropdown>
-            <Dropdown.Toggle className="task-item__btn">
-              <i className="bx bx-dots-horizontal-rounded bx-xs" />
-            </Dropdown.Toggle>
-            <Dropdown.Menu className="task-item__menu">
-              <Dropdown.Item className="task-item__link" onClick={handleClick}>Edit task</Dropdown.Item>
-              <Dropdown.Item className="task-item__link" onClick={(): void => deleteTask(task.id)}> Delete task</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        )
-        : null}
-      {isActive
-        ? <input onChange={handleTitle} onKeyDown={handleKeyDown} placeholder={taskTitle} className="task-item__input" type="text" />
-        : null }
-      {isModalEdit
-        ? <TaskEdit show={isModalEdit} handleModal={handleModalEditClose} task={task} /> : null}
-    </div>
+    <li className="tasks__item" draggable onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
+      <div className="task-header" style={{ backgroundColor: '#ccccff' }} />
+      <div className="task-item">
+        {taskTitle}
+        {isHover
+          ? (
+            <Dropdown>
+              <Dropdown.Toggle className="task-item__btn">
+                <i className="bx bx-dots-horizontal-rounded bx-xs" />
+              </Dropdown.Toggle>
+              <Dropdown.Menu className="task-item__menu">
+                <Dropdown.Item className="task-item__link" onClick={handleClick}>Edit task</Dropdown.Item>
+                <Dropdown.Item className="task-item__link" onClick={(): void => deleteTask(task.id)}> Delete task</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          )
+          : null}
+        {isActive
+          ? <input onChange={handleTitle} onKeyDown={handleKeyDown} placeholder={taskTitle} className="task-item__input" type="text" />
+          : null }
+        {isModalEdit
+          ? <TaskEdit show={isModalEdit} handleModal={handleModalEditClose} task={task} /> : null}
+      </div>
+    </li>
   );
 };
 

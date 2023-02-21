@@ -8,13 +8,11 @@
   background-color: #fff;
   padding: 0.7rem 0.6rem;
   color: #4d4d4d;
-  border: 0.1rem solid #ccc;
-  border-bottom: 0.2rem solid #ccc;
-  border-radius: 0.3rem;
-  margin-bottom: 0.6rem;
   word-wrap: break-word;
   cursor: pointer;
   list-style: none;
+  border: 0.1rem solid #ccc;
+  border-top: 0;
 
   &__input {
     position: absolute;
@@ -86,4 +84,13 @@
   &.invalid {
     border: 1px solid red;
   }
+}
+
+.tasks__item {
+  margin-bottom: 0.6rem;
+}
+
+.task-header {
+  height: 22px;
+  background-size: contain;
 }

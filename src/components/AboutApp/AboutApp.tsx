@@ -3,7 +3,7 @@ import './style.scss';
 
 const AboutApp = (): JSX.Element => (
   <div className="welcome__app">
-    <h2 className="welcome__app-title">About Trelolo App</h2>
+    <h2 className="welcome__app-title">About Trello clone</h2>
     <div className="welcome__app-feature">
       <h2 className="welcome__app-second-title">Workflows for projects of any size</h2>
     </div>
