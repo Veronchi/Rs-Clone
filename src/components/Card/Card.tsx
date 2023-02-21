@@ -50,6 +50,7 @@ const Card: FC<ICardProps> = ({ card, editCard }): JSX.Element => {
       } else {
         setIsNewTask(false);
         setIsSentTask(false);
+        setNewTask('');
         addTask(newTask, card.id, card.BoardId);
       }
     }

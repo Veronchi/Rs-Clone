@@ -40,6 +40,7 @@ export interface ITask {
   text: string;
   cover?: string;
   ColumnId: string;
+  BoardId: string;
 }
 
 export type ITaskMap = { [n: string]: Array<ITask> };
@@ -60,14 +61,11 @@ export interface ITaskProps {
 }
 
 export interface IParentModal {
-  show: boolean;
+  deleteTask?: () => Promise<void>;
   handleModal: (e: MouseEvent | FormEvent) => void;
-  handleParentModal: (e: MouseEvent | FormEvent) => void;
-  task: ITask;
 }
 
 export interface IModalEdit {
-  show: boolean;
   handleModal: (e: MouseEvent | FormEvent) => void;
   task: ITask;
 }

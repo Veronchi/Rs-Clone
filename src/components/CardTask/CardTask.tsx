@@ -1,16 +1,20 @@
-import React, {
-  ChangeEvent, FC, KeyboardEvent, useState,
-} from 'react';
-import { Dropdown } from 'react-bootstrap';
+import React, { FC, useState } from 'react';
+import { Dropdown, Modal } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { remove } from '../../http/rowAPI';
 import { ITaskProps } from '../../interfaces';
+import { removeTask } from '../../store/slices/tasksSlice';
+import { ConfirmModal } from '../TaskEdit/ConfirmModal';
 import { TaskEdit } from '../TaskEdit/TaskEdit';
 import './style.scss';
 
 const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
-  const [taskTitle, setTaskTitle] = useState<string>(task.text);
+  const dispatch = useDispatch();
+
   const [isHover, setIsHover] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isModal, setIsModal] = useState<boolean>(false);
+  const [isRemove, setIsRemove] = useState<boolean>(false);
   const handleModalClose = (): void => setIsModal(false);
 
   const mouseEnter = ():void => setIsHover(true);
@@ -21,23 +25,29 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
     setIsModal(true);
   };
 
-  const handleKeyDown = (ev: KeyboardEvent<HTMLInputElement>): void => {
-    if (ev.key === 'Enter') {
-      setIsActive(!isActive);
+  const handleModel = (): void => {
+    setIsRemove(false);
+    setIsModal(false);
+  };
+
+  const hanadleDelete = (): void => {
+    setIsRemove(true);
+  };
+
+  const deleteTask = async (): Promise<void> => {
+    const isDelete = await remove(task.id);
+    if (isDelete) {
+      dispatch(removeTask({
+        taskId: task.id,
+        columnId: task.ColumnId,
+      }));
     }
-  };
-
-  const handleTitle = (ev: ChangeEvent<HTMLInputElement>): void => {
-    setTaskTitle(ev.target.value);
-  };
-
-  const deleteTask = (id: string): void => {
-    console.log(`Удаляем таск с id - ${id}`);
+    setIsRemove(false);
   };
 
   return (
     <div className="task-item" onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
-      {taskTitle}
+      {task.text}
       {isHover
         ? (
           <Dropdown>
@@ -46,17 +56,27 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
             </Dropdown.Toggle>
             <Dropdown.Menu className="task-item__menu">
               <Dropdown.Item className="task-item__link" onClick={handleClick}>Edit task</Dropdown.Item>
-              <Dropdown.Item className="task-item__link" onClick={(): void => deleteTask(task.id)}> Delete task</Dropdown.Item>
+              <Dropdown.Item className="task-item__link" onClick={hanadleDelete}> Delete task</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         )
         : null}
-      {isActive
-        ? <input onChange={handleTitle} onKeyDown={handleKeyDown} placeholder={taskTitle} className="task-item__input" type="text" />
-        : null }
       {isModal
-        ? <TaskEdit show={isModal} handleModal={handleModalClose} task={task} /> : null}
+        ? (
+          <Modal show={isModal} size="lg">
+            <TaskEdit handleModal={handleModalClose} task={task} />
+          </Modal>
+        )
+        : null}
+
+      {isRemove
+        ? (
+          <Modal show={isRemove} animation={false} centered>
+            <ConfirmModal handleModal={handleModel} deleteTask={deleteTask} />
+          </Modal>
+        ) : null}
     </div>
+
   );
 };
 

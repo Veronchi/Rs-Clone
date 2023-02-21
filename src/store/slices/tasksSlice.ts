@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
 import { ITask, ITaskMap } from '../../interfaces';
 
 const initialState: ITaskMap = {};
@@ -15,8 +15,25 @@ const tasksSlice = createSlice({
       });
       return { ...state, ...obj };
     },
+    updateTask: (state, action: PayloadAction<{ task: ITask, columnId: string }>) => {
+      const curState = current(state);
+      const { columnId, task } = action.payload;
+      const res = curState[columnId].map((item) => {
+        if (item.id === task.id) {
+          return task;
+        }
+        return item;
+      });
+      return { ...curState, [columnId]: res };
+    },
+    removeTask: (state, action: PayloadAction<{ taskId: string, columnId: string }>) => {
+      const curState = current(state);
+      const { columnId, taskId } = action.payload;
+      const res = curState[columnId].filter((item) => item.id !== taskId);
+      return { ...curState, [columnId]: res };
+    },
   },
 });
 
-export const { setAllTasks } = tasksSlice.actions;
+export const { setAllTasks, updateTask, removeTask } = tasksSlice.actions;
 export default tasksSlice.reducer;
