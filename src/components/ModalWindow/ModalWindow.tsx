@@ -70,7 +70,7 @@ export const ModalWindow: FC<IModal> = ({
               value={boardTitle}
               style={{ borderColor: color }}
             />
-            {!isValid ? <span className="validation-text">Enter some text</span> : null}
+            {!isValid ? <span className="validation-text">Enter board name</span> : null}
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>board background</Form.Label>

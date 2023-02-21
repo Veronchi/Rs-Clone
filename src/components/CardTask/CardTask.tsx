@@ -30,16 +30,6 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
     setIsModal(false);
   };
 
-  // const handleKeyDown = (ev: KeyboardEvent<HTMLInputElement>): void => {
-  //   if (ev.key === 'Enter') {
-  //     setIsActive(!isActive);
-  //   }
-  // };
-
-  // const handleTitle = (ev: ChangeEvent<HTMLInputElement>): void => {
-  //   setTaskTitle(ev.target.value);
-  // };
-
   const hanadleDelete = (): void => {
     setIsRemove(true);
   };

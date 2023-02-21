@@ -66,7 +66,7 @@ const CreateCardModal: FC<BoardPageModal> = ({
               value={cardTitle}
               onChange={handleTitle}
             />
-            {!isValid ? <span className="validation-text">Enter some text</span> : null}
+            {!isValid ? <span className="validation-text">Enter card name</span> : null}
           </Form.Group>
         </Form>
       </Modal.Body>
