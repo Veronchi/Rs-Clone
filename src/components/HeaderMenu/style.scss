@@ -28,17 +28,11 @@
   position: relative;
 
   &__form {
-    position: absolute;
     padding: 20px 0;
-    width: 250px;
     border-radius: 10px;
-    border: 1px solid $border-gray;
-    background-color: $light-gray;
     font-size: 1.2rem;
     color: $dark-text;
-    top: 50px;
-    left: 0;
-    z-index: 10;
+    background-color: $light-gray;
   }
 
   &__title {
@@ -72,4 +66,9 @@
   &__submit {
     width: 100%;
   }
+}
+
+.template__modal > .modal-dialog {
+  width: 300px;
+  top: 30px;
 }
