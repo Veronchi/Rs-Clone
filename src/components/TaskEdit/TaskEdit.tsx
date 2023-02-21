@@ -20,6 +20,7 @@ export const TaskEdit = ({ handleModal, task }: IModalEdit): JSX.Element => {
   const [isNameBlock, setName] = useState<boolean>(true);
   const [cover, setCover] = useState<string | undefined>(task.cover || '#ffffff');
   const [isValid, setIsValid] = useState<boolean>(true);
+  const [copyText, setCopyText] = useState<string>('Copy');
 
   const dispatch = useDispatch();
 
@@ -34,10 +35,14 @@ export const TaskEdit = ({ handleModal, task }: IModalEdit): JSX.Element => {
     setCover(value);
   };
 
-  // const handleMove = (): void => {
-  // };
-
   const handleCopy = (): void => {
+    navigator.clipboard.writeText(title);
+
+    setCopyText('Сopied!');
+
+    setTimeout(() => {
+      setCopyText('Copy');
+    }, 1000);
   };
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
@@ -124,26 +129,10 @@ export const TaskEdit = ({ handleModal, task }: IModalEdit): JSX.Element => {
                 <Button
                   size="sm"
                   variant="secondary"
-                  // onClick={handleConfirmClose}
-                  className="task-edit__buttons"
-                >
-                  Move
-                </Button>
-                <Button
-                  size="sm"
-                  variant="secondary"
                   onClick={handleCopy}
                   className="task-edit__buttons"
                 >
-                  Copy
-                </Button>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  // onClick={handleDelete}
-                  className="task-edit__buttons"
-                >
-                  Delete
+                  {copyText}
                 </Button>
               </div>
             </Col>
