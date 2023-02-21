@@ -3,13 +3,22 @@
     width: 1400px;
     max-width: 98%;
     margin: 2% auto;
-    box-shadow: 0px 0px 8px 1px black;
-    background: #fafbfc;
+    box-shadow: 0px 0px 8px 1px #ccc;
+    background: transparent;
     border-radius: 10px;
 
     &-title {
       font-size: 3.3rem;
       margin: 40px 90px;
+      @media screen and (max-width: 940px) {
+        font-size: 2.7rem;
+        margin: 40px 50px;
+      }
+      @media screen and (max-width: 450px) {
+        font-size: 2.2rem;
+        margin: 35px 40px;
+        text-align: center;
+      }
     }
   }
 
@@ -19,6 +28,7 @@
     align-items: center;
     gap: 50px;
     margin-bottom: 5%;
+    flex-wrap: wrap;
 
     &-info {
       width: 320px;
@@ -26,7 +36,7 @@
       padding: 10px;
       gap: 35px;
       background-color: #fafbfc;
-      box-shadow: 0px 0px 8px 1px black;
+      box-shadow: 0px 0px 8px 1px #ccc;
       background: #fafbfc;
       border-radius: 10px;
       display: flex;
@@ -34,6 +44,10 @@
       justify-content: center;
       align-items: center;
       margin-top: 5%;
+
+      @media screen and (max-width: 940px) {
+        width: 100%;
+      }
     }
 
     &-name {

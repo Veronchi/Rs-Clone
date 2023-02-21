@@ -80,9 +80,7 @@ const Card: FC<ICardProps> = ({ card, editCard }): JSX.Element => {
       <ul className="tasks">
         {
           tasks[card.id]?.map((task) => (
-            <li className="tasks__item" key={task.id}>
-              <CardTask task={task} />
-            </li>
+            <CardTask task={task} key={task.id} />
           ))
         }
       </ul>

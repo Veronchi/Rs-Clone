@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AboutApp from '../../components/AboutApp/AboutApp';
 import AboutDevelopers from '../../components/AboutDevelopers/AboutDevelopers';
 import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
+import HeaderWelcome from '../../components/HeaderWelcome/HeaderWelcome';
 
 import './style.scss';
 
@@ -10,13 +10,13 @@ const WelcomePage = (): JSX.Element => {
   const [isAboutDevelopers, setIsAboutDevelopers] = useState<boolean>(false);
   return (
     <>
-      <Header />
+      <HeaderWelcome />
       <section className="welcome">
         <div className="welcome__content">
           <div className="welcome__info-block">
-            <h1 className="welcome__title">Trelolo app</h1>
+            <h1 className="welcome__title">Trello clone</h1>
             <p className="welcome__small-text">
-              Trelolo is an application that will help you and your team
+              Trello clone - an application that will help you and your team
               organize your workflow, achieving your goals!
             </p>
             <p className="welcome__small-text">
@@ -27,7 +27,7 @@ const WelcomePage = (): JSX.Element => {
               comprehensive overview of who is doing what and what needs to be done.
             </p>
           </div>
-          <i className="welcome__image" />
+          <img alt="" className="welcome__image" />
         </div>
         <div className="welcome__links">
           <button
