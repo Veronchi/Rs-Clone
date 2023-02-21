@@ -12,6 +12,20 @@ const HeaderWelcome = (): JSX.Element => (
         />
         <h2 className="header__title">Trello Clone</h2>
       </div>
+      <div className="header__buttons">
+        <button
+          className="header__btn"
+          type="button"
+        >
+          Sign In
+        </button>
+        <button
+          className="header__btn"
+          type="button"
+        >
+          Sign Up
+        </button>
+      </div>
     </nav>
   </header>
 );
