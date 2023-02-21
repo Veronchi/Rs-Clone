@@ -46,37 +46,6 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
   };
 
   return (
-    <div className="task-item" onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
-      {task.text}
-      {isHover
-        ? (
-          <Dropdown>
-            <Dropdown.Toggle className="task-item__btn">
-              <i className="bx bx-dots-horizontal-rounded bx-xs" />
-            </Dropdown.Toggle>
-            <Dropdown.Menu className="task-item__menu">
-              <Dropdown.Item className="task-item__link" onClick={handleClick}>Edit task</Dropdown.Item>
-              <Dropdown.Item className="task-item__link" onClick={hanadleDelete}> Delete task</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        )
-        : null}
-      {isModal
-        ? (
-          <Modal show={isModal} size="lg">
-            <TaskEdit handleModal={handleModalClose} task={task} />
-          </Modal>
-        )
-        : null}
-
-      {isRemove
-        ? (
-          <Modal show={isRemove} animation={false} centered>
-            <ConfirmModal handleModal={handleModel} deleteTask={deleteTask} />
-          </Modal>
-        ) : null}
-    </div>
-
     <li className="tasks__item" draggable onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
       <div className="task-header" style={{ backgroundColor: '#ccccff' }}>
         {isHover
@@ -87,20 +56,21 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
               </Dropdown.Toggle>
               <Dropdown.Menu className="task-header__menu">
                 <Dropdown.Item className="task-header__link" onClick={handleClick}>Edit task</Dropdown.Item>
-                <Dropdown.Item className="task-header__link" onClick={(): void => deleteTask(task.id)}> Delete task</Dropdown.Item>
+                <Dropdown.Item className="task-header__link" onClick={hanadleDelete}> Delete task</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           )
           : null}
       </div>
       <div className="task-item">
-        {taskTitle}
-        {isActive
-          ? <input onChange={handleTitle} onKeyDown={handleKeyDown} placeholder={taskTitle} className="task-item__input" type="text" />
-          : null }
-        {isModal
-          ? <TaskEdit show={isModal} handleModal={handleModalClose} task={task} /> : null}
+        {task.text}
       </div>
+      <Modal show={isModal} size="lg">
+        <TaskEdit handleModal={handleModalClose} task={task} />
+      </Modal>
+      <Modal show={isRemove} animation={false} centered>
+        <ConfirmModal handleModal={handleModel} deleteTask={deleteTask} />
+      </Modal>
     </li>
   );
 };

@@ -39,7 +39,6 @@
       color: cornflowerblue;
       margin: 0 auto;
       font-size: 2.2rem;
-      text-shadow: 1px 1px 1px black;
       @media screen and (max-width: 840px) {
         font-size: 1.8rem;
         margin: 0 auto 4% auto;
@@ -62,13 +61,11 @@
         font-size: 2rem;
         margin-bottom: 3%;
         color: cadetblue;
-        text-shadow: 1px 1px 1px black;
       }
 
       .feature-description {
         font-size: 1.2rem;
         text-align: center;
-        text-shadow: 1px 1px 1px black;
         @media screen and (max-width: 1400px) {
           font-size: 0.9rem;
         }

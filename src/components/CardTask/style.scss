@@ -1,26 +1,22 @@
-@import "../../styles/palette.scss";
+@import '../../styles/palette.scss';
 
-.task-item {
+.tasks__item {
   position: relative;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.3;
   background-color: #fff;
-  padding: 0.7rem 0.6rem;
   color: #4d4d4d;
   word-wrap: break-word;
   cursor: pointer;
   list-style: none;
   border: 0.1rem solid #ccc;
   border-top: 0;
+  margin-bottom: 0.6rem;
+}
 
-  &__input {
-    position: absolute;
-    left: 5px;
-    bottom: 5px;
-    margin-right: 5px;
-    z-index: 50;
-  }
+.task-item {
+  padding: 0.7rem 0.6rem;
 }
 
 .task-input.form-control {
@@ -33,10 +29,6 @@
   &.invalid {
     border: 1px solid red;
   }
-}
-
-.tasks__item {
-  margin-bottom: 0.6rem;
 }
 
 .task-header {
