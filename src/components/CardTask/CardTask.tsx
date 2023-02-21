@@ -10,15 +10,15 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
   const [taskTitle, setTaskTitle] = useState<string>(task.text);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [isModalEdit, setIsModalEdit] = useState<boolean>(false);
-  const handleModalEditClose = (): void => setIsModalEdit(false);
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const handleModalClose = (): void => setIsModal(false);
 
   const mouseEnter = ():void => setIsHover(true);
   const mouseLeave = ():void => setIsHover(false);
 
   const handleClick = (): void => {
     setIsActive(!isActive);
-    setIsModalEdit(true);
+    setIsModal(true);
   };
 
   const handleKeyDown = (ev: KeyboardEvent<HTMLInputElement>): void => {

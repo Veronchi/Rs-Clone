@@ -2,13 +2,13 @@ import { FormEvent, MouseEvent } from 'react';
 
 export interface IUpdateState {
   isUpdate: boolean,
-  boardId: string,
-  boardTitle: string,
+  id: string,
+  title: string,
+  background?: string,
 }
 
 export interface IModal {
   handleModal: (e: MouseEvent | FormEvent) => void;
-  boards: () => void;
   updateState: IUpdateState;
 }
 
@@ -18,15 +18,10 @@ export interface ICard {
   BoardId: string;
 }
 
-export interface CardProps {
-  card: ICard;
-}
-
 export interface BoardPageModal {
-  show: boolean;
   handleModal: (e: MouseEvent | FormEvent) => void;
   BoardId: string;
-  setCards: () => void;
+  updateState: IUpdateState
 }
 
 export interface IUser {
@@ -47,15 +42,17 @@ export interface ITask {
   ColumnId: string;
 }
 
+export type ITaskMap = { [n: string]: Array<ITask> };
 export interface IState {
   user: IUser;
   boards: Array<IBoard>;
   cards: Array<ICard>;
-  tasks: Array<ITask>;
+  tasks: ITaskMap;
 }
 
 export interface ICardProps {
   card: ICard;
+  editCard: (id: string) => void;
 }
 
 export interface ITaskProps {
