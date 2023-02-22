@@ -15,6 +15,8 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isRemove, setIsRemove] = useState<boolean>(false);
+  const cover: string | undefined = task.cover || '';
+
   const handleModalClose = (): void => setIsModal(false);
 
   const mouseEnter = ():void => setIsHover(true);
@@ -47,7 +49,7 @@ const CardTask: FC<ITaskProps> = ({ task }): JSX.Element => {
 
   return (
     <li className="tasks__item" draggable onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
-      <div className="task-header" style={{ backgroundColor: '#ccccff' }}>
+      <div className="task-header" style={{ backgroundColor: cover }}>
         {isHover
           ? (
             <Dropdown>

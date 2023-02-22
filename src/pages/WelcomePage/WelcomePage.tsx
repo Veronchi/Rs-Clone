@@ -3,13 +3,14 @@ import AboutApp from '../../components/AboutApp/AboutApp';
 import AboutDevelopers from '../../components/AboutDevelopers/AboutDevelopers';
 import Footer from '../../components/Footer/Footer';
 import HeaderWelcome from '../../components/HeaderWelcome/HeaderWelcome';
+import ourlogo from '../../assets/img/ourlogo.png';
 
 import './style.scss';
 
 const WelcomePage = (): JSX.Element => {
   const [isAboutDevelopers, setIsAboutDevelopers] = useState<boolean>(false);
   return (
-    <>
+    <div className="page-container">
       <HeaderWelcome />
       <section className="welcome">
         <div className="welcome__content">
@@ -27,7 +28,7 @@ const WelcomePage = (): JSX.Element => {
               comprehensive overview of who is doing what and what needs to be done.
             </p>
           </div>
-          <img alt="" className="welcome__image" />
+          <img src={ourlogo} alt="our_logo" className="welcome__image" />
         </div>
         <div className="welcome__links">
           <button
@@ -48,7 +49,7 @@ const WelcomePage = (): JSX.Element => {
         {isAboutDevelopers ? <AboutDevelopers /> : <AboutApp />}
       </section>
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-@import '../../styles/palette.scss';
+@import "../../styles/palette.scss";
 
 .tasks__item {
   position: relative;
@@ -13,6 +13,7 @@
   border: 0.1rem solid #ccc;
   border-top: 0;
   margin-bottom: 0.6rem;
+  border-radius: 10px;
 }
 
 .task-item {
@@ -35,6 +36,8 @@
   height: 26px;
   background-size: contain;
   position: relative;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 
   &__btn.btn {
     position: absolute;

@@ -1,11 +1,10 @@
-@import '../../styles/palette.scss';
+@import "../../styles/palette.scss";
 .header__welcome {
   width: 100%;
   padding: 6px 12px;
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: linear-gradient(0deg, #e2efff, #fcfdff 0%);
 }
 
 .header__buttons {
@@ -19,16 +18,17 @@
 .header__btn {
   display: block;
   font-size: 1.2rem;
-  background: linear-gradient(0deg, #e2efff, #fcfdff 0%);
-  color: $dark;
-  border-radius: 0.2rem;
-  box-shadow: 1px 1px 3px 1px #ccc;
+  line-height: 35px;
+  background-color: transparent;
+  color: $dark-text;
+  border-radius: 50px;
   border: none;
   transition: background-color 150ms;
   padding: 0 15px;
 
   &:hover {
-    background: linear-gradient(0deg, #2d8bff12 100%, #d1d3d6 24%);
+    background-color: #62ad9b;
+    color: #fff;
   }
 
   &:active {

@@ -4,7 +4,6 @@
   margin: 0 auto;
   padding: 6px 12px;
   width: 100%;
-  background: linear-gradient(0deg, #e2efff 100%, #fcfdff 74%);
   font-size: 1.5rem;
 
   &__container {
@@ -16,14 +15,27 @@
     width: 90%;
   }
 
-  &__left-img {
-    width: 50px;
-    transition: 0.4s;
-    @media screen and (max-width: 600px) {
-      width: 40px;
+  &__left-container {
+    display: flex;
+    gap: 40px;
+    transition: color 0.10s ease-in-out;
+    a {
+      color: $dark-text;
+      text-decoration: none;
+
+      &:hover {
+        color: #62ad9b;
+      }
+
+      &:active {
+        color: darken(#62ad9b, 10%)
+      }
     }
-    &:hover {
-      transform: translateY(-10px);
+
+    @media screen and (max-width: 740px) {
+      flex-direction: column;
+      font-size: 1.1rem;
+      gap: 0;
     }
   }
 
