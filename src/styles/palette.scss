@@ -20,5 +20,10 @@ $dark-text: #172b4d; //тёмно-синий текст(менюшка)
 $gray-text: #5e6c84; //серый текст(таблица, календарь)
 $disabled-text: #a5adba;
 
-$welcome-bg: rgb(226,239,255); // бекграунд приветственной страницы
-$welcome-bg-gradient: linear-gradient(0deg, rgba(226,239,255,1) 2%, rgba(252,253,255,1) 74%); // ее градиентик
+$welcome-bg: rgb(226, 239, 255); // бекграунд приветственной страницы
+$welcome-bg-gradient: linear-gradient(
+  0deg,
+  rgba(255, 255, 255, 1) 85%,
+  rgba(98, 173, 155, 1) 110%
+); // ее градиентик
+$error-gradient: linear-gradient(0deg, #62ad9b -20%, white 30%);
