@@ -1,4 +1,6 @@
 @import "../../styles/palette.scss";
+@import "../../styles/buttons";
+
 .header__welcome {
   width: 100%;
   padding: 6px 12px;
@@ -16,15 +18,13 @@
 }
 
 .header__btn {
-  display: block;
+  @include main-btn;
   font-size: 1.2rem;
-  line-height: 35px;
+  line-height: 40px;
+  box-shadow: none;
   background-color: transparent;
   color: $dark-text;
-  border-radius: 50px;
-  border: none;
   transition: background-color 150ms;
-  padding: 0 15px;
 
   &:hover {
     background-color: #62ad9b;
@@ -32,7 +32,7 @@
   }
 
   &:active {
-    box-shadow: 1px 1px 5px 1px #ccc;
+    background: lighten($color: #62ad9b, $amount: 10%);
   }
 
   @media screen and (max-width: 410px) {

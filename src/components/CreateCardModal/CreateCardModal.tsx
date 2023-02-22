@@ -31,8 +31,8 @@ const CreateCardModal: FC<BoardPageModal> = ({
       const data = await getAllCards(BoardId);
       dispatch(updateCards(data));
 
-      const taska = await getAllRows(id);
-      dispatch(setAllTasks(taska));
+      const task = await getAllRows(id);
+      dispatch(setAllTasks(task));
     } else {
       const data = await createCard(cardTitle, BoardId);
       dispatch(setAllCards([data]));
@@ -74,7 +74,7 @@ const CreateCardModal: FC<BoardPageModal> = ({
         <Button variant="secondary" onClick={handleModal}>
           Close
         </Button>
-        <Button type="button" variant="success" onClick={handleSubmit}>
+        <Button type="button" className="success-btn" onClick={handleSubmit}>
           Save Changes
         </Button>
       </Modal.Footer>

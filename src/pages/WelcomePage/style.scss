@@ -1,4 +1,5 @@
 @import "../../styles/palette.scss";
+@import "../../styles/buttons";
 
 .page-container {
   background: $welcome-bg-gradient;
@@ -120,30 +121,6 @@
   }
 
   &__buttons {
-    border-radius: 50px;
-    font-size: 16px;
-    cursor: pointer;
-    background: #62ad9b;
-    color: #fff;
-    border: none;
-    box-shadow: 0 4px 8px 0 #ccc;
-    transition: 0.15s ease-in-out;
-    text-decoration: none;
-    width: 140px;
-    height: 60px;
-    margin: 0 auto;
-
-    &:hover {
-      background: darken($color: #62ad9b, $amount: 10%);
-    }
-
-    &:active {
-      background: lighten($color: #62ad9b, $amount: 10%);
-    }
-
-    @media screen and (max-width: 520px) {
-      font-size: 14px;
-      width: 110px;
-    }
+    @include main-btn;
   }
 }

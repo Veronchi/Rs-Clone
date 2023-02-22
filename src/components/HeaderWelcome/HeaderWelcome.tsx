@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './style.scss';
 
 const HeaderWelcome = (): JSX.Element => (
@@ -13,18 +14,22 @@ const HeaderWelcome = (): JSX.Element => (
         <h2 className="header__title">Trello Clone</h2>
       </div>
       <div className="header__buttons">
-        <button
+        <Link
+          to="/auth"
+          state={{ isSignUp: false }}
           className="header__btn"
           type="button"
         >
           Sign In
-        </button>
-        <button
+        </Link>
+        <Link
+          to="/auth"
+          state={{ isSignUp: true }}
           className="header__btn"
           type="button"
         >
           Sign Up
-        </button>
+        </Link>
       </div>
     </nav>
   </header>

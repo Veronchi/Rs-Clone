@@ -18,8 +18,6 @@
   }
 
   &__list {
-    // display: grid;
-    // grid-template-columns: repeat(4, 290px);
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -91,6 +89,8 @@
 
 .generate-btn {
   background-color: $light-gray;
+  color: $dark;
+  font-size: 18px;
   border: none;
   border-radius: 10px;
   height: 95px;

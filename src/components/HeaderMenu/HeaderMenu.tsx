@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { createBoard, getAllBoards } from '../../http/boardAPI';
 import { createCard } from '../../http/cardAPI';
 import {
@@ -15,7 +15,6 @@ const HeaderMenu = (): JSX.Element => {
   const [isOpenTemplates, setIsOpenTemplates] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('Small board');
   const isLogon = true;
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const getRandomColor = (): string => {
@@ -28,10 +27,6 @@ const HeaderMenu = (): JSX.Element => {
   const getBoards = async (): Promise<void> => {
     const data = await getAllBoards();
     dispatch(updateBoards([data]));
-  };
-
-  const handleBoards = (): void => {
-    navigate('/boards', { replace: true });
   };
 
   const handleSize = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -64,7 +59,7 @@ const HeaderMenu = (): JSX.Element => {
     <div className="menu">
       { isLogon
         ? (
-          <Button className="menu__boards" onClick={handleBoards}>Boards</Button>
+          <Link to="boards" className="menu__boards">Boards</Link>
         )
         : (
           <Button className="menu__boards" disabled>Boards</Button>
@@ -74,9 +69,6 @@ const HeaderMenu = (): JSX.Element => {
           <div className="template">
             <Button className="menu__templates" onClick={handleOpenTemplates}>
               Templates&nbsp;
-              <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.2929 16.7071L4.22185 9.63606C3.83132 9.24554 3.83132 8.61237 4.22185 8.22185C4.61237 7.83133 5.24554 7.83133 5.63606 8.22185L12 14.5858L18.364 8.22185C18.7545 7.83132 19.3877 7.83132 19.7782 8.22185C20.1687 8.61237 20.1687 9.24554 19.7782 9.63606L12.7071 16.7071C12.3166 17.0977 11.6834 17.0977 11.2929 16.7071Z" fill="currentColor" />
-              </svg>
             </Button>
             { isOpenTemplates
               ? (
@@ -119,7 +111,7 @@ const HeaderMenu = (): JSX.Element => {
                     </label>
                     <hr />
                     <div className="template__wrapper">
-                      <Form.Label>Board title</Form.Label>
+                      <Form.Label className="template__label">Board title</Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="My board name"
@@ -130,7 +122,7 @@ const HeaderMenu = (): JSX.Element => {
                     <hr />
                     <div className="template__wrapper">
                       <Button
-                        className="save-btn template__submit"
+                        className="template__submit"
                         onClick={():void => {
                           setIsOpenTemplates(false);
                           handleTemplates(templateSize, title);
