@@ -27,7 +27,7 @@ const WelcomePage = (): JSX.Element => {
               comprehensive overview of who is doing what and what needs to be done.
             </p>
           </div>
-          <img alt="" className="welcome__image" />
+          <img src="../static/media/ourlogo.9200bdfbbdc815b503b7.png" alt="our_logo" className="welcome__image" />
         </div>
         <div className="welcome__links">
           <button
