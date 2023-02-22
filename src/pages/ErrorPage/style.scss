@@ -1,4 +1,4 @@
-@import "../../styles/palette.scss";
+@import '../../styles/palette.scss';
 
 .error-page {
   max-width: 100%;
@@ -42,7 +42,7 @@
     margin: 0;
   }
 
-  &__button {
+  &__link {
     border-radius: 50px;
     padding: 8px 24px;
     font-size: 16px;
@@ -57,15 +57,13 @@
 
     &:hover {
       background: darken($color: #62ad9b, $amount: 10%);
+      color: #fff;
     }
 
     &:active {
       background: lighten($color: #62ad9b, $amount: 10%);
+      color: #fff;
     }
-  }
-
-  &__link {
-    text-decoration: none;
   }
 
   &__text {
