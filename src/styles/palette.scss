@@ -14,12 +14,14 @@ $light-white: rgba(
 $light-gray: #fafbfc; //бэкраунд менюшки
 $light-blue: #e4f0f6; //используется на доске(фильтр при нажатии и пункты сортировки при ховере)
 $hovered-gray: hsla(0, 0%, 0%, 0.08); //ховер на лишке меню
-$active-gray: hsla(0, 0%, 0%, 0.16);
+$active-gray: hsla(0, 0%, 0%, 0.204);
 $border-gray: #dfe1e6;
-$dark-text: #172b4d; //тёмно-синий текст(менюшка)
+$dark-text: #000000; //тёмно-синий текст(менюшка)
 $gray-text: #5e6c84; //серый текст(таблица, календарь)
 $disabled-text: #a5adba;
 
+$blue-btn: #62ad9b;
+$transparent-blue: #62ad9ba9;
 $welcome-bg: rgb(226, 239, 255); // бекграунд приветственной страницы
 $welcome-bg-gradient: linear-gradient(
   0deg,

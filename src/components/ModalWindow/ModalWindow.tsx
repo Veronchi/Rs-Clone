@@ -85,11 +85,11 @@ export const ModalWindow: FC<IModal> = ({
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="outline-danger" onClick={handleModal}>
+        <Button variant="secondary" onClick={handleModal}>
           Close
         </Button>
         <Button
-          className="save-btn"
+          className="success-btn"
           onClick={(e): Promise<void> => handleClick(e)}
         >
           Save
