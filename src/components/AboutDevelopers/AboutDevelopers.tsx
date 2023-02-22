@@ -1,5 +1,8 @@
 import React from 'react';
 import './style.scss';
+import veronica from '../../assets/img/veronika.jpg';
+import vladimir from '../../assets/img/vladimir.jpg';
+import alexander from '../../assets/img/alexandr.jpg';
 
 const AboutDevelopers = (): JSX.Element => (
   <div className="welcome__developers">
@@ -8,21 +11,21 @@ const AboutDevelopers = (): JSX.Element => (
       <div>
         <h2 className="welcome__cards-name">Alexander</h2>
         <div className="welcome__cards-info">
-          <i className="welcome__cards-photo sasha-photo" />
+          <img alt="alexander" src={alexander} className="welcome__cards-photo" />
           <p className="welcome__cards-job">Front-End Developer</p>
         </div>
       </div>
       <div>
         <h2 className="welcome__cards-name">Vladimir</h2>
         <div className="welcome__cards-info">
-          <i className="welcome__cards-photo vladimir-photo" />
+          <img src={vladimir} alt="vladimir" className="welcome__cards-photo" />
           <p className="welcome__cards-job">Front-End Developer</p>
         </div>
       </div>
       <div>
         <h2 className="welcome__cards-name">Veronica</h2>
         <div className="welcome__cards-info">
-          <i className="welcome__cards-photo vika-photo" />
+          <img src={veronica} alt="veronica" className="welcome__cards-photo" />
           <p className="welcome__cards-job team-lead">Team Lead</p>
         </div>
       </div>

@@ -3,6 +3,7 @@ import AboutApp from '../../components/AboutApp/AboutApp';
 import AboutDevelopers from '../../components/AboutDevelopers/AboutDevelopers';
 import Footer from '../../components/Footer/Footer';
 import HeaderWelcome from '../../components/HeaderWelcome/HeaderWelcome';
+import ourlogo from '../../assets/img/ourlogo.png';
 
 import './style.scss';
 
@@ -27,7 +28,7 @@ const WelcomePage = (): JSX.Element => {
               comprehensive overview of who is doing what and what needs to be done.
             </p>
           </div>
-          <img src="../static/media/ourlogo.9200bdfbbdc815b503b7.png" alt="our_logo" className="welcome__image" />
+          <img src={ourlogo} alt="our_logo" className="welcome__image" />
         </div>
         <div className="welcome__links">
           <button

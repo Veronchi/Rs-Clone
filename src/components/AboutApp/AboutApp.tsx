@@ -1,5 +1,8 @@
 import React from 'react';
 import './style.scss';
+import screen1 from '../../assets/img/screen1.png';
+import screen2 from '../../assets/img/screen2.png';
+import screen3 from '../../assets/img/screen3.png';
 
 const AboutApp = (): JSX.Element => (
   <div className="welcome__app">
@@ -15,10 +18,10 @@ const AboutApp = (): JSX.Element => (
           your board will look with which you will work
         </p>
       </div>
-      <img src="./static/media/screen1.aca74f8cba57538acc9a.png" alt="our_feature_1" className="welcome__app-image" />
+      <img src={screen1} alt="our_feature_1" className="welcome__app-image" />
     </div>
     <div className="welcome__app-feature">
-      <img src="./static/media/screen2.dba83d62fda085635eeb.png" alt="our_feature_2" className="welcome__app-image" />
+      <img src={screen2} alt="our_feature_2" className="welcome__app-image" />
       <div className="welcome__app-info">
         <h3 className="feature-title">Create as many columns as you see need.</h3>
         <p className="feature-description">
@@ -35,7 +38,7 @@ const AboutApp = (): JSX.Element => (
           conveniently tracking the status of the task
         </p>
       </div>
-      <img src="./static/media/screen3.d1e0cf558e34f92a4946.png" alt="our_feature_3" className="welcome__app-image" />
+      <img src={screen3} alt="our_feature_3" className="welcome__app-image" />
     </div>
   </div>
 );

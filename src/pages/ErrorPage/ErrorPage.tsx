@@ -50,9 +50,7 @@ const ErrorPage = (): JSX.Element => (
       <h2 className="error-page__title"> 404 Error </h2>
       <h3>Page not found</h3>
       <p className="error-page__text"> Sorry, this page isn`t available </p>
-      <button className="error-page__button" type="button">
-        <Link to="/boards" className="error-page__link">Back to home</Link>
-      </button>
+      <Link to="/boards" className="error-page__link">Back to home</Link>
     </div>
   </section>
 );
