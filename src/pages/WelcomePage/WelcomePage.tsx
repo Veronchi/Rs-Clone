@@ -9,7 +9,7 @@ import './style.scss';
 const WelcomePage = (): JSX.Element => {
   const [isAboutDevelopers, setIsAboutDevelopers] = useState<boolean>(false);
   return (
-    <>
+    <div className="page-container">
       <HeaderWelcome />
       <section className="welcome">
         <div className="welcome__content">
@@ -48,7 +48,7 @@ const WelcomePage = (): JSX.Element => {
         {isAboutDevelopers ? <AboutDevelopers /> : <AboutApp />}
       </section>
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -2,7 +2,7 @@
 
 .error-page {
   max-width: 100%;
-  width: 100%; 
+  width: 100%;
   margin: 30px auto;
   margin: 0;
   display: flex;
@@ -10,8 +10,7 @@
   justify-content: center;
   height: 100vh;
   padding: 0px 30px;
-  background: $welcome-bg;
-  background: $welcome-bg-gradient;
+  background: $error-gradient;
 
   &__content {
     max-width: 760px;
@@ -49,7 +48,7 @@
     font-size: 16px;
     margin-top: 10px;
     cursor: pointer;
-    background: #62AD9B;
+    background: #62ad9b;
     color: #fff;
     border: none;
     box-shadow: 0 4px 8px 0 #ccc;
@@ -57,11 +56,11 @@
     text-decoration: none;
 
     &:hover {
-      background: darken($color: #62AD9B, $amount: 10%);
+      background: darken($color: #62ad9b, $amount: 10%);
     }
 
     &:active {
-      background: lighten($color: #62AD9B, $amount: 10%);
+      background: lighten($color: #62ad9b, $amount: 10%);
     }
   }
 
@@ -71,7 +70,7 @@
 
   &__text {
     font-size: 16px;
-    width: 35%; 
+    width: 35%;
     margin: 16px auto 24px;
     text-align: center;
   }

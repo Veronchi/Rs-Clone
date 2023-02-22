@@ -54,9 +54,9 @@ const BoardPage = (): JSX.Element => {
   };
 
   return (
-    <section className="board">
+    <section className="board" style={{ backgroundColor: boards.state.background }}>
       <h1 className="board__title">{boards.state.title}</h1>
-      <div className="wrapper" style={{ backgroundColor: boards.state.background }}>
+      <div className="wrapper">
         {isLoading ? <div className="spinner" />
           : (
             <>
