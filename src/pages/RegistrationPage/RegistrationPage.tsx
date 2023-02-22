@@ -3,12 +3,14 @@ import React, {
 } from 'react';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { logIn, registration } from '../../http/userAPI';
 import './style.scss';
 
 const RegistrationPage = (): JSX.Element => {
-  const [isSignUp, setIsSignUp] = useState<boolean>(false);
+  const location = useLocation();
+
+  const [isSignUp, setIsSignUp] = useState<boolean>(location.state.isSignUp);
   const [inputLogin, setInputLogin] = useState<string>('');
   const [inputPassword, setInputPassword] = useState<string>('');
   const [inputEmail, setInputEmail] = useState<string>('');

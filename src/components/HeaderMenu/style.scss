@@ -1,4 +1,5 @@
 @import "../../styles/palette.scss";
+@import "../../styles/buttons";
 
 .menu {
   display: flex;
@@ -7,19 +8,26 @@
   font-size: 1.5rem;
   color: $primary;
 
-  &__boards.btn,
-  &__templates.btn {
-    padding: 0 10px;
-    border-radius: 5px;
-    border: none;
-    color: $primary;
-    font-size: 1.5rem;
-    background-color: $blue;
-    transition: 0.5s;
+  &__boards {
+    @include transparent-btn;
+    text-decoration: none;
+    height: 40px;
+  }
 
-    &:hover {
-      background-color: $dark-text;
-      color: $primary;
+  &__templates.btn {
+    @include transparent-btn;
+    position: relative;
+    padding-right: 25px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 9px;
+      right: 2px;
+      width: 24px;
+      height: 24px;
+      background-image: url("../../assets/icons/arrow-bottom.svg");
+      background-repeat: no-repeat;
     }
   }
 }
@@ -37,6 +45,7 @@
 
   &__title {
     padding: 0 20px;
+    color: $gray-text;
   }
 
   &__radios {
@@ -50,6 +59,8 @@
   &__text {
     display: block;
     padding: 0 20px;
+    color: $blue;
+    font-size: 18px;
   }
 
   &__input {
@@ -63,8 +74,23 @@
     position: relative;
   }
 
-  &__submit {
+  &__label {
+    color: $gray-text;
+  }
+
+  &__submit.btn {
+    @include main-btn;
+    background-color: $blue-btn;
+    color: $dark-text;
+    line-height: 35px;
     width: 100%;
+    border-radius: 10px;
+
+    &:hover {
+      box-shadow: none;
+      border: 1px solid $blue-btn;
+      background-color: $light-gray;
+    }
   }
 }
 

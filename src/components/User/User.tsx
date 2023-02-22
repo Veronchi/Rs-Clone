@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   IState,
 } from '../../interfaces';
@@ -62,7 +62,7 @@ const User = (): JSX.Element => {
         )
         : (
           <div className="user__entry">
-            <a href="/auth" className="user__login">Login</a>
+            <Link to="/auth" className="user__login">Log in</Link>
           </div>
         )}
     </div>

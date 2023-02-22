@@ -8,11 +8,11 @@
   color: red;
 }
 
-.save-btn.btn {
-  border: 1px solid $primary-blue;
-  background-color: $light-gray;
+.success-btn.btn {
+  background-color: $blue-btn;
+  color: $primary;
 
   &:hover {
-    background-color: $primary-blue;
+    background: darken($color: #62ad9b, $amount: 10%);
   }
 }

@@ -140,10 +140,10 @@ export const TaskEdit = ({ handleModal, task }: IModalEdit): JSX.Element => {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="outline-danger" onClick={handleModal}>
+        <Button variant="secondary" onClick={handleModal}>
           Close
         </Button>
-        <Button className="save-btn" type="submit" variant="outline-success" onClick={handleSubmit}>
+        <Button type="submit" className="success-btn" onClick={handleSubmit}>
           Save Task
         </Button>
       </Modal.Footer>
