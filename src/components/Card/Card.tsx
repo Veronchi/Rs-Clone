@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllCards, remove } from '../../http/cardAPI';
 import { createRow, getAllRows, update } from '../../http/rowAPI';
 import {
+  ICard,
   ICardProps, IState, ITask, ITaskMap,
 } from '../../interfaces';
 import { updateCards } from '../../store/slices/cardsSlice';
@@ -127,8 +128,60 @@ const Card: FC<ICardProps> = ({ card, editCard }): JSX.Element => {
     li.style.opacity = '1';
   };
 
+  const dragOverCardHandler = (e: DragEvent<HTMLLIElement>):void => {
+    e.preventDefault();
+    const target = e.target as HTMLLIElement;
+    const li = target.parentElement as HTMLLIElement;
+    const ul = li.childNodes[1] as HTMLUListElement;
+
+    if (li.className === 'board__item' && ul.children.length === 0) {
+      li.style.height = '200px';
+    }
+  };
+
+  const dragLeaveCardHandler = (e: DragEvent<HTMLLIElement>):void => {
+    const target = e.target as HTMLLIElement;
+    const li = target.parentElement as HTMLLIElement;
+    const ul = li.childNodes[1] as HTMLUListElement;
+
+    if (li.className === 'board__item' && ul.children.length === 0) {
+      li.style.height = '100%';
+    }
+  };
+
+  const dragEndCardHandler = (e: DragEvent<HTMLLIElement>): void => {
+    const target = e.target as HTMLLIElement;
+    const li = target.parentElement as HTMLLIElement;
+    const ul = li.childNodes[1] as HTMLUListElement;
+
+    if (li.className === 'board__item' && ul.children.length === 0) {
+      li.style.height = '100%';
+    }
+  };
+
+  const dropCardHandler = async (e: DragEvent<HTMLLIElement>, currCcard: ICard): Promise<void> => {
+    e.preventDefault();
+
+    const target = e.target as HTMLLIElement;
+    const li = target.parentElement as HTMLLIElement;
+    const ul = li.childNodes[1] as HTMLUListElement;
+
+    if (li.className === 'board__item' && ul.children.length === 0) {
+      setCurrCardId(currCcard.id);
+      li.style.height = '100%';
+    }
+  };
+
   return (
-    <li className="board__item" draggable onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
+    <li
+      className="board__item"
+      onDragOver={(e): void => dragOverCardHandler(e)}
+      onDragLeave={(e): void => dragLeaveCardHandler(e)}
+      onDragEnd={(e): void => dragEndCardHandler(e)}
+      onDrop={(e): Promise<void> => dropCardHandler(e, card)}
+      onMouseEnter={mouseEnter}
+      onMouseLeave={mouseLeave}
+    >
       <h3 className="title">{card.title}</h3>
       { isHover
         ? (
