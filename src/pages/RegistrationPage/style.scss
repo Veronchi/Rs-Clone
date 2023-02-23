@@ -25,10 +25,14 @@
 
   &__btn.btn {
     color: $primary;
-    background-color: $primary-blue;
+    background-color: $blue-btn;
     margin-bottom: 10px;
 
     &:hover {
+      background: darken($color: #62ad9b, $amount: 10%);
+    }
+
+    &:active {
       background-color: $light-blue;
     }
   }
