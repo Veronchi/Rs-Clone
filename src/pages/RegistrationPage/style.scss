@@ -10,6 +10,7 @@
   }
 
   &__form {
+    position: relative;
     max-width: 500px;
     text-align: left;
     border: 2px solid $light-blue;
@@ -42,5 +43,14 @@
 
   &__input.form-control:focus {
     border-color: $primary-blue;
+  }
+
+  &__valid {
+    position: absolute;
+    background-color: rgba(255, 100, 100, 0.85);
+    padding: 2px 10px;
+    color: white;
+    border-radius: 3px;
+    right: 20px;
   }
 }

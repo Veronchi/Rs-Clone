@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createBoard, getAllBoards } from '../../http/boardAPI';
@@ -13,7 +13,8 @@ import './style.scss';
 const HeaderMenu = (): JSX.Element => {
   const [templateSize, setTemplateSize] = useState<TemplateSize>('small');
   const [isOpenTemplates, setIsOpenTemplates] = useState<boolean>(false);
-  const [title, setTitle] = useState<string>('Small board');
+  const [boardTitle, setBoardTitle] = useState<string>('Template board');
+  const [isValid, setIsValid] = useState<boolean>(true);
   const isLogon = true;
   const dispatch = useDispatch();
 
@@ -32,7 +33,6 @@ const HeaderMenu = (): JSX.Element => {
   const handleSize = (e: ChangeEvent<HTMLInputElement>): void => {
     const tempName = e.currentTarget.value as TemplateSize;
     setTemplateSize(tempName);
-    setTitle(`${tempName.charAt(0).toUpperCase() + tempName.slice(1)} board`);
   };
 
   const handleOpenTemplates = (): void => {
@@ -41,19 +41,31 @@ const HeaderMenu = (): JSX.Element => {
 
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
-    setTitle(value);
+    if (/^\s+$/.test(value)) {
+      setIsValid(false);
+    } else {
+      setBoardTitle(value);
+      setIsValid(true);
+    }
   };
 
-  const handleTemplates = (templateName: TemplateSize, boardTitle: string): void => {
-    const tempBoard = templates[templateName];
-    createBoard(boardTitle, getRandomColor())
-      .then((result: IBoard) => {
-        tempBoard.cards.forEach(async (element):Promise<void> => {
-          await createCard(element, result.id);
-        });
-      })
-      .then(getBoards);
+  const handleTemplates = (templateName: TemplateSize, templTitle: string): void => {
+    if (boardTitle) {
+      const tempBoard = templates[templateName];
+      setIsOpenTemplates(false);
+      createBoard(templTitle, getRandomColor())
+        .then((result: IBoard) => {
+          tempBoard.cards.forEach(async (element):Promise<void> => {
+            await createCard(element, result.id);
+          });
+        })
+        .then(getBoards);
+    } else {
+      setIsValid(false);
+    }
   };
+
+  const color = isValid ? 'green' : 'red';
 
   return (
     <div className="menu">
@@ -72,9 +84,14 @@ const HeaderMenu = (): JSX.Element => {
             </Button>
             { isOpenTemplates
               ? (
-                <div className="template__form">
-                  <Form>
-                    <h4 className="template__title">Add board:</h4>
+                <Modal
+                  show={isOpenTemplates}
+                  backdropClassName="user-modal"
+                  onHide={():void => { setIsOpenTemplates(false); }}
+                  className="template__modal"
+                >
+                  <Form className="template__form">
+                    <h4 className="template__title">Add:</h4>
                     <label className="template__radios" htmlFor="radio1">
                       <input
                         type="radio"
@@ -114,25 +131,26 @@ const HeaderMenu = (): JSX.Element => {
                       <Form.Label className="template__label">Board title</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="My board name"
+                        placeholder={isValid ? 'My board name' : 'Enter your name'}
                         onChange={handleTitleChange}
-                        value={title}
+                        value={boardTitle}
+                        style={{ borderColor: color }}
                       />
+                      {!isValid ? <span className="validation-text">Enter board name</span> : null}
                     </div>
                     <hr />
                     <div className="template__wrapper">
                       <Button
                         className="template__submit"
                         onClick={():void => {
-                          setIsOpenTemplates(false);
-                          handleTemplates(templateSize, title);
+                          handleTemplates(templateSize, boardTitle);
                         }}
                       >
                         Create board
                       </Button>
                     </div>
                   </Form>
-                </div>
+                </Modal>
               ) : null}
           </div>
         )
