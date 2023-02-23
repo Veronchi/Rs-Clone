@@ -31,12 +31,9 @@ const getTasksByBoardId = async (id: string): Promise<Array<ITask>> => {
   return data;
 };
 
-const update = async (id: string, text: string, cover: string): Promise<boolean> => {
-  const { data } = await $authHost.patch('/row', {
-    id,
-    text,
-    cover,
-  });
+const update = async (payload: { id: string, text: string, cover: string, ColumnId?: string }):
+Promise<boolean> => {
+  const { data } = await $authHost.patch('/row', payload);
   return !!data;
 };
 

@@ -7,12 +7,10 @@ import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
 import { getAllBoards, remove } from '../../http/boardAPI';
-import { getUser } from '../../http/userAPI';
 import {
   IBoard, IState, IUpdateState,
 } from '../../interfaces';
 import { updateBoards } from '../../store/slices/boardsSlice';
-import { addUser } from '../../store/slices/userSlice';
 import './style.scss';
 
 const BoardsPage = (): JSX.Element | null => {
@@ -42,14 +40,8 @@ const BoardsPage = (): JSX.Element | null => {
     setIsLoading(false);
   };
 
-  const getCurrUser = async (): Promise<void> => {
-    const data = await getUser();
-    dispatch(addUser(data));
-  };
-
   useEffect(() => {
     getBoards();
-    getCurrUser();
   }, []);
 
   const getColor = (id: string): string => {
