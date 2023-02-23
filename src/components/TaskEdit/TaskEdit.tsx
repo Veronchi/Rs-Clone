@@ -50,7 +50,11 @@ export const TaskEdit = ({ handleModal, task }: IModalEdit): JSX.Element => {
     if (title.trim().length === 0) {
       setIsValid(false);
     } else {
-      const isUpdate = await update(task.id, title, cover as string);
+      const isUpdate = await update({
+        id: task.id,
+        text: title,
+        cover: cover as string,
+      });
       if (isUpdate) {
         dispatch(updateTask({
           task: { ...task, text: title, cover },

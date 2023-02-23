@@ -1,4 +1,4 @@
-import { FormEvent, MouseEvent } from 'react';
+import { FormEvent, MouseEvent, DragEvent } from 'react';
 
 export interface IUpdateState {
   isUpdate: boolean,
@@ -49,6 +49,7 @@ export interface IState {
   boards: Array<IBoard>;
   cards: Array<ICard>;
   tasks: ITaskMap;
+  currTask: ITask;
 }
 
 export interface ICardProps {
@@ -58,6 +59,11 @@ export interface ICardProps {
 
 export interface ITaskProps {
   task: ITask;
+  dragStartHandler: (e: DragEvent<HTMLLIElement>, task: ITask) => void
+  dragLeavetHandler: (e: DragEvent<HTMLLIElement>) => void
+  dragEndHandler: (e: DragEvent<HTMLLIElement>) => void
+  dragOverHandler: (e: DragEvent<HTMLLIElement>) => void
+  dropHandler: (e: DragEvent<HTMLLIElement>, task: ITask) => void
 }
 
 export type TemplateSize = 'small' | 'medium' | 'big';
