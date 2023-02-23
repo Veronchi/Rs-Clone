@@ -66,24 +66,27 @@ const Card: FC<ICardProps> = ({ card, editCard }): JSX.Element => {
     })();
   }, []);
 
-  useEffect(() => {
-    (async (): Promise<void> => {
-      if (currCardId) {
-        await update({
-          id: currTask.id,
-          text: currTask.text,
-          cover: currTask.cover as string,
-          ColumnId: currCardId,
-        });
-        const data = await getAllRows(currCardId);
+  const updateAfterDrop = async (): Promise<void> => {
+    await update({
+      id: currTask.id,
+      text: currTask.text,
+      cover: currTask.cover as string,
+      ColumnId: currCardId,
+    });
+    const data = await getAllRows(currCardId);
 
-        dispatch(removeTask({
-          taskId: currTask.id,
-          columnId: currTask.ColumnId,
-        }));
-        dispatch(setAllTasks(data));
-      }
-    })();
+    dispatch(removeTask({
+      taskId: currTask.id,
+      columnId: currTask.ColumnId,
+    }));
+    dispatch(setAllTasks(data));
+  };
+
+  useEffect(() => {
+    if (currCardId) {
+      updateAfterDrop();
+      setCurrCardId('');
+    }
   }, [currCardId]);
 
   const dragStartHandler = (e: DragEvent<HTMLLIElement>, task: ITask): void => {
