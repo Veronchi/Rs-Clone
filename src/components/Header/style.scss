@@ -22,13 +22,25 @@
   &__title {
     font-size: 2rem;
     margin: 0;
+    width: 100%;
+
+    @media screen and (max-width: 940px) {
+      font-size: 1.6rem;
+    }
+
+    @media screen and (max-width: 740px) {
+      font-size: 1.4rem;
+      width: 60px;
+    }
 
     @media screen and (max-width: 600px) {
       font-size: 1.2rem;
+
     }
 
     @media screen and (max-width: 450px) {
       font-size: 1.1rem;
+      width: 50px;
     }
   }
 
@@ -43,5 +55,9 @@
   &__img {
     width: 48px;
     height: 48px;
+  }
+
+  @media screen and (max-width: 740px) {
+    padding: 6px 0;
   }
 }

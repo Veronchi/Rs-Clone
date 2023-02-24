@@ -1,15 +1,25 @@
-@import "../../styles/palette.scss";
+@import '../../styles/palette.scss';
 
 .search-form {
-  @media screen and (min-width: 600px) {
-    width: 300px;
-  }
+  width: 300px;
 
-  &__input {
-    background-color: $light-blue;
+  &__input.form-control {
+    background-color: transparent;
+    
 
     &:hover {
       background-color: $light-gray;
+      border-color: #62ad9b;
     }
+    &:focus-visible {
+      border-color: #62ad9b;
+    }
+
   }
+  @media screen and (max-width: 740px) {
+    width: 52%;
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
 }
