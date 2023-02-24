@@ -3,6 +3,8 @@
 .registration {
   text-align: center;
   padding-top: 50px;
+  height: 100vh;
+  background: linear-gradient(0deg, #62ad9b -20%, white 30%);;
 
   &__title {
     margin: 0;
@@ -25,18 +27,18 @@
 
   &__btn.btn {
     color: $primary;
-    background-color: $primary-blue;
+    background-color: #62ad9b;
     margin-bottom: 10px;
 
     &:hover {
-      background-color: $light-blue;
+      background-color: #4b9180;
     }
   }
 
   &__option {
     border: none;
     background-color: transparent;
-    border-bottom: 1px solid $primary-blue;
+    border-bottom: 1px solid #62ad9b;
     padding: 0;
     margin-left: 5px;
   }
