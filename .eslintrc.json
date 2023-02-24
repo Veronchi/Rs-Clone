@@ -22,6 +22,7 @@
         "@typescript-eslint/explicit-function-return-type": "error",
         "@typescript-eslint/no-explicit-any": "error",
         "import/prefer-default-export": "off",
+        "react/jsx-props-no-spreading": "off",
         "linebreak-style": 0,
         "react/function-component-definition": [
             2,

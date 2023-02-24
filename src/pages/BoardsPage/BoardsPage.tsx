@@ -1,9 +1,10 @@
 import React, {
   useEffect, useState,
 } from 'react';
+import { AxiosError } from 'axios';
 import tinycolor from 'tinycolor2';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
 import { getAllBoards, remove } from '../../http/boardAPI';
@@ -27,6 +28,7 @@ const BoardsPage = (): JSX.Element | null => {
 
   const boards = useSelector((state: IState) => state.boards.flat());
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleModalClose = (): void => {
     setUpdateState(initUpdState);
@@ -41,7 +43,12 @@ const BoardsPage = (): JSX.Element | null => {
   };
 
   useEffect(() => {
-    getBoards();
+    getBoards()
+      .catch((e: AxiosError) => {
+        if (e.response?.status === 401) {
+          navigate('/welcome', { replace: true });
+        }
+      });
   }, []);
 
   const getColor = (id: string): string => {
