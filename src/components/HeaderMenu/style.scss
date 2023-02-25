@@ -12,12 +12,26 @@
     @include transparent-btn;
     text-decoration: none;
     height: 40px;
+
+    @media screen and (max-width: 900px) {
+      margin: 0;
+      padding: 0;
+    }
+    @media screen and (max-width: 720px) {
+      font-size: 12px;
+      width: 65px;
+    }
   }
 
   &__templates.btn {
     @include transparent-btn;
     position: relative;
     padding-right: 25px;
+    margin-left: 0;
+    @media screen and (max-width: 740px) {
+      font-size: 12px;
+      padding: 0 5px;
+    }
 
     &::after {
       content: "";
@@ -28,7 +42,21 @@
       height: 24px;
       background-image: url("../../assets/icons/arrow-bottom.svg");
       background-repeat: no-repeat;
+
+      @media screen and (max-width: 740px) {
+        width: 12px;
+        height: 12px;
+        background-size: 100% 100%;
+        left: 26px;
+        top: 26px;
+      }
     }
+  }
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    font-size: 1.2rem;
+    gap: 5px;
+    margin-left: 5px;
   }
 }
 

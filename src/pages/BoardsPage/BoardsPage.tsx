@@ -38,7 +38,7 @@ const BoardsPage = (): JSX.Element | null => {
   const getBoards = async (): Promise<void> => {
     setIsLoading(true);
     const data = await getAllBoards();
-    dispatch(updateBoards([data]));
+    dispatch(updateBoards(data));
     setIsLoading(false);
   };
 
@@ -87,7 +87,7 @@ const BoardsPage = (): JSX.Element | null => {
   const deleteBoard = async (id: string): Promise<void> => {
     await remove(id);
     const data = await getAllBoards();
-    dispatch(updateBoards([data]));
+    dispatch(updateBoards(data));
   };
 
   return (

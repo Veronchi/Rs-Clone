@@ -40,7 +40,7 @@ export const ModalWindow: FC<IModal> = ({
     } else if (isUpdate) {
       await update(id, boardTitle, boardBackground);
       const updBoards = await getAllBoards();
-      dispatch(updateBoards([updBoards]));
+      dispatch(updateBoards(updBoards));
       handleModal(event);
     } else {
       const board = await createBoard(boardTitle, boardBackground);

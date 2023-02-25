@@ -10,7 +10,7 @@ const createBoard = async (title: string, background: string): Promise<IBoard> =
   return data;
 };
 
-const getAllBoards = async (): Promise<IBoard> => {
+const getAllBoards = async (): Promise<IBoard[]> => {
   const { data } = await $authHost.get('/board/boards');
 
   return data;
