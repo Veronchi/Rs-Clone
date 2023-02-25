@@ -17,8 +17,10 @@ const Header = (): JSX.Element => (
         <h2 className="header__title">Trello Clone</h2>
       </Link>
       <HeaderMenu />
-      <HeaderSearch />
-      <User />
+      <div className="header__right-bar">
+        <HeaderSearch />
+        <User />
+      </div>
     </nav>
   </header>
 );

@@ -60,4 +60,9 @@
   @media screen and (max-width: 740px) {
     padding: 6px 0;
   }
+
+  &__right-bar {
+    display: flex;
+    gap: 5px;
+  }
 }

@@ -27,7 +27,7 @@ const HeaderMenu = (): JSX.Element => {
 
   const getBoards = async (): Promise<void> => {
     const data = await getAllBoards();
-    dispatch(updateBoards([data]));
+    dispatch(updateBoards(data));
   };
 
   const handleSize = (e: ChangeEvent<HTMLInputElement>): void => {
