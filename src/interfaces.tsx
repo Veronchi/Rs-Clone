@@ -95,3 +95,8 @@ export interface IModalEdit {
   handleModal: (e: MouseEvent | FormEvent) => void;
   task: ITask;
 }
+
+export interface IModalError {
+  message: string;
+  handleModal: (e: MouseEvent | FormEvent) => void;
+}
