@@ -51,6 +51,21 @@ const BoardsPage = (): JSX.Element | null => {
       });
   }, []);
 
+  const handleKeyPress = (e: KeyboardEvent): void => {
+    const { key, ctrlKey } = e;
+    if (key === 'b' && ctrlKey) {
+      e.preventDefault();
+      setIsModal(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
   const getColor = (id: string): string => {
     const currBoard = boards.find((i) => i.id === id) as IBoard;
     if (tinycolor(currBoard.background).isLight()) {

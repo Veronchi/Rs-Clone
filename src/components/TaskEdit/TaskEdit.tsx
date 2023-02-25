@@ -1,5 +1,5 @@
 import React, {
-  ChangeEvent, FormEvent, useState,
+  ChangeEvent, FormEvent, useEffect, useState,
 } from 'react';
 import {
   Button, Form, Modal,
@@ -45,7 +45,7 @@ export const TaskEdit = ({ handleModal, task }: IModalEdit): JSX.Element => {
     }, 1000);
   };
 
-  const handleSubmit = async (e: FormEvent): Promise<void> => {
+  const handleSubmit = async (e: FormEvent | KeyboardEvent): Promise<void> => {
     e.preventDefault();
     if (title.trim().length === 0) {
       setIsValid(false);
@@ -64,6 +64,24 @@ export const TaskEdit = ({ handleModal, task }: IModalEdit): JSX.Element => {
       handleModal(e);
     }
   };
+
+  const handleKeyPress = (e: KeyboardEvent): void => {
+    const { key, ctrlKey } = e;
+    if (key === 's' && ctrlKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    } else if (key === 'Escape') {
+      e.preventDefault();
+      handleModal(e);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
 
   return (
     <>

@@ -8,7 +8,7 @@ export interface IUpdateState {
 }
 
 export interface IModal {
-  handleModal: (e: MouseEvent | FormEvent) => void;
+  handleModal: (e: MouseEvent | FormEvent | KeyboardEvent) => void;
   updateState: IUpdateState;
 }
 
@@ -19,7 +19,7 @@ export interface ICard {
 }
 
 export interface BoardPageModal {
-  handleModal: (e: MouseEvent | FormEvent) => void;
+  handleModal: (e: MouseEvent | FormEvent | KeyboardEvent) => void;
   BoardId: string;
   updateState: IUpdateState
 }
@@ -92,6 +92,6 @@ export interface IParentModal {
 }
 
 export interface IModalEdit {
-  handleModal: (e: MouseEvent | FormEvent) => void;
+  handleModal: (e: MouseEvent | FormEvent | KeyboardEvent) => void;
   task: ITask;
 }

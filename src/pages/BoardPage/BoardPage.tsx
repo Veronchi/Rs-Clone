@@ -53,6 +53,21 @@ const BoardPage = (): JSX.Element => {
     }
   };
 
+  const handleKeyPress = (e: KeyboardEvent): void => {
+    const { key, ctrlKey } = e;
+    if (key === 'c' && ctrlKey) {
+      e.preventDefault();
+      setIsModal(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
   return (
     <section className="board">
       <h1 className="board__title">{boards.state.title}</h1>
