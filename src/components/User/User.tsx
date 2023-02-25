@@ -9,11 +9,12 @@ import {
 import { addUser } from '../../store/slices/userSlice';
 import { getUser } from '../../http/userAPI';
 import './style.scss';
+import { HotkeyWindow } from '../HotkeyWindow/HotkeyWindow';
 
 const User = (): JSX.Element => {
   const user = useSelector((state: IState) => state.user);
   const dispatch = useDispatch();
-
+  const [isModal, setIsModal] = useState<boolean>(false);
   const [isUserClick, setIsUserClick] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -45,6 +46,15 @@ const User = (): JSX.Element => {
       });
   }, []);
 
+  const handleModalClose = (): void => {
+    setIsModal(false);
+  };
+
+  const handleHotKey = (): void => {
+    setIsModal(true);
+    handleClose();
+  };
+
   return (
     <div className="user">
       <div>
@@ -64,8 +74,7 @@ const User = (): JSX.Element => {
               <p className="user__email">{user.email}</p>
             </div>
             <div className="user__links">
-              <a className="user__link" href="/">Help</a>
-              <a className="user__link" href="/">Hot keys</a>
+              <button className="user__link" type="button" onClick={handleHotKey}>Hot key</button>
             </div>
             <div className="user__exit">
               <button className="user__logout" type="button" onClick={handleLogOut}>Log out</button>
@@ -73,6 +82,11 @@ const User = (): JSX.Element => {
           </div>
         </Modal>
       </div>
+      <Modal show={isModal}>
+        <HotkeyWindow
+          handleModal={handleModalClose}
+        />
+      </Modal>
     </div>
   );
 };

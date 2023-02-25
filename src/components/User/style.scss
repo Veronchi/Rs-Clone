@@ -72,8 +72,10 @@
     display: block;
     width: 100%;
     padding: 10px 20px;
-    text-decoration: none;
+    background: transparent;
+    border: none;
     color: inherit;
+    text-align: left;
 
     &:hover {
       color: inherit;
