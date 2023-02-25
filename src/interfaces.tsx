@@ -95,3 +95,7 @@ export interface IModalEdit {
   handleModal: (e: MouseEvent | FormEvent | KeyboardEvent) => void;
   task: ITask;
 }
+
+export interface IModalKeys {
+  handleModal: (e: MouseEvent | FormEvent | KeyboardEvent) => void;
+}
