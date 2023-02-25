@@ -10,7 +10,7 @@ import './style.scss';
 const RegistrationPage = (): JSX.Element => {
   const location = useLocation();
 
-  const [isSignUp, setIsSignUp] = useState<boolean>(location.state.isSignUp);
+  const [isSignUp, setIsSignUp] = useState<boolean>(location.state?.isSignUp || false);
   const [inputLogin, setInputLogin] = useState<string>('');
   const [inputPassword, setInputPassword] = useState<string>('');
   const [inputEmail, setInputEmail] = useState<string>('');
@@ -40,17 +40,17 @@ const RegistrationPage = (): JSX.Element => {
       if (isValid) {
         if (isSignUp) {
           await registration(inputLogin, inputEmail, inputPassword);
+          navigate('/', { replace: true });
         } else {
           await logIn(inputLogin, inputPassword);
+          navigate('/', { replace: true });
         }
-        navigate('/', { replace: true });
       }
     } catch (e) {
-      alert((e as Error).message);
+      console.log((e as Error).message);
     } finally {
       setIsSubmit(false);
     }
-    // }
   };
 
   useEffect(() => {

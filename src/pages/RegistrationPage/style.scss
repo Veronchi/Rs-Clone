@@ -27,11 +27,11 @@
 
   &__btn.btn {
     color: $primary;
-    background-color: #62ad9b;
+    background-color: $blue-btn;
     margin-bottom: 10px;
 
     &:hover {
-      background-color: #4b9180;
+      background-color: $light-blue;
     }
   }
 

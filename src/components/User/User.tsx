@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 import {
   IState,
 } from '../../interfaces';
@@ -36,7 +37,12 @@ const User = (): JSX.Element => {
   };
 
   useEffect(() => {
-    getCurrUser();
+    getCurrUser()
+      .catch((e: AxiosError) => {
+        if (e.response?.status === 401) {
+          navigate('/welcome', { replace: true });
+        }
+      });
   }, []);
 
   return (
