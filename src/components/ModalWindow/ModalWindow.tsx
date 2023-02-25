@@ -1,5 +1,5 @@
 import React, {
-  ChangeEvent, FC, MouseEvent, useState,
+  ChangeEvent, FC, MouseEvent, useEffect, useState,
 } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -34,7 +34,7 @@ export const ModalWindow: FC<IModal> = ({
     setBackground(value);
   };
 
-  const handleClick = async (event: MouseEvent<HTMLButtonElement>): Promise<void> => {
+  const handleClick = async (event: MouseEvent | KeyboardEvent): Promise<void> => {
     if (!boardTitle) {
       setIsValid(false);
     } else if (isUpdate) {
@@ -50,6 +50,23 @@ export const ModalWindow: FC<IModal> = ({
   };
 
   const color = isValid ? 'green' : 'red';
+
+  const handleKeyPress = (e: KeyboardEvent): void => {
+    const { key, ctrlKey } = e;
+    if (key === 's' && ctrlKey) {
+      e.preventDefault();
+      handleClick(e);
+    } else if (key === 'Escape') {
+      handleModal(e);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React, {
-  ChangeEvent, FC, FormEvent, useState,
+  ChangeEvent, FC, FormEvent, useEffect, useState,
 } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -22,7 +22,7 @@ const CreateCardModal: FC<BoardPageModal> = ({
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e: FormEvent): Promise<void> => {
+  const handleSubmit = async (e: FormEvent | KeyboardEvent): Promise<void> => {
     e.preventDefault();
     if (cardTitle.trim().length === 0) {
       setIsValid(false);
@@ -51,6 +51,24 @@ const CreateCardModal: FC<BoardPageModal> = ({
       setIsValid(true);
     }
   };
+
+  const handleKeyPress = (e: KeyboardEvent): void => {
+    const { key, ctrlKey } = e;
+    if (key === 's' && ctrlKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    } else if (key === 'Escape') {
+      e.preventDefault();
+      handleModal(e);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
 
   return (
     <>
