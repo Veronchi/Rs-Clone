@@ -96,6 +96,11 @@ export interface IModalEdit {
   task: ITask;
 }
 
+export interface IModalError {
+  message: string;
+  handleModal: (e: MouseEvent | FormEvent) => void;
+}
+
 export interface IModalKeys {
   handleModal: (e: MouseEvent | FormEvent | KeyboardEvent) => void;
 }

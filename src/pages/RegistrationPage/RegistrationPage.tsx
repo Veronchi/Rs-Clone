@@ -1,9 +1,11 @@
+import { AxiosError } from 'axios';
 import React, {
   ChangeEvent, FocusEvent, useEffect, useRef, useState,
 } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ErrorWindow, getErrorText } from '../../components/ErrorWindow/ErrorWindow';
 import { logIn, registration } from '../../http/userAPI';
 import './style.scss';
 
@@ -18,6 +20,9 @@ const RegistrationPage = (): JSX.Element => {
   const [isLoginValid, setIsLoginValid] = useState<boolean>(true);
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
   const [isPasswdValid, setIsPasswdValid] = useState<boolean>(true);
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>('');
+
   const targetLogin = useRef(null);
   const targetEmail = useRef(null);
   const targetPasswd = useRef(null);
@@ -47,7 +52,9 @@ const RegistrationPage = (): JSX.Element => {
         }
       }
     } catch (e) {
-      console.log((e as Error).message);
+      const err = e as AxiosError;
+      setErrorText(getErrorText(err));
+      setIsModal(true);
     } finally {
       setIsSubmit(false);
     }
@@ -117,6 +124,8 @@ const RegistrationPage = (): JSX.Element => {
     if (e.target.value) setIsPasswdValid(true);
     setInputPassword(e.target.value);
   };
+
+  const handleModalClose = (): void => setIsModal(false);
 
   return (
     <section className="registration">
@@ -213,8 +222,13 @@ const RegistrationPage = (): JSX.Element => {
             )}
         </div>
       </Form>
+      { isModal
+        ? (
+          <Modal show={isModal} centered>
+            <ErrorWindow handleModal={handleModalClose} message={errorText} />
+          </Modal>
+        ) : (null)}
     </section>
-
   );
 };
 
