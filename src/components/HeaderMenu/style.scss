@@ -120,6 +120,74 @@
       background-color: $light-gray;
     }
   }
+
+  &__recent-drop > .btn.show {
+    background-color: $active-gray;
+  }
+
+  &__recent-drop > .btn {
+    @include transparent-btn;
+    position: relative;
+    padding-right: 25px;
+    margin-left: 0;
+    @media screen and (max-width: 740px) {
+      font-size: 12px;
+      padding: 0 5px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 9px;
+      right: 2px;
+      width: 24px;
+      height: 24px;
+      background-image: url("../../assets/icons/arrow-bottom.svg");
+      background-repeat: no-repeat;
+      border-top: 0;
+      border-right: 0;
+      border-bottom: 0;
+      border-left: 0;
+
+      @media screen and (max-width: 740px) {
+        width: 12px;
+        height: 12px;
+        background-size: 100% 100%;
+        left: 26px;
+        top: 26px;
+      }
+    }
+  }
+
+  &__recent {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: $dark-text;
+
+    &:hover {
+      box-shadow: none;
+      background-color: $border-gray;
+      color: $dark-text;
+    }
+  }
+
+  &__recent-color {
+    width: 30px;
+    height: 20px;
+  }
+
+  &__recent-name {
+    width: 90%;
+    display: block;
+    padding: 0 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 .template__modal > .modal-dialog {

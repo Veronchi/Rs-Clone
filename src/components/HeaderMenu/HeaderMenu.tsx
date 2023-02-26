@@ -184,21 +184,23 @@ const HeaderMenu = (): JSX.Element => {
             </Modal>
           ) : null}
       </div>
-      <DropdownButton id="dropdown-basic-button" title="Recent" className="menu__templates">
+      <DropdownButton id="dropdown-basic-button" title="Recent&nbsp;" className="template__recent-drop">
         {
-            boards.filter((item) => recentBoards.includes(item.id)).map(
-              ({ id, title, background }): JSX.Element => (
-                <Link
-                  key={id}
-                  className="template__input"
-                  to="/board"
-                  state={{ boardId: id, title, background }}
-                  style={{ display: 'block', backgroundColor: background }}
-                >
-                  {title}
-                </Link>
-              ),
-            )
+            boards.filter((item) => recentBoards.includes(item.id))
+              .sort((a, b) => recentBoards.indexOf(b.id) - recentBoards.indexOf(a.id))
+              .map(
+                ({ id, title, background }): JSX.Element => (
+                  <Link
+                    key={id}
+                    className="template__recent"
+                    to="/board"
+                    state={{ boardId: id, title, background }}
+                  >
+                    <div className="template__recent-color" style={{ backgroundColor: background }} />
+                    <span className="template__recent-name">{title}</span>
+                  </Link>
+                ),
+              )
           }
       </DropdownButton>
     </div>
