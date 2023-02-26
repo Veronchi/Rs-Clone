@@ -50,7 +50,10 @@
 
     &-title {
       position: absolute;
-      max-width: 275px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      max-width: 210px;
       font-size: 18px;
       font-weight: 600;
       text-align: left;

@@ -1,6 +1,10 @@
-@import '../../styles/palette.scss';
+@import "../../styles/palette.scss";
 
 .title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  width: 85%;
   font-size: 1.4rem;
   font-weight: 600;
   color: #333;
