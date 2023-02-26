@@ -4,7 +4,7 @@
   text-align: center;
   padding-top: 50px;
   height: 100vh;
-  background: linear-gradient(0deg, #62ad9b -20%, white 30%);;
+  background: linear-gradient(0deg, #62ad9b -20%, white 30%);
 
   &__title {
     margin: 0;
@@ -29,9 +29,14 @@
     color: $primary;
     background-color: $blue-btn;
     margin-bottom: 10px;
+    border: none;
 
     &:hover {
-      background-color: $light-blue;
+      background: darken($color: #62ad9b, $amount: 10%);
+    }
+
+    &:active {
+      background: lighten($color: #62ad9b, $amount: 10%);
     }
   }
 

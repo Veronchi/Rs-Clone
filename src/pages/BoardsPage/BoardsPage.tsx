@@ -13,25 +13,19 @@ import {
 } from '../../interfaces';
 import { updateBoards } from '../../store/slices/boardsSlice';
 import './style.scss';
+import { initUpdBoardState } from '../../utils/initalStates';
 
 const BoardsPage = (): JSX.Element | null => {
-  const initUpdState = {
-    isUpdate: false,
-    id: '',
-    title: '',
-    background: '',
-  };
-
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [updateState, setUpdateState] = useState<IUpdateState>(initUpdState);
+  const [updateState, setUpdateState] = useState<IUpdateState>(initUpdBoardState);
 
   const boards = useSelector((state: IState) => state.boards.flat());
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleModalClose = (): void => {
-    setUpdateState(initUpdState);
+    setUpdateState(initUpdBoardState);
     setIsModal(false);
   };
 
