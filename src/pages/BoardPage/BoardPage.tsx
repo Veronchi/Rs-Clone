@@ -39,8 +39,7 @@ const BoardPage = (): JSX.Element => {
 
   useEffect(() => {
     setCards();
-    console.log(boards.state);
-    setBoardToRecent(boards.state);
+    setBoardToRecent(boards.state.boardId);
   }, []);
 
   const editCard = (id: string): void => {

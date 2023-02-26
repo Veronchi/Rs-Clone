@@ -1,13 +1,16 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { createBoard, getAllBoards } from '../../http/boardAPI';
-import { createCard } from '../../http/cardAPI';
 import {
-  IBoard, TemplateSize, templates,
+  Button, DropdownButton, Form, Modal,
+} from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+import { createBoard, getAllBoards } from '../../http/boardAPI';
+import { createCard, getAllCards } from '../../http/cardAPI';
+import {
+  IBoard, TemplateSize, templates, IState,
 } from '../../interfaces';
 import { updateBoards } from '../../store/slices/boardsSlice';
+import { updateCards } from '../../store/slices/cardsSlice';
 import './style.scss';
 
 const HeaderMenu = (): JSX.Element => {
@@ -15,8 +18,25 @@ const HeaderMenu = (): JSX.Element => {
   const [isOpenTemplates, setIsOpenTemplates] = useState<boolean>(false);
   const [boardTitle, setBoardTitle] = useState<string>('Template board');
   const [isValid, setIsValid] = useState<boolean>(true);
-  const [isOpenRecent, setIsOpenRecent] = useState<boolean>(false);
+  const board = useLocation();
+
   const dispatch = useDispatch();
+
+  const boards = useSelector((state: IState) => state.boards.flat());
+
+  const setCards = async (): Promise<void> => {
+    const data = await getAllCards(board.state.boardId);
+    dispatch(updateCards(data));
+  };
+
+  const getBoardFromRecent = (): string[] => {
+    const data = localStorage.getItem('recent');
+    if (data) {
+      return JSON.parse(data);
+    }
+    return [];
+  };
+  const recentBoards = getBoardFromRecent();
 
   const getRandomColor = (): string => {
     const red: string = Math.floor(Math.random() * (255 - 20 + 1) + 20).toString(16).padStart(2, '0');
@@ -65,10 +85,9 @@ const HeaderMenu = (): JSX.Element => {
     }
   };
 
-  const handleOpenRecent = (): void => {
-    console.log('recent');
-    setIsOpenRecent(!isOpenRecent);
-  };
+  useEffect(() => {
+    setCards();
+  }, [board]);
 
   const color = isValid ? 'green' : 'red';
 
@@ -165,23 +184,41 @@ const HeaderMenu = (): JSX.Element => {
             </Modal>
           ) : null}
       </div>
-      <Button className="menu__templates" onClick={handleOpenRecent}>
-        Recent&nbsp;
-      </Button>
+      <DropdownButton id="dropdown-basic-button" title="Recent" className="menu__templates">
+        {
+            boards.filter((item) => recentBoards.includes(item.id)).map(
+              ({ id, title, background }): JSX.Element => (
+                <Link
+                  key={id}
+                  className="template__input"
+                  to="/board"
+                  state={{ boardId: id, title, background }}
+                  style={{ display: 'block', backgroundColor: background }}
+                >
+                  {title}
+                </Link>
+              ),
+            )
+          }
+      </DropdownButton>
     </div>
   );
 };
 
-const setBoardToRecent = (board: IBoard):void => {
+const setBoardToRecent = (boardId: string):void => {
   const data = localStorage.getItem('recent');
-  let recent: Array<IBoard>;
+  let recent: Array<string>;
   if (data) {
-    recent = JSON.parse(data) as Array<IBoard>;
-    if (recent.length >= 5) {
-      recent.pop();
+    recent = JSON.parse(data) as Array<string>;
+    if (!recent.includes(boardId)) {
+      if (recent.length >= 5) {
+        recent.pop();
+      }
+      recent.unshift(boardId);
+      localStorage.setItem('recent', JSON.stringify(recent));
     }
-    recent.unshift(board);
-    localStorage.setItem('recent', JSON.stringify(recent));
+  } else {
+    localStorage.setItem('recent', JSON.stringify([boardId]));
   }
 };
 
