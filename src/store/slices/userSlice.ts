@@ -2,8 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from '../../interfaces';
 
 const initialState: IUser = {
+  id: '',
   login: '',
   email: '',
+  avatar: '',
 };
 
 const userSlice = createSlice({
