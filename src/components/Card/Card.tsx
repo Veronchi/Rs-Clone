@@ -134,7 +134,7 @@ const Card: FC<ICardProps> = ({ card, editCard }): JSX.Element => {
     const li = target.parentElement as HTMLLIElement;
     const ul = li.childNodes[1] as HTMLUListElement;
 
-    if (li.className === 'board__item' && ul.children.length === 0) {
+    if (li.className === 'card' && ul.children.length === 0) {
       li.style.height = '200px';
     }
   };
@@ -144,7 +144,7 @@ const Card: FC<ICardProps> = ({ card, editCard }): JSX.Element => {
     const li = target.parentElement as HTMLLIElement;
     const ul = li.childNodes[1] as HTMLUListElement;
 
-    if (li.className === 'board__item' && ul.children.length === 0) {
+    if (li.className === 'card' && ul.children.length === 0) {
       li.style.height = '100%';
     }
   };
@@ -154,7 +154,7 @@ const Card: FC<ICardProps> = ({ card, editCard }): JSX.Element => {
     const li = target.parentElement as HTMLLIElement;
     const ul = li.childNodes[1] as HTMLUListElement;
 
-    if (li.className === 'board__item' && ul.children.length === 0) {
+    if (li.className === 'card' && ul.children.length === 0) {
       li.style.height = '100%';
     }
   };
@@ -166,7 +166,7 @@ const Card: FC<ICardProps> = ({ card, editCard }): JSX.Element => {
     const li = target.parentElement as HTMLLIElement;
     const ul = li.childNodes[1] as HTMLUListElement;
 
-    if (li.className === 'board__item' && ul.children.length === 0) {
+    if (li.className === 'card' && ul.children.length === 0) {
       setCurrCardId(currCcard.id);
       li.style.height = '100%';
     }
@@ -174,7 +174,7 @@ const Card: FC<ICardProps> = ({ card, editCard }): JSX.Element => {
 
   return (
     <li
-      className="board__item"
+      className="card"
       onDragOver={(e): void => dragOverCardHandler(e)}
       onDragLeave={(e): void => dragLeaveCardHandler(e)}
       onDragEnd={(e): void => dragEndCardHandler(e)}
@@ -182,7 +182,7 @@ const Card: FC<ICardProps> = ({ card, editCard }): JSX.Element => {
       onMouseEnter={mouseEnter}
       onMouseLeave={mouseLeave}
     >
-      <h3 className="title">{card.title}</h3>
+      <h3 className="card__title">{card.title}</h3>
       { isHover
         ? (
           <span className="icons">
