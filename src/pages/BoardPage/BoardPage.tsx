@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Card from '../../components/Card/Card';
 import CreateCardModal from '../../components/CreateCardModal/CreateCardModal';
+import { setBoardToRecent } from '../../components/HeaderMenu/HeaderMenu';
 import { getAllCards } from '../../http/cardAPI';
 import { IState, IUpdateState } from '../../interfaces';
 import { updateCards } from '../../store/slices/cardsSlice';
@@ -38,6 +39,8 @@ const BoardPage = (): JSX.Element => {
 
   useEffect(() => {
     setCards();
+    console.log(boards.state);
+    setBoardToRecent(boards.state);
   }, []);
 
   const editCard = (id: string): void => {
