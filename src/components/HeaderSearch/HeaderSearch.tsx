@@ -1,11 +1,14 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { getAllBoards } from '../../http/boardAPI';
 import { getTasksByBoardId } from '../../http/rowAPI';
-import { IBoard } from '../../interfaces';
+import {
+  IBoard, IState, ITask, ITaskMap,
+} from '../../interfaces';
 import { updateBoards } from '../../store/slices/boardsSlice';
+import { updateTask } from '../../store/slices/tasksSlice';
 import './style.scss';
 
 const HeaderSearch = (): JSX.Element => {
@@ -13,6 +16,8 @@ const HeaderSearch = (): JSX.Element => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const location = useLocation();
   const dispatch = useDispatch();
+
+  const tasks = useSelector((state: IState): ITaskMap => state.tasks);
 
   const onChangeValue = (ev: ChangeEvent<HTMLInputElement>): void => {
     setValue(ev.target.value);
@@ -24,14 +29,23 @@ const HeaderSearch = (): JSX.Element => {
 
   const filterBoards = async (): Promise<void> => {
     const data = await getAllBoards();
-    // eslint-disable-next-line max-len
-    const filteredBoards = data.filter((elem: IBoard) => elem.title.toLowerCase().includes(value.toLowerCase()));
+    const filteredBoards = data.filter((elem: IBoard) => {
+      const res = elem.title.toLowerCase().includes(value.toLowerCase());
+      return res;
+    });
     dispatch(updateBoards(filteredBoards));
   };
 
   const filterTasks = async (): Promise<void> => {
     const data = await getTasksByBoardId(location.state.boardId);
-    console.log(data);
+    const filteredTasks = data.filter((elem: ITask) => {
+      const res = elem.text.toLowerCase().includes(value.toLowerCase());
+      return res;
+    });
+    const newItem = { opacity: true };
+    const arr = filteredTasks.map((item: ITask) => Object.assign(item, newItem));
+    arr.map((item: ITask) => dispatch(updateTask({ task: item, columnId: item.ColumnId })));
+    console.log(tasks);
   };
 
   useEffect(() => {

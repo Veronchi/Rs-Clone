@@ -41,6 +41,7 @@ export interface ITask {
   cover?: string;
   ColumnId: string;
   BoardId: string;
+  opacity?: boolean;
 }
 
 export type ITaskMap = { [n: string]: Array<ITask> };
