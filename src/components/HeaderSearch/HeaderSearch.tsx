@@ -20,7 +20,7 @@ const HeaderSearch = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const restartSearch = async (): Promise<void> => {
-    if (location.state.boardId) {
+    if (location.state) {
       const data = await getTasksByBoardId(location.state.boardId);
       dispatch(setAllTasks(data));
     } else {
