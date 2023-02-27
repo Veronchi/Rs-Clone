@@ -87,7 +87,9 @@ const HeaderMenu = (): JSX.Element => {
   };
 
   useEffect(() => {
-    setCards();
+    if (board.state) {
+      setCards();
+    }
   }, [board]);
 
   const color = isValid ? 'green' : 'red';
