@@ -25,8 +25,14 @@ export interface BoardPageModal {
 }
 
 export interface IUser {
+  id: '';
   login: string;
   email?: string;
+  avatar?: string;
+}
+
+export interface IUpdUserModal {
+  handleModal: (e: MouseEvent | FormEvent | KeyboardEvent) => void;
 }
 
 export interface IBoard {
@@ -69,24 +75,6 @@ export interface ITaskProps {
 
 export type TemplateSize = 'small' | 'medium' | 'big';
 
-export const templates = {
-  small: {
-    title: 'Small board',
-    background: '#009900',
-    cards: ['To do', 'Done'],
-  },
-  medium: {
-    title: 'Medium board',
-    background: '#000099',
-    cards: ['To do', 'In process', 'Done'],
-  },
-  big: {
-    title: 'Big board',
-    background: '#990000',
-    cards: ['To do', 'In process', 'Review', 'Done'],
-  },
-};
-
 export interface IParentModal {
   deleteTask?: () => Promise<void>;
   handleModal: (e: MouseEvent | FormEvent) => void;
@@ -104,4 +92,13 @@ export interface IModalError {
 
 export interface IModalKeys {
   handleModal: (e: MouseEvent | FormEvent | KeyboardEvent) => void;
+}
+
+export interface IAvatars {
+  dog: string,
+  sloth: string,
+  pufferFish: string,
+  penguin: string,
+  shark: string,
+  reindeer: string,
 }

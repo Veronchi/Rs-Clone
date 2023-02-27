@@ -7,10 +7,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { createBoard, getAllBoards } from '../../http/boardAPI';
 import { createCard, getAllCards } from '../../http/cardAPI';
 import {
-  IBoard, TemplateSize, templates, IState,
+  IBoard, TemplateSize, IState,
 } from '../../interfaces';
 import { updateBoards } from '../../store/slices/boardsSlice';
 import { updateCards } from '../../store/slices/cardsSlice';
+import { templates } from '../../utils/mocData';
 import './style.scss';
 
 const HeaderMenu = (): JSX.Element => {

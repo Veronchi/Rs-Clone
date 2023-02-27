@@ -31,17 +31,4 @@
     gap: 10px;
     list-style: none;
   }
-
-  &__item {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    max-height: 500px;
-    background-color: $light-gray;
-    height: 100%;
-    border-radius: 0.4rem;
-    margin-right: 1.5rem;
-    position: relative;
-    opacity: 1;
-  }
 }

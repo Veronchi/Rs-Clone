@@ -4,18 +4,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import {
+  IAvatars,
   IState,
 } from '../../interfaces';
 import { addUser } from '../../store/slices/userSlice';
 import { getUser } from '../../http/userAPI';
 import './style.scss';
 import { HotkeyWindow } from '../HotkeyWindow/HotkeyWindow';
+import UserUpdModal from '../UserUpdModal/UserUpdModal';
+import { Avatars } from '../../utils/mocData';
 
 const User = (): JSX.Element => {
   const user = useSelector((state: IState) => state.user);
   const dispatch = useDispatch();
+
   const [isModal, setIsModal] = useState<boolean>(false);
+  const [isUserModal, setIsUserModal] = useState<boolean>(false);
   const [isUserClick, setIsUserClick] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const handleUser = (): void => {
@@ -46,8 +52,14 @@ const User = (): JSX.Element => {
       });
   }, []);
 
+  const handleUserUpd = (): void => {
+    setIsUserClick(false);
+    setIsUserModal(true);
+  };
+
   const handleModalClose = (): void => {
     setIsModal(false);
+    setIsUserModal(false);
   };
 
   const handleHotKey = (): void => {
@@ -58,7 +70,14 @@ const User = (): JSX.Element => {
   return (
     <div className="user">
       <div>
-        <button className="user__avatar" type="button" onClick={handleUser}>{user.login[0]?.toUpperCase()}</button>
+        {!user.avatar
+          ? <button className="user__avatar" type="button" onClick={handleUser}>{user.login[0]?.toUpperCase()}</button>
+          : (
+            <button className="user__avatar" type="button" onClick={handleUser}>
+              <img className="user__img" src={Avatars[user.avatar as keyof IAvatars]} alt="user-avatar" />
+            </button>
+          )}
+
         <Modal
           show={isUserClick}
           backdropClassName="user-modal"
@@ -74,7 +93,8 @@ const User = (): JSX.Element => {
               <p className="user__email">{user.email}</p>
             </div>
             <div className="user__links">
-              <button className="user__link" type="button" onClick={handleHotKey}>Hot key</button>
+              <button className="user__link" type="button" onClick={handleUserUpd}>User settings</button>
+              <button className="user__link" type="button" onClick={handleHotKey}>Hot keys</button>
             </div>
             <div className="user__exit">
               <button className="user__logout" type="button" onClick={handleLogOut}>Log out</button>
@@ -84,6 +104,11 @@ const User = (): JSX.Element => {
       </div>
       <Modal show={isModal}>
         <HotkeyWindow
+          handleModal={handleModalClose}
+        />
+      </Modal>
+      <Modal show={isUserModal}>
+        <UserUpdModal
           handleModal={handleModalClose}
         />
       </Modal>

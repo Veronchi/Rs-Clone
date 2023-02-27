@@ -8,18 +8,13 @@ import { setBoardToRecent } from '../../components/HeaderMenu/HeaderMenu';
 import { getAllCards } from '../../http/cardAPI';
 import { IState, IUpdateState } from '../../interfaces';
 import { updateCards } from '../../store/slices/cardsSlice';
+import { initUpdCardState } from '../../utils/initalStates';
 import './style.scss';
 
 const BoardPage = (): JSX.Element => {
-  const initUpdState = {
-    isUpdate: false,
-    id: '',
-    title: '',
-  };
-
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [updateState, setUpdateState] = useState<IUpdateState>(initUpdState);
+  const [updateState, setUpdateState] = useState<IUpdateState>(initUpdCardState);
   const boards = useLocation();
   const dispatch = useDispatch();
   const cards = useSelector((state: IState) => state.cards.flat());
@@ -33,7 +28,7 @@ const BoardPage = (): JSX.Element => {
   };
 
   const handleModalClose = (): void => {
-    setUpdateState(initUpdState);
+    setUpdateState(initUpdCardState);
     setIsModal(false);
   };
 

@@ -31,12 +31,14 @@ const getUser = async (): Promise<IUser> => {
   return data;
 };
 
-const update = async (login: string, password: string, email: string): Promise<void> => {
-  await $authHost.patch('user/', {
-    login,
-    password,
-    email,
-  });
+const update = async (payload: {
+  id: string
+  login: string,
+  email: string,
+  avatar: string }): Promise<boolean> => {
+  const { data } = await $authHost.patch('user/', payload);
+
+  return !!data;
 };
 
 const remove = async (): Promise<void> => {

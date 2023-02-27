@@ -22,6 +22,12 @@
     flex-wrap: wrap;
     gap: 10px;
     list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @media screen and (max-width: 914px) {
+      justify-content: center;
+    }
   }
 
   &__link {
@@ -95,6 +101,7 @@
   color: $dark;
   font-size: 18px;
   border: none;
+  border: 1px solid $blue-btn;
   border-radius: 10px;
   height: 95px;
   width: 285px;

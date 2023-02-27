@@ -33,13 +33,14 @@ const CreateCardModal: FC<BoardPageModal> = ({
 
       const task = await getAllRows(id);
       dispatch(setAllTasks(task));
+      handleModal(e);
     } else {
       const data = await createCard(cardTitle, BoardId);
       dispatch(setAllCards([data]));
+      handleModal(e);
     }
 
     setCardTitle('');
-    handleModal(e);
   };
 
   const handleTitle = (e: ChangeEvent<HTMLInputElement>): void => {
