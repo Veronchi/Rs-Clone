@@ -23,7 +23,7 @@ const ErrorWindow: FC<IModalError> = ({ message, handleModal }): JSX.Element => 
 const getErrorText = (error: AxiosError): string => {
   let result = '';
   if (error.code === 'ERR_NETWORK') {
-    result = 'The server is unavailable. Try again later.';
+    result = 'Internal error. Try again later.';
   } else {
     const errResponse = error.response as AxiosResponse;
     result = errResponse.data.error;
