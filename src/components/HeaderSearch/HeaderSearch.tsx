@@ -20,8 +20,13 @@ const HeaderSearch = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const restartSearch = async (): Promise<void> => {
-    const data = await getTasksByBoardId(location.state.boardId);
-    dispatch(setAllTasks(data));
+    if (location.state) {
+      const data = await getTasksByBoardId(location.state.boardId);
+      dispatch(setAllTasks(data));
+    } else {
+      const data = await getAllBoards();
+      dispatch(updateBoards(data));
+    }
   };
 
   const onChangeValue = (ev: ChangeEvent<HTMLInputElement>): void => {
@@ -62,7 +67,8 @@ const HeaderSearch = (): JSX.Element => {
       filterTasks();
     } else if (value) {
       filterBoards();
-    } else {
+    }
+    if (!value) {
       restartSearch();
     }
   }, [value]);
