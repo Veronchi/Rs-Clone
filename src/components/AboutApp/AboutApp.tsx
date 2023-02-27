@@ -1,8 +1,8 @@
 import React from 'react';
 import './style.scss';
-import screen1 from '../../assets/img/screen1.png';
-import screen2 from '../../assets/img/screen2.png';
-import screen3 from '../../assets/img/screen3.png';
+import screen1 from '../../assets/img/newScreen1.png';
+import screen2 from '../../assets/img/newScreen2.png';
+import screen3 from '../../assets/img/newScreen3.png';
 
 const AboutApp = (): JSX.Element => (
   <div className="welcome__app">
@@ -32,7 +32,7 @@ const AboutApp = (): JSX.Element => (
     </div>
     <div className="welcome__app-feature">
       <div className="welcome__app-info">
-        <h3 className="feature-title">Drag and drop your cards!</h3>
+        <h3 className="feature-title">Drag and drop your tasks!</h3>
         <p className="feature-description">
           Drag and drop your tasks from one column to another,
           conveniently tracking the status of the task
