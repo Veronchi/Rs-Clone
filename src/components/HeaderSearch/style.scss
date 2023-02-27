@@ -1,4 +1,4 @@
-@import '../../styles/palette.scss';
+@import "../../styles/palette.scss";
 
 .search-form {
   width: 0px;
@@ -10,7 +10,7 @@
     background: transparent;
     width: 0;
     transition: all 0.2s 0.3s ease;
-    border-color: #62ad9b;
+    border-color: $blue-btn;
     border: 0;
     padding: 0;
   }
@@ -36,17 +36,17 @@
   }
   .search-form__input.form-control {
     padding: 0.375rem 0.75rem;
+    padding-right: 30px;
     width: 98%;
     padding-left: 10px;
-    border: 0.5px solid #62ad9b;
+    border: 0.5px solid $blue-btn;
 
     &:hover.form-control {
-      background-color: $light-gray !important;
-      border-color: #62ad9b !important;
+      background-color: $light-gray;
+      border-color: $blue-btn;
     }
-    &:focus-visible{
-      border-color: #62ad9b;
+    &:focus-visible {
+      border-color: $blue-btn;
     }
   }
-
 }

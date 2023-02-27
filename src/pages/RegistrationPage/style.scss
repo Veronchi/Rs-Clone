@@ -4,7 +4,7 @@
   text-align: center;
   padding-top: 50px;
   height: 100vh;
-  background: linear-gradient(0deg, #62ad9b -20%, white 30%);
+  background: linear-gradient(0deg, $blue-btn -20%, white 30%);
 
   &__title {
     margin: 0;
@@ -32,18 +32,18 @@
     border: none;
 
     &:hover {
-      background: darken($color: #62ad9b, $amount: 10%);
+      background: darken($color: $blue-btn, $amount: 10%);
     }
 
     &:active {
-      background: lighten($color: #62ad9b, $amount: 10%);
+      background: lighten($color: $blue-btn, $amount: 10%);
     }
   }
 
   &__option {
     border: none;
     background-color: transparent;
-    border-bottom: 1px solid #62ad9b;
+    border-bottom: 1px solid $blue-btn;
     padding: 0;
     margin-left: 5px;
   }
