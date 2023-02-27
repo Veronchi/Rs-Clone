@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Card from '../../components/Card/Card';
 import CreateCardModal from '../../components/CreateCardModal/CreateCardModal';
 import { setBoardToRecent } from '../../components/HeaderMenu/HeaderMenu';
@@ -15,9 +15,11 @@ const BoardPage = (): JSX.Element => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [updateState, setUpdateState] = useState<IUpdateState>(initUpdCardState);
+
   const boards = useLocation();
   const dispatch = useDispatch();
   const cards = useSelector((state: IState) => state.cards.flat());
+  const navigate = useNavigate();
 
   const setCards = async (): Promise<void> => {
     setIsLoading(true);
@@ -33,8 +35,12 @@ const BoardPage = (): JSX.Element => {
   };
 
   useEffect(() => {
-    setCards();
-    setBoardToRecent(boards.state.boardId);
+    if (boards.state) {
+      setCards();
+      setBoardToRecent(boards.state.boardId);
+    } else {
+      navigate('/', { replace: true });
+    }
   }, []);
 
   const editCard = (id: string): void => {
@@ -67,7 +73,7 @@ const BoardPage = (): JSX.Element => {
 
   return (
     <section className="board">
-      <h1 className="board__title">{boards.state.title}</h1>
+      <h1 className="board__title">{boards.state?.title}</h1>
       <div className="wrapper">
         {isLoading ? <div className="spinner" />
           : (
@@ -92,7 +98,7 @@ const BoardPage = (): JSX.Element => {
       <Modal show={isModal}>
         <CreateCardModal
           handleModal={handleModalClose}
-          BoardId={boards.state.boardId}
+          BoardId={boards.state?.boardId}
           updateState={updateState}
         />
       </Modal>

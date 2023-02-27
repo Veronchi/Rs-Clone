@@ -61,6 +61,7 @@ const CardTask: FC<ITaskProps> = ({
       onDrop={(e): void => dropHandler(e, task)}
       onMouseEnter={mouseEnter}
       onMouseLeave={mouseLeave}
+      style={!task.opacity ? { opacity: '0.4' } : undefined}
     >
       <div className="task-header" style={{ backgroundColor: cover }}>
         {isHover
