@@ -1,14 +1,16 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, {
+  ChangeEvent, useEffect, useState,
+} from 'react';
 import { Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { getAllBoards } from '../../http/boardAPI';
 import { getTasksByBoardId } from '../../http/rowAPI';
 import {
-  IBoard, IState, ITask, ITaskMap,
+  IBoard, ITask,
 } from '../../interfaces';
 import { updateBoards } from '../../store/slices/boardsSlice';
-import { updateTask } from '../../store/slices/tasksSlice';
+import { restartOpacity, updateTask } from '../../store/slices/tasksSlice';
 import './style.scss';
 
 const HeaderSearch = (): JSX.Element => {
@@ -16,8 +18,6 @@ const HeaderSearch = (): JSX.Element => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const location = useLocation();
   const dispatch = useDispatch();
-
-  const tasks = useSelector((state: IState): ITaskMap => state.tasks);
 
   const onChangeValue = (ev: ChangeEvent<HTMLInputElement>): void => {
     setValue(ev.target.value);
@@ -39,18 +39,28 @@ const HeaderSearch = (): JSX.Element => {
   const filterTasks = async (): Promise<void> => {
     const data = await getTasksByBoardId(location.state.boardId);
     const filteredTasks = data.filter((elem: ITask) => {
-      const res = elem.text.toLowerCase().includes(value.toLowerCase());
+      const res = !elem.text.toLowerCase().includes(value.toLowerCase());
       return res;
     });
-    const newItem = { opacity: true };
-    const arr = filteredTasks.map((item: ITask) => Object.assign(item, newItem));
-    arr.map((item: ITask) => dispatch(updateTask({ task: item, columnId: item.ColumnId })));
-    console.log(tasks);
+
+    filteredTasks.map((item: ITask) => dispatch(updateTask({
+      task: { ...item, opacity: false },
+      columnId: item.ColumnId,
+    })));
+  };
+
+  const restartSearch = async (): Promise<void> => {
+    dispatch(restartOpacity());
   };
 
   useEffect(() => {
-    filterBoards();
-    filterTasks();
+    if (location.state && value) {
+      filterTasks();
+    } else if (value) {
+      filterBoards();
+    } else {
+      restartSearch();
+    }
   }, [value]);
 
   const handleKeyPress = (e: KeyboardEvent): void => {
@@ -58,6 +68,8 @@ const HeaderSearch = (): JSX.Element => {
     if (key === 'f' && ctrlKey) {
       e.preventDefault();
       setIsActive(true);
+    } else if (key === 'Enter') {
+      e.preventDefault();
     }
   };
 
@@ -70,8 +82,18 @@ const HeaderSearch = (): JSX.Element => {
 
   return (
     <Form className={isActive ? 'search-form active' : 'search-form'}>
-      <Form.Control className={isActive ? 'search-form__input' : 'search-form__input'} type="text" autoFocus placeholder="Search" onChange={onChangeValue} />
-      <button type="button" className="search__btn" onClick={onChangeActive}>
+      <Form.Control
+        className={isActive ? 'search-form__input' : 'search-form__input'}
+        type="text"
+        autoFocus
+        placeholder="Search"
+        onChange={onChangeValue}
+      />
+      <button
+        type="button"
+        className="search__btn"
+        onClick={onChangeActive}
+      >
         <i className="bx bx-search bx-sm search__icon" />
       </button>
     </Form>
