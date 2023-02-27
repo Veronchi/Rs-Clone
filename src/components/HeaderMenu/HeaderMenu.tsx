@@ -92,76 +92,74 @@ const HeaderMenu = (): JSX.Element => {
         <Button className="menu__templates" onClick={handleOpenTemplates}>
           Templates&nbsp;
         </Button>
-        { isOpenTemplates
-          ? (
-            <Modal
-              show={isOpenTemplates}
-              backdropClassName="user-modal"
-              onHide={():void => { setIsOpenTemplates(false); }}
-              className="template__modal"
-            >
-              <Form className="template__form">
-                <h4 className="template__title">Add:</h4>
-                <label className="template__radios" htmlFor="radio1">
-                  <input
-                    type="radio"
-                    id="radio1"
-                    name="template"
-                    className="template__input"
-                    value="small"
-                    onChange={handleSize}
-                    defaultChecked
-                  />
-                  <span className="template__text">Small board (2 cards)</span>
-                </label>
-                <label className="template__radios" htmlFor="radio2">
-                  <input
-                    type="radio"
-                    id="radio2"
-                    name="template"
-                    className="template__input"
-                    value="medium"
-                    onChange={handleSize}
-                  />
-                  <span className="template__text">Medium board (3 cards)</span>
-                </label>
-                <label className="template__radios" htmlFor="radio3">
-                  <input
-                    type="radio"
-                    id="radio3"
-                    name="template"
-                    className="template__input"
-                    value="big"
-                    onChange={handleSize}
-                  />
-                  <span className="template__text">Big board (4 cards)</span>
-                </label>
-                <hr />
-                <div className="template__wrapper">
-                  <Form.Label className="template__label">Board title</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder={isValid ? 'My board name' : 'Enter your name'}
-                    onChange={handleTitleChange}
-                    value={boardTitle}
-                    style={{ borderColor: color }}
-                  />
-                  {!isValid ? <span className="validation-text">Enter board name</span> : null}
-                </div>
-                <hr />
-                <div className="template__wrapper">
-                  <Button
-                    className="template__submit"
-                    onClick={():void => {
-                      handleTemplates(templateSize, boardTitle);
-                    }}
-                  >
-                    Create board
-                  </Button>
-                </div>
-              </Form>
-            </Modal>
-          ) : null}
+
+        <Modal
+          show={isOpenTemplates}
+          backdropClassName="user-modal"
+          onHide={():void => { setIsOpenTemplates(false); }}
+          className="template__modal"
+        >
+          <Form className="template__form">
+            <h4 className="template__title">Add:</h4>
+            <label className="template__radios" htmlFor="radio1">
+              <input
+                type="radio"
+                id="radio1"
+                name="template"
+                className="template__input"
+                value="small"
+                onChange={handleSize}
+                defaultChecked
+              />
+              <span className="template__text">Small board (2 cards)</span>
+            </label>
+            <label className="template__radios" htmlFor="radio2">
+              <input
+                type="radio"
+                id="radio2"
+                name="template"
+                className="template__input"
+                value="medium"
+                onChange={handleSize}
+              />
+              <span className="template__text">Medium board (3 cards)</span>
+            </label>
+            <label className="template__radios" htmlFor="radio3">
+              <input
+                type="radio"
+                id="radio3"
+                name="template"
+                className="template__input"
+                value="big"
+                onChange={handleSize}
+              />
+              <span className="template__text">Big board (4 cards)</span>
+            </label>
+            <hr />
+            <div className="template__wrapper">
+              <Form.Label className="template__label">Board title</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder={isValid ? 'My board name' : 'Enter your name'}
+                onChange={handleTitleChange}
+                value={boardTitle}
+                style={{ borderColor: color }}
+              />
+              {!isValid ? <span className="validation-text">Enter board name</span> : null}
+            </div>
+            <hr />
+            <div className="template__wrapper">
+              <Button
+                className="template__submit"
+                onClick={():void => {
+                  handleTemplates(templateSize, boardTitle);
+                }}
+              >
+                Create board
+              </Button>
+            </div>
+          </Form>
+        </Modal>
       </div>
 
     </div>
