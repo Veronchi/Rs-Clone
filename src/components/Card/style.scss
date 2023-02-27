@@ -37,6 +37,7 @@
   overflow-y: auto;
   list-style: none;
   margin: 0;
+  max-height: 415px;
 
   &__item:last-child {
     margin-bottom: 5%;
