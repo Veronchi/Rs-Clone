@@ -136,7 +136,13 @@ const UserUpdModal: FC<IUpdUserModal> = ({ handleModal }) => {
             />
             {!isEmaiValid ? <span className="validation-text">Enter new email</span> : null}
           </Form.Group>
-          <input type="checkbox" id="avatar-chaeck" checked={isChecked} onChange={handleChecked} className="me-1" />
+          <input
+            type="checkbox"
+            id="avatar-chaeck"
+            checked={isChecked}
+            onChange={handleChecked}
+            className="me-1"
+          />
           <label htmlFor="avatar-chaeck">No avatar</label>
         </Form>
         <div className="avatars">

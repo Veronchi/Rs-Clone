@@ -4,7 +4,7 @@ import './style.scss';
 
 const HeaderWelcome = (): JSX.Element => (
   <header className="header__welcome">
-    <nav className="header__nav">
+    <nav className="header__nav-weelcome">
       <div className="header__logo">
         <img
           className="header__img"

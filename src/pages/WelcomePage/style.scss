@@ -14,37 +14,43 @@
   padding: 0 20px;
 
   &__content {
+    display: flex;
+    justify-content: space-between;
     max-width: 98%;
     width: 100%;
-    height: 700px;
     margin: 2% auto;
     background: transparent;
     border-radius: 10px;
     display: flex;
     justify-content: space-evenly;
+    margin-bottom: 50px;
 
     @media screen and (max-width: 1300px) {
       flex-direction: column;
       justify-content: space-between;
     }
     @media screen and (max-width: 520px) {
-      height: 600px;
     }
     @media screen and (max-width: 325px) {
-      height: 540px;
     }
   }
 
   &__info-block {
+    flex-shrink: 0;
     margin-top: 5%;
-    height: 200px;
     color: $dark-text;
+
+    @media screen and (max-width: 1600px) {
+      flex-shrink: 1;
+      margin-top: 0;
+    }
 
     @media screen and (max-width: 1300px) {
       display: flex;
       width: 100%;
       flex-direction: column;
-      margin-top: 5%;
+      text-align: center;
+      margin-bottom: 30px;
     }
   }
 
@@ -52,9 +58,11 @@
     font-size: 8.2rem;
     text-align: center;
     margin-bottom: 7%;
+    margin: 0;
+
     @media screen and (max-width: 1300px) {
       font-size: 4.8rem;
-      margin-bottom: 6%;
+      margin-bottom: 30px;
     }
     @media screen and (max-width: 400px) {
       font-size: 3.2rem;
@@ -82,14 +90,22 @@
     }
   }
 
+  .img-container {
+    @media screen and (max-width: 1600px) {
+      flex-shrink: 2;
+    }
+
+    @media screen and (max-width: 1300px) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   &__image {
-    width: 45%;
-    height: 395px;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
     box-shadow: 1px 1px 8px 2px #ccc;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    margin-top: 5%;
-    margin-left: 5%;
 
     @media screen and (max-width: 1300px) {
       width: 600px;
