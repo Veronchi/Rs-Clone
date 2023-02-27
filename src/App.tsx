@@ -17,7 +17,9 @@ const defaultProtectedRouteProps: Omit<ProtectedRouteProps, 'outlet'> = {
 const App = (): JSX.Element => (
   <Routes>
     <Route path="/welcome" element={<WelcomePage />} />
-    <Route path="/" element={<RequireAuth {...defaultProtectedRouteProps} outlet={<MainLayout />} />}>
+    <Route path="/" element={<RequireAuth {...defaultProtectedRouteProps} outlet={<MainLayout />} />} />
+
+    <Route path="/" element={<MainLayout />}>
       <Route path="boards" element={<BoardsPage />} />
       <Route path="/" element={<Navigate to="boards" replace />} />
       <Route path="board" element={<BoardPage />} />

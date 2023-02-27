@@ -45,11 +45,10 @@ const RegistrationPage = (): JSX.Element => {
       if (isValid) {
         if (isSignUp) {
           await registration(inputLogin, inputEmail, inputPassword);
-          navigate('/', { replace: true });
         } else {
           await logIn(inputLogin, inputPassword);
-          navigate('/', { replace: true });
         }
+        navigate('/boards', { replace: true });
       }
     } catch (e) {
       const err = e as AxiosError;
