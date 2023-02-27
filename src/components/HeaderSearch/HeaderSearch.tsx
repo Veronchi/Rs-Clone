@@ -7,10 +7,10 @@ import { useLocation } from 'react-router-dom';
 import { getAllBoards } from '../../http/boardAPI';
 import { getTasksByBoardId } from '../../http/rowAPI';
 import {
-  IBoard, ITask,
+  IBoard,
 } from '../../interfaces';
 import { updateBoards } from '../../store/slices/boardsSlice';
-import { restartOpacity, updateTask } from '../../store/slices/tasksSlice';
+import { setAllTasks, searchUpdateTask } from '../../store/slices/tasksSlice';
 import './style.scss';
 
 const HeaderSearch = (): JSX.Element => {
@@ -18,6 +18,11 @@ const HeaderSearch = (): JSX.Element => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const location = useLocation();
   const dispatch = useDispatch();
+
+  const restartSearch = async (): Promise<void> => {
+    const data = await getTasksByBoardId(location.state.boardId);
+    dispatch(setAllTasks(data));
+  };
 
   const onChangeValue = (ev: ChangeEvent<HTMLInputElement>): void => {
     setValue(ev.target.value);
@@ -38,19 +43,18 @@ const HeaderSearch = (): JSX.Element => {
 
   const filterTasks = async (): Promise<void> => {
     const data = await getTasksByBoardId(location.state.boardId);
-    const filteredTasks = data.filter((elem: ITask) => {
-      const res = !elem.text.toLowerCase().includes(value.toLowerCase());
-      return res;
+    const result = data.map((item) => {
+      if (!item.text.toLowerCase().includes(value.toLowerCase())) {
+        const newItem = item;
+        newItem.opacity = false;
+      } else {
+        const newItem = item;
+        newItem.opacity = true;
+      }
+      return item;
     });
 
-    filteredTasks.map((item: ITask) => dispatch(updateTask({
-      task: { ...item, opacity: false },
-      columnId: item.ColumnId,
-    })));
-  };
-
-  const restartSearch = async (): Promise<void> => {
-    dispatch(restartOpacity());
+    dispatch(searchUpdateTask(result));
   };
 
   useEffect(() => {
@@ -85,7 +89,6 @@ const HeaderSearch = (): JSX.Element => {
       <Form.Control
         className={isActive ? 'search-form__input' : 'search-form__input'}
         type="text"
-        autoFocus
         placeholder="Search"
         onChange={onChangeValue}
       />
