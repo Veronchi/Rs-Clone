@@ -53,9 +53,24 @@ const HeaderSearch = (): JSX.Element => {
     filterTasks();
   }, [value]);
 
+  const handleKeyPress = (e: KeyboardEvent): void => {
+    const { key, ctrlKey } = e;
+    if (key === 'f' && ctrlKey) {
+      e.preventDefault();
+      setIsActive(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
   return (
     <Form className={isActive ? 'search-form active' : 'search-form'}>
-      <Form.Control className={isActive ? 'search-form__input' : 'search-form__input'} type="text" placeholder="Search" onChange={onChangeValue} />
+      <Form.Control className={isActive ? 'search-form__input' : 'search-form__input'} type="text" autoFocus placeholder="Search" onChange={onChangeValue} />
       <button type="button" className="search__btn" onClick={onChangeActive}>
         <i className="bx bx-search bx-sm search__icon" />
       </button>

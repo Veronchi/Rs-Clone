@@ -12,6 +12,10 @@
   opacity: 1;
 
   &__title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    width: 85%;
     font-size: 1.4rem;
     font-weight: 600;
     color: #333;
@@ -33,9 +37,22 @@
   overflow-y: auto;
   list-style: none;
   margin: 0;
+  max-height: 415px;
 
   &__item:last-child {
     margin-bottom: 5%;
+  }
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $active-gray;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $border-gray;
+    border: 1px solid $active-gray;
   }
 }
 
