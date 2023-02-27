@@ -1,4 +1,4 @@
-@import '../../styles/palette.scss';
+@import "../../styles/palette.scss";
 
 .search-form {
   width: 0px;
@@ -36,6 +36,7 @@
   }
   .search-form__input.form-control {
     padding: 0.375rem 0.75rem;
+    padding-right: 30px;
     width: 98%;
     padding-left: 10px;
     border: 0.5px solid #62ad9b;
@@ -44,9 +45,8 @@
       background-color: $light-gray !important;
       border-color: #62ad9b !important;
     }
-    &:focus-visible{
+    &:focus-visible {
       border-color: #62ad9b;
     }
   }
-
 }
