@@ -222,12 +222,9 @@ const RegistrationPage = (): JSX.Element => {
             )}
         </div>
       </Form>
-      { isModal
-        ? (
-          <Modal show={isModal} centered>
-            <ErrorWindow handleModal={handleModalClose} message={errorText} />
-          </Modal>
-        ) : (null)}
+      <Modal show={isModal} centered>
+        <ErrorWindow handleModal={handleModalClose} message={errorText} />
+      </Modal>
     </section>
   );
 };

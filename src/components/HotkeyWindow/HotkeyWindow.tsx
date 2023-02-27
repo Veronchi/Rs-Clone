@@ -40,6 +40,10 @@ export const HotkeyWindow: FC<IModalKeys> = ({ handleModal }): JSX.Element => {
             <Col xs={3}>Ctrl + m</Col>
             <Col xs={7}>Open template window</Col>
           </Row>
+          <Row>
+            <Col xs={3}>Ctrl + f</Col>
+            <Col xs={7}>Open search field</Col>
+          </Row>
           <hr />
           <h5>
             Board page
@@ -51,6 +55,10 @@ export const HotkeyWindow: FC<IModalKeys> = ({ handleModal }): JSX.Element => {
           <Row>
             <Col xs={3}>Ctrl + m</Col>
             <Col xs={7}>Open template window</Col>
+          </Row>
+          <Row>
+            <Col xs={3}>Ctrl + f</Col>
+            <Col xs={7}>Open search field</Col>
           </Row>
           <hr />
           <h5>
