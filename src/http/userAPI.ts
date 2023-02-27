@@ -36,7 +36,7 @@ const update = async (payload: {
   login: string,
   email: string,
   avatar: string }): Promise<boolean> => {
-  const { data } = await $authHost.patch('user/', payload);
+  const { data } = await $authHost.put('user/', payload);
 
   return !!data;
 };

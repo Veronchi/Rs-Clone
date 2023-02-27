@@ -36,7 +36,7 @@ const update = async (payload: {
   text: string,
   cover: string,
   ColumnId?: string }): Promise<boolean> => {
-  const { data } = await $authHost.patch('/row', payload);
+  const { data } = await $authHost.put('/row', payload);
   return !!data;
 };
 

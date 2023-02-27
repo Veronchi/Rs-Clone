@@ -17,7 +17,7 @@ const getAllBoards = async (): Promise<IBoard[]> => {
 };
 
 const update = async (id: string, title: string, background: string): Promise<void> => {
-  await $authHost.patch('/board', {
+  await $authHost.put('/board', {
     id,
     title,
     background,

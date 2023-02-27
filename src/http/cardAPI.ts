@@ -21,7 +21,7 @@ const getAllCards = async (id: string): Promise<Array<ICard>> => {
 };
 
 const update = async (id: string, title: string): Promise<void> => {
-  await $authHost.patch('/column', {
+  await $authHost.put('/column', {
     id,
     title,
   });
