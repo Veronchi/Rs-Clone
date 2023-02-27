@@ -18,7 +18,7 @@ const CardTask: FC<ITaskProps> = ({
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isRemove, setIsRemove] = useState<boolean>(false);
 
-  const cover: string | undefined = task.cover || '#E9967A';
+  const cover: string | undefined = task.cover || '#f8e6e0';
 
   const handleModalClose = (): void => setIsModal(false);
 
