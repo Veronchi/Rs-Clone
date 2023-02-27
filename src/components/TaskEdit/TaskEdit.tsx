@@ -18,7 +18,7 @@ import './style.scss';
 export const TaskEdit = ({ handleModal, task }: IModalEdit): JSX.Element => {
   const [title, setTitle] = useState<string>(task.text);
   const [isNameBlock, setName] = useState<boolean>(true);
-  const [cover, setCover] = useState<string | undefined>(task.cover || '#ffffff');
+  const [cover, setCover] = useState<string>(task.cover || '#f8e6e0');
   const [isValid, setIsValid] = useState<boolean>(true);
   const [copyText, setCopyText] = useState<string>('Copy');
 
@@ -38,7 +38,7 @@ export const TaskEdit = ({ handleModal, task }: IModalEdit): JSX.Element => {
   const handleCopy = (): void => {
     navigator.clipboard.writeText(title);
 
-    setCopyText('Сopied!');
+    setCopyText('Copied!');
 
     setTimeout(() => {
       setCopyText('Copy');
