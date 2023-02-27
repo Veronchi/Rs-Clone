@@ -24,6 +24,18 @@
   &__item:last-child {
     margin-bottom: 5%;
   }
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $active-gray;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $border-gray;
+    border: 1px solid $active-gray;
+  }
 }
 
 .input-close {
