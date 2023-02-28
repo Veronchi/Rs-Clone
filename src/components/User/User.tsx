@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -13,10 +13,12 @@ import './style.scss';
 import { HotkeyWindow } from '../HotkeyWindow/HotkeyWindow';
 import UserUpdModal from '../UserUpdModal/UserUpdModal';
 import { Avatars } from '../../utils/mocData';
+import { AuthContex } from '../../hoc/AuthProvider';
 
 const User = (): JSX.Element => {
   const user = useSelector((state: IState) => state.user);
   const dispatch = useDispatch();
+  const { signOut } = useContext(AuthContex);
 
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isUserModal, setIsUserModal] = useState<boolean>(false);
@@ -35,7 +37,9 @@ const User = (): JSX.Element => {
   const handleLogOut = (): void => {
     setIsUserClick(false);
     localStorage.removeItem('token');
-    navigate('/welcome', { replace: true });
+    if (signOut) {
+      signOut(() => navigate('/welcome', { replace: true }));
+    }
   };
 
   const getCurrUser = async (): Promise<void> => {

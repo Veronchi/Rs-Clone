@@ -1,16 +1,18 @@
 import { AxiosError } from 'axios';
 import React, {
-  ChangeEvent, FocusEvent, useEffect, useRef, useState,
+  ChangeEvent, FocusEvent, useContext, useEffect, useRef, useState,
 } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ErrorWindow, getErrorText } from '../../components/ErrorWindow/ErrorWindow';
+import { AuthContex } from '../../hoc/AuthProvider';
 import { logIn, registration } from '../../http/userAPI';
 import './style.scss';
 
 const RegistrationPage = (): JSX.Element => {
   const location = useLocation();
+  const { signIn } = useContext(AuthContex);
 
   const [isSignUp, setIsSignUp] = useState<boolean>(location.state?.isSignUp || false);
   const [inputLogin, setInputLogin] = useState<string>('');
@@ -44,11 +46,16 @@ const RegistrationPage = (): JSX.Element => {
     try {
       if (isValid) {
         if (isSignUp) {
-          await registration(inputLogin, inputEmail, inputPassword);
+          const data = await registration(inputLogin, inputEmail, inputPassword);
+          if (signIn) {
+            signIn(!!data, () => navigate('/boards', { replace: true }));
+          }
         } else {
-          await logIn(inputLogin, inputPassword);
+          const data = await logIn(inputLogin, inputPassword);
+          if (signIn) {
+            signIn(!!data, () => navigate('/boards', { replace: true }));
+          }
         }
-        navigate('/boards', { replace: true });
       }
     } catch (e) {
       const err = e as AxiosError;
