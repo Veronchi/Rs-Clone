@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
+import { AuthContex } from './AuthProvider';
 
 export type ProtectedRouteProps = {
-  isAuthenticated: boolean;
   authenticationPath: string;
   outlet: JSX.Element;
 };
 
 const RequireAuth = ({
-  isAuthenticated, authenticationPath, outlet,
+  authenticationPath, outlet,
 }: ProtectedRouteProps): JSX.Element => {
-  if (isAuthenticated) {
+  const { isAuth } = useContext(AuthContex);
+
+  const token = localStorage.getItem('token');
+  if (isAuth || token) {
     return outlet;
   }
   return <Navigate to={{ pathname: authenticationPath }} />;

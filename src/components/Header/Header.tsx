@@ -8,7 +8,7 @@ import User from '../User/User';
 const Header = (): JSX.Element => (
   <header className="header">
     <nav className="header__nav">
-      <Link to="/" className="header__logo">
+      <Link to="/boards" className="header__logo">
         <img
           className="header__img"
           src="https://img.icons8.com/clouds/256/trello.png"
