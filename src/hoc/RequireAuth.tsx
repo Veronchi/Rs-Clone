@@ -11,9 +11,6 @@ const RequireAuth = ({
   authenticationPath, outlet,
 }: ProtectedRouteProps): JSX.Element => {
   const { isAuth } = useContext(AuthContex);
-  // const isAuthenticated = useAuth();
-  // eslint-disable-next-line no-debugger
-  debugger;
 
   const token = localStorage.getItem('token');
   if (isAuth || token) {
