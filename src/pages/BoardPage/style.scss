@@ -1,0 +1,34 @@
+@import "../../styles/palette.scss";
+@import "../../styles/buttons";
+
+.board {
+  flex: 1 0 auto;
+  padding: 5px;
+
+  &__title {
+    font-size: 2.2rem;
+    margin: 3% auto;
+    text-align: left;
+    margin-top: 3%;
+    margin-left: 1%;
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: flex-start;
+    padding: 2%;
+    border-radius: 10px;
+  }
+
+  &__btn {
+    @include transparent-btn;
+    width: 270px;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    list-style: none;
+  }
+}

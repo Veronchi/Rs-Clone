@@ -1,0 +1,61 @@
+@import '../../styles/palette.scss';
+
+.footer {
+  margin: 0 auto;
+  padding: 6px 12px;
+  width: 100%;
+  font-size: 1.5rem;
+  background-color: transparent;
+
+  &__container {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    width: 90%;
+  }
+
+  &__left-container {
+    display: flex;
+    gap: 40px;
+    transition: color 0.10s ease-in-out;
+    a {
+      color: $dark-text;
+      text-decoration: none;
+
+      &:hover {
+        color: #62ad9b;
+      }
+
+      &:active {
+        color: darken(#62ad9b, 10%)
+      }
+    }
+
+    @media screen and (max-width: 740px) {
+      flex-direction: column;
+      font-size: 1.1rem;
+      gap: 0;
+    }
+  }
+
+  &__central-container {
+    color: $dark;
+    @media screen and (max-width: 600px) {
+      font-size: 1rem;
+    }
+  }
+
+  &__right-container {
+    background-size: 90px 60px;
+    background-repeat: no-repeat;
+  }
+
+  &__right-img {
+    width: 140px;
+    @media screen and (max-width: 600px) {
+      width: 70px;
+    }
+  }
+}

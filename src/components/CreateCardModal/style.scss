@@ -1,0 +1,9 @@
+.valid-title.form-control {
+  &:focus {
+    border: 1px solid green;
+  }
+}
+
+.invalid-title.form-control {
+  border: 1px solid red;
+}

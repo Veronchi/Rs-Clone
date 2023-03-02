@@ -1,0 +1,19 @@
+@import "../../styles/palette.scss";
+
+.board-color {
+  width: 100px;
+}
+
+.validation-text {
+  color: red;
+}
+
+.success-btn.btn {
+  background-color: $blue-btn;
+  color: $primary;
+  border: none;
+
+  &:hover {
+    background: darken($color: #62ad9b, $amount: 10%);
+  }
+}

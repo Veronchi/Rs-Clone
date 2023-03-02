@@ -1,0 +1,48 @@
+@import "./palette.scss";
+
+@mixin main-btn {
+  background-color: $blue-btn;
+  border-radius: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  color: $primary;
+  border: none;
+  box-shadow: 0 1px 8px 0 #ccc;
+  transition: 0.15s ease-in-out;
+  text-decoration: none;
+  text-align: center;
+  width: 140px;
+  line-height: 50px;
+  margin: 0 auto;
+
+  &:hover {
+    background: darken($color: #62ad9b, $amount: 10%);
+  }
+
+  &:active {
+    background: lighten($color: #62ad9b, $amount: 10%);
+  }
+
+  @media screen and (max-width: 520px) {
+    font-size: 14px;
+    width: 110px;
+  }
+}
+
+@mixin transparent-btn {
+  font-size: 20px;
+  background-color: $active-gray;
+  color: $light-gray;
+  border-radius: 5px;
+  line-height: 40px;
+  border: none;
+  transition: background-color 150ms;
+  text-align: center;
+  margin-left: 20px;
+  padding: 0 10px;
+
+  &:hover {
+    background-color: $dark-blue;
+    color: $primary;
+  }
+}

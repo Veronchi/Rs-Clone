@@ -1,0 +1,87 @@
+@import "../../styles/palette.scss";
+
+.header {
+  width: 100%;
+  padding: 6px 12px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: $dark-text;
+    text-decoration: none;
+
+    @media screen and (max-width: 550px) {
+      margin: 0 auto;
+    }
+
+    &:hover {
+      color: $dark-text;
+    }
+  }
+
+  &__title {
+    font-size: 2rem;
+    margin: 0;
+    width: 100%;
+
+    @media screen and (max-width: 940px) {
+      font-size: 1.6rem;
+    }
+
+    @media screen and (max-width: 740px) {
+      font-size: 1.4rem;
+      width: 60px;
+    }
+
+    @media screen and (max-width: 600px) {
+      font-size: 1.2rem;
+    }
+
+    @media screen and (max-width: 550px) {
+      font-size: 1.1rem;
+      width: 50px;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 96%;
+    margin: 0 auto;
+
+    @media screen and (max-width: 950px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 550px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  &__img {
+    width: 48px;
+    height: 48px;
+  }
+
+  @media screen and (max-width: 740px) {
+    padding: 6px 0;
+  }
+
+  &__right-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+
+    @media screen and (max-width: 950px) {
+      flex-direction: row-reverse;
+      gap: 30px;
+      justify-content: flex-end;
+    }
+  }
+}
