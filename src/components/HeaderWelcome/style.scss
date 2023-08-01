@@ -1,0 +1,61 @@
+@import "../../styles/palette.scss";
+@import "../../styles/buttons";
+
+.header {
+  &__welcome {
+    width: 100%;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  &__nav-weelcome {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    @media screen and (max-width: 520px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 20px;
+    @media screen and (max-width: 410px) {
+      gap: 5px;
+    }
+  }
+
+  &__btn {
+    @include main-btn;
+    font-size: 1.2rem;
+    box-shadow: none;
+    background-color: transparent;
+    color: $dark-text;
+    transition: background-color 150ms;
+
+    &:hover {
+      background-color: #62ad9b;
+      color: #fff;
+    }
+
+    &:active {
+      background: lighten($color: #62ad9b, $amount: 10%);
+    }
+
+    @media screen and (max-width: 520px) {
+      height: 40px;
+      line-height: 40px;
+    }
+
+    @media screen and (max-width: 410px) {
+      font-size: 0.87rem;
+      padding: 0 10px;
+      height: 35px;
+      line-height: 35px;
+    }
+  }
+}

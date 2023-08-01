@@ -1,0 +1,98 @@
+@import "../../styles/palette.scss";
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  background-color: $light-gray;
+  height: 100%;
+  border-radius: 0.4rem;
+  margin-right: 1.5rem;
+  position: relative;
+  opacity: 1;
+
+  &__title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    width: 85%;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    padding: 1rem;
+  }
+
+  .list__btn {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+}
+
+.tasks {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  padding: 0 0.6rem 0.5rem;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  max-height: 415px;
+
+  &__item:last-child {
+    margin-bottom: 5%;
+  }
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $active-gray;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $border-gray;
+    border: 1px solid $active-gray;
+  }
+}
+
+.input-close {
+  border: 1px solid $active-gray;
+  border-radius: 5px;
+  background-color: transparent;
+  line-height: 30px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5px;
+  margin-bottom: 10px;
+}
+
+.icons {
+  display: flex;
+  right: 0.5%;
+  top: 5%;
+  color: black;
+  position: absolute;
+
+  &__btn {
+    border: 0;
+    background-color: inherit;
+    padding-left: 2%;
+
+    .icon {
+      color: dark;
+      transition: color 0.15s ease-in-out;
+      &:hover {
+        color: $dark-blue;
+      }
+      &:active {
+        color: rgba($dark-blue, 0.5);
+      }
+    }
+  }
+}

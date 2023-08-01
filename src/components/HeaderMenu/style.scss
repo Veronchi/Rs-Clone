@@ -1,0 +1,202 @@
+@import "../../styles/palette.scss";
+@import "../../styles/buttons";
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  color: $primary;
+
+  @media screen and (max-width: 550px) {
+    margin-bottom: 10px;
+  }
+
+  &__boards {
+    @include transparent-btn;
+    width: 100px;
+    text-decoration: none;
+    height: 40px;
+
+    @media screen and (max-width: 900px) {
+      margin: 0;
+      padding: 0;
+    }
+    @media screen and (max-width: 720px) {
+      font-size: 12px;
+      width: 65px;
+    }
+  }
+
+  &__templates.btn {
+    @include transparent-btn;
+    position: relative;
+    padding-right: 25px;
+    margin-left: 0;
+    @media screen and (max-width: 740px) {
+      font-size: 12px;
+      padding: 0 5px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 9px;
+      right: 2px;
+      width: 24px;
+      height: 24px;
+      background-image: url("../../assets/icons/arrow-bottom.svg");
+      background-repeat: no-repeat;
+
+      @media screen and (max-width: 740px) {
+        width: 12px;
+        height: 12px;
+        background-size: 100% 100%;
+        left: 26px;
+        top: 26px;
+      }
+    }
+  }
+  @media screen and (max-width: 900px) {
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 5px;
+    margin-left: 5px;
+  }
+}
+
+.template {
+  position: relative;
+
+  &__form {
+    padding: 20px 0;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    color: $dark-text;
+    background-color: $light-gray;
+  }
+
+  &__title {
+    padding: 0 20px;
+    color: $gray-text;
+  }
+
+  &__radios {
+    display: block;
+
+    & input:checked + span {
+      background-color: $border-gray;
+    }
+  }
+
+  &__text {
+    display: block;
+    padding: 0 20px;
+    color: $blue;
+    font-size: 18px;
+  }
+
+  &__input {
+    &[type="radio"] {
+      display: none;
+    }
+  }
+
+  &__wrapper {
+    padding: 0 20px;
+    position: relative;
+  }
+
+  &__label {
+    color: $gray-text;
+  }
+
+  &__submit.btn {
+    @include main-btn;
+    background-color: $blue-btn;
+    color: $dark-text;
+    line-height: 35px;
+    width: 100%;
+    border-radius: 10px;
+
+    &:hover {
+      box-shadow: none;
+      border: 1px solid $blue-btn;
+      background-color: $light-gray;
+    }
+  }
+
+  &__recent-drop > .btn.show {
+    background-color: $active-gray;
+  }
+
+  &__recent-drop > .btn {
+    @include transparent-btn;
+    position: relative;
+    padding-right: 25px;
+    margin-left: 0;
+    @media screen and (max-width: 740px) {
+      font-size: 12px;
+      padding: 0 5px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 9px;
+      right: 2px;
+      width: 24px;
+      height: 24px;
+      background-image: url("../../assets/icons/arrow-bottom.svg");
+      background-repeat: no-repeat;
+      border-top: 0;
+      border-right: 0;
+      border-bottom: 0;
+      border-left: 0;
+
+      @media screen and (max-width: 740px) {
+        width: 12px;
+        height: 12px;
+        background-size: 100% 100%;
+        left: 26px;
+        top: 26px;
+      }
+    }
+  }
+
+  &__recent {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: $dark-text;
+
+    &:hover {
+      box-shadow: none;
+      background-color: $border-gray;
+      color: $dark-text;
+    }
+  }
+
+  &__recent-color {
+    width: 30px;
+    height: 20px;
+  }
+
+  &__recent-name {
+    width: 90%;
+    display: block;
+    padding: 0 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+.template__modal > .modal-dialog {
+  width: 300px;
+  top: 30px;
+}
